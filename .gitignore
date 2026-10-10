@@ -6,3 +6,8 @@
 __pycache__/
 *.pyc
 .venv/
+
+# Local writing draft; reusable demo assets in this folder are versioned.
+/claude-dashboard-bigquery-demo/article-draft.md
+/claude-dashboard-bigquery-demo/LINKEDIN-POST.md
+/claude-dashboard-bigquery-demo/article-assets/

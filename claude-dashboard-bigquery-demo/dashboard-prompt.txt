@@ -1,0 +1,17 @@
+Using the BigQuery view
+`PROJECT_ID.claude_demo.citibike_dashboard_source`, build an executive
+operations dashboard for NYC Citi Bike.
+
+Include:
+1. Total trips and average trip duration.
+2. Monthly trip-volume trend.
+3. Weekday versus weekend trip volume.
+4. Top 10 starting stations by trip count.
+5. A map or geographic view of the busiest starting stations.
+6. A concise Key Insights section with facts separated from hypotheses.
+
+Use the full available date range. For every chart, show the SQL query and
+state the date range. Do not use any tables outside this named view.
+
+Before use, replace PROJECT_ID with the Google Cloud project ID printed by
+setup-demo.sh.
