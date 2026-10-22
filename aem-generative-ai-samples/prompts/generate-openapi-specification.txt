@@ -1,0 +1,69 @@
+Please generate an OpenAPI YAML definition with the following details. 
+General Rules:
+ - Create refernce schemas for request/response and any nested objects using example request and response
+
+API Details:
+- API Title: Sample API
+- API Description: Sample API Specification
+- API Version: "1.0.0"
+- Contact Name: test
+- Contact Email: test@gmail.com
+
+API Servers:
+- Production server: https://test.search.com/rest
+- Staging server: https://stage.test.search.com/rest
+
+Paths:
+	1. Search
+	   - Enpoint: /search/v2
+           - Security: Bearer token
+	   - Method: POST
+	   - Summary: Search API
+	   - Description: Search Data
+	   - Query Parameter: testparam	  
+
+	   - Example Request 
+
+		{
+		  "q": "test",
+		  "context": {
+			"country": "US",
+			"locale": "en",
+			"environment": "stage"
+		  }
+		}
+
+	   - Example Response
+
+		{
+		  "totalCount": 1,
+		  "result": [
+			{
+			  "uri": "https://test.com/test.pdf",
+			  "test1": [
+				[
+				  "test1"
+				]
+			  ],
+			  "test2": [
+				[
+				  "test2"
+				]
+			  ],
+			  "test3": "test3",
+			  "test4": [
+				[
+				  "test4_1",
+				  "test4_2"
+				]
+			  ]     
+			}
+		  ]
+		}
+
+
+Additional Prompts:
+
+Include an enum named 'environment' with values 'stage', 'uat', and 'prod'. Give me the complete specification
+Add a description for the request body field 'q', labeling it as 'Product Code. Give me the complete specification
+
