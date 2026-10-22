@@ -16,4 +16,4 @@ own setup notes. Copy `.env.example` to `.env` in a folder before running it.
 Adobe-specific tools (`cja-mcp`, `target-mcp`) moved to
 [martech-architect-toolkit](https://github.com/techforum-repo/martech-architect-toolkit).
 `openai-agents-api` and `agent-design-experiments` came from their now-archived repos with history included;
-`lightning-ai-clip` came from the archived `lightning.ai` repo (current files only).
+`lightning-ai-clip` came from the former `lightning.ai` repo (current files only).
