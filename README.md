@@ -5,12 +5,15 @@ own setup notes. Copy `.env.example` to `.env` in a folder before running it.
 
 | Folder | What it is |
 |---|---|
+| [agent-design-experiments](agent-design-experiments/) | Reproducible tests of how coding agents behave when they have to work from a design system |
 | [claude-dashboard-bigquery-demo](claude-dashboard-bigquery-demo/) | Claude Dashboards over a zero-billing BigQuery Sandbox view of the public NYC Citi Bike dataset |
 | [coveo-crga-atomic-local](coveo-crga-atomic-local/) | Local Coveo Atomic search page loaded from Coveo's CDN |
 | [edge-ai-my-profile](edge-ai-my-profile/) | Cloudflare Worker powering the portfolio's AI routes: RAG chat, contact-form analysis, visitor personalization |
+| [lightning-ai-clip](lightning-ai-clip/) | Lightning AI Studio demo: OpenAI CLIP image classification with a Streamlit UI |
 | [openai-agents-api](openai-agents-api/) | Live tests of OpenAI's Agents API sandbox sessions, verified against computed ground truth |
 | [openai-decision-api-triage](openai-decision-api-triage/) | DAM asset-intake triage with the OpenAI Decisions API, using image and text input |
 
 Adobe-specific tools (`cja-mcp`, `target-mcp`) moved to
 [martech-architect-toolkit](https://github.com/techforum-repo/martech-architect-toolkit).
-`openai-agents-api` came from the now-archived `ai-agents-experimentation` repo, history included.
+`openai-agents-api` and `agent-design-experiments` came from their now-archived repos with history included;
+`lightning-ai-clip` came from the archived `lightning.ai` repo (current files only).
