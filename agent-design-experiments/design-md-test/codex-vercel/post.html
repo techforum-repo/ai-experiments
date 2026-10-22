@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../design-systems/vercel/">
+  <link rel="stylesheet" href="stylesheet.css">
+  <title>Retries Aren't Idempotent By Accident</title>
+  <meta name="description" content="Designing request identity, atomic deduplication, and retention boundaries so retries cannot silently duplicate business effects.">
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <span class="eyebrow">Distributed systems / 01 — Request identity</span>
+    <h1>Retries Aren't Idempotent By Accident</h1>
+    <p class="dek">A retry becomes safe when the server can recognize the original intent and recover its result across failures.</p>
+    <div class="stat-row" aria-label="The argument in numbers">
+      <div class="stat"><b>2</b> attempts</div>
+      <div class="stat"><b>1</b> operation key</div>
+      <div class="stat"><b>1</b> committed effect</div>
+      <div class="stat"><b>3</b> boundaries: identity, commit, retention</div>
+    </div>
+  </header>
+
+  <div class="prose">
+    <p>A client submits an order. The server commits it, then the connection drops before the response arrives. The client sees a timeout; the database sees success. Retrying is a reasonable recovery action, but another ordinary POST can create another order. Backoff changes when that happens. It does nothing to establish whether the operation already happened.</p>
+    <p class="thesis-lead">A timeout is missing knowledge, not evidence of a missing effect.</p>
+    <p>The useful guarantee is narrow: repeating the same logical operation must not repeat its business effect. Delivering that guarantee requires a protocol spanning the caller, the handler, and durable storage. A header named <code>Idempotency-Key</code> is only the identifier carried by that protocol.</p>
+  </div>
+
+  <section aria-labelledby="identity">
+    <div class="prose">
+      <h2 id="identity">01 / Name the intent</h2>
+      <p>Generate a random key when the user initiates an operation, persist it with the pending work, and reuse it for every attempt. Generating a new key inside the retry loop gives every duplicate a fresh identity. Conversely, hashing only the request body can collapse two intentional purchases of identical items. Caller-provided identifiers distinguish those intentions, a distinction described in the <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Amazon Builders’ Library</a>.</p>
+      <p>Scope the stored key to the authenticated tenant and operation. Bind it to a fingerprint of validated, canonical request parameters. If the same scoped key arrives with different parameters, reject it as a conflict. Never silently replay an unrelated result. Authentication and authorization still apply to every attempt; possessing a key grants no access.</p>
+    </div>
+    <figure class="scene" aria-labelledby="flow-caption">
+      <div class="scene-label">Figure 01 / One intent, two deliveries</div>
+      <div class="scene-body">
+        <ol class="step-list">
+          <li><div><b>Client → Server</b>POST /orders · Idempotency-Key: k-7</div></li>
+          <li><div><b>Server → Database</b>Commit order #42 and result for k-7 together.</div></li>
+          <li><div><b>Server ⇢ Client</b><span class="pill warn">Response lost</span> Client cannot tell whether the order exists.</div></li>
+          <li><div><b>Client → Server</b>Retry POST /orders · same key k-7 · same parameters.</div></li>
+          <li><div><b>Server → Client</b><span class="pill ok">Stored result</span> Return order #42 without creating another order.</div></li>
+        </ol>
+      </div>
+      <figcaption class="scene-foot" id="flow-caption">After a lost response, the client retries with the original key and the server returns the result committed with the first order.</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="commit">
+    <div class="prose">
+      <h2 id="commit">02 / Make recognition atomic</h2>
+      <p>A lookup followed by an insert is insufficient: concurrent requests can both observe an absent key. Enforce uniqueness on the scoped key in the database. PostgreSQL’s <a href="https://www.postgresql.org/docs/current/sql-insert.html">INSERT documentation</a> describes conflict handling against unique constraints. The handler below uses a transactional claim built on that constraint, rather than an in-memory check.</p>
+    </div>
+    <figure class="scene">
+      <div class="scene-label">Pattern / Transactional pseudocode</div>
+      <div class="scene-body">
+<pre><code>def post_order(request):
+    tenant = authenticate_and_authorize(request)
+    payload = validate(request.body)
+    scope = (tenant.id, "create-order", require_key(request))
+    fingerprint = hash_canonical(payload)
+
+    with db.transaction() as tx:
+        # Unique insert; on conflict, wait for the owner,
+        # then read its committed record. No separate claim commit.
+        record, owner = tx.claim_or_read(scope, fingerprint)
+        if record.fingerprint != fingerprint:
+            raise Conflict("Key reused with different parameters")
+        if owner:
+            order = tx.insert_order(tenant.id, payload)
+            reply = Response(201, {"order_id": order.id})
+            tx.save_result(scope, reply)
+        else:
+            reply = record.reply
+    # Transaction has committed before any response is sent.
+    return reply</code></pre>
+      </div>
+      <figcaption class="scene-foot">The claim helper must wait for a conflicting transaction and retry acquisition if that transaction rolls back; it must never return an unfinished record.</figcaption>
+    </figure>
+    <div class="prose">
+      <p>Commit the key record, order, and replayable response in one transaction. A crash before commit leaves none of them; a crash afterward leaves enough information to answer the retry. Store the response status and body, plus any application headers needed for replay. Bound contention waits and return a documented retryable outcome when another attempt still owns the transaction.</p>
+      <p>This boundary covers local database effects. An external payment cannot join that transaction merely because the handler calls it. Persist an outbox entry with the order, then deliver it using a stable downstream idempotency key. The receiver must enforce deduplication too; an outbox alone permits duplicate delivery.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="retention">
+    <div class="prose">
+      <h2 id="retention">03 / Define when memory ends</h2>
+      <p>Deduplication lasts only as long as its evidence. Publish a retention window that covers supported retries, delayed queue deliveries, and recovery jobs. After deletion, the same key can look new. For irreversible operations, keep a durable business identifier or require reconciliation after the window expires instead of blindly resubmitting.</p>
+      <p>Test the uncertain outcomes directly: drop the response after commit, race identical requests, change parameters under one key, and replay after expiration. Verify the number of business effects as well as the responses. Successful HTTP requests alone cannot prove this contract. Record duplicate hits, parameter conflicts, and claim wait times so production behavior exposes broken assumptions. A sudden drop in duplicate hits can mean callers have started regenerating keys, even while their retry success rate looks healthy.</p>
+    </div>
+  </section>
+
+  <footer class="closing">
+    <p class="thesis">Design the identity before enabling the retry.</p>
+    <ul class="chain-list">
+      <li>Keep one key for one intent.</li>
+      <li>Commit the effect and its evidence together.</li>
+      <li>Make the retention boundary explicit.</li>
+    </ul>
+    <div class="sources">
+      <h3>Sources</h3>
+      <ol>
+        <li><a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Malcolm Featonby — Making retries safe with idempotent APIs, Amazon Builders’ Library.</a></li>
+        <li><a href="https://www.postgresql.org/docs/current/sql-insert.html">PostgreSQL documentation — INSERT and ON CONFLICT.</a></li>
+      </ol>
+    </div>
+  </footer>
+</main>
+</body>
+</html>

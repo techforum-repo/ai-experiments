@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feature Flags Are a Liability After They Ship</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+  <main class="page">
+    <article class="prose">
+      <h1>Feature Flags Are a Liability After They Ship</h1>
+      <p>Learn why completed rollout flags become operational liabilities and how to remove them without breaking the behavior you intended to keep.</p>
+
+      <p>A feature flag buys time: you can deploy code before exposing it, compare outcomes, and retreat when production disagrees with your tests. That flexibility has a carrying cost. Once the rollout is complete, every surviving conditional preserves another behavior that engineers must understand, test, and support. Shipping the feature ends the experiment; it does not finish the engineering work.</p>
+
+      <h2>The old branch is still production code</h2>
+      <p>Consider <code>checkout_v2</code> <span class="badge">cleanup-due</span>. The replacement checkout has served all eligible traffic for six weeks, its acceptance criteria are met, and its owner has confirmed that the rollback window is closed. Yet the flag still selects between two implementations. The old branch receives fewer tests while shared schemas, dependencies, and authorization rules continue changing around it.</p>
+
+<!-- Banner: full-width solid block, heaviest visual weight. Variants: default, warn, crit -->
+<div class="banner">
+  A dormant branch can become a live incident. If an SDK falls back to false during a configuration outage, it may reactivate checkout code that no longer enforces the current validation rules. A completed rollout does not make that branch unreachable.
+</div>
+
+      <p>The risk depends on actual evaluation semantics: cached values, bootstrap configuration, missing keys, and explicit defaults can produce different results. Inspect those paths instead of assuming that “100% enabled” describes every execution. Workers, regional deployments, and older application versions may evaluate the same flag under different conditions.</p>
+
+      <p>Flags also multiply possible interactions. Two individually safe switches can select a combination nobody exercises. Even when no incident occurs, engineers spend time determining which behavior matters, and tests accumulate fixtures for branches that no longer serve a product purpose.</p>
+
+      <h2>Remove the dependency in a deliberate order</h2>
+      <p>Treat removal as a small migration with evidence and an owner. For this example, the desired invariant is that every supported checkout caller uses the replacement implementation without consulting the flag. Establish that invariant before removing the configuration it previously depended on.</p>
+
+<!-- Steps: numbered procedure list, decimal-leading-zero counters. Use for a genuinely ordered sequence. -->
+<ol class="steps">
+  <li>Confirm eligibility. Name the owner, verify rollout acceptance criteria, and inspect evaluation telemetry across environments and caller versions. Check targeting exceptions, fallback values, scheduled jobs, and rollback requirements. Record why the old behavior is no longer needed; silence in a dashboard alone is insufficient evidence.</li>
+  <li>Remove the branch in code. Keep the selected implementation, delete the alternative and obsolete flag plumbing, and update tests to assert the permanent behavior. Exercise failure paths and integration boundaries, including validation and persisted data compatibility. Review the diff for unrelated changes that would complicate diagnosis.</li>
+  <li>Deploy and observe before retiring configuration. Monitor checkout errors and business outcomes through a representative traffic window. Confirm that supported services, workers, and clients no longer evaluate the key. Then archive or delete it according to the platform’s semantics, and remove obsolete alerts, fixtures, and documentation.</li>
+</ol>
+
+<!-- Callout: boxed aside, left-accent border. Variants: default, warn, crit -->
+<div class="callout">
+  Do not delete the remote flag first. Deployed callers may interpret a missing key using their fallback value and immediately select the obsolete branch. Keep configuration available until callers are migrated, including any older release you might restore during rollback.
+</div>
+
+      <h2>Make cleanup part of shipping</h2>
+      <p>Assign each rollout flag an owner, a purpose, and a review date when creating it. Completion should trigger a tracked removal task with explicit exit criteria. Review overdue flags regularly, but use age to request investigation, not to authorize automatic deletion. Long-lived operational switches need a documented purpose, tested behavior, and periodic review of their own.</p>
+
+      <p>The takeaway: a rollout flag is temporary infrastructure. Finish shipping by removing the alternate behavior and proving that production no longer depends on the switch.</p>
+    </article>
+  </main>
+</body>
+</html>

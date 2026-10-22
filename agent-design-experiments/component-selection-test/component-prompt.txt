@@ -1,0 +1,25 @@
+First, read design.md in full, then read every file in the components/ directory, then read stylesheet.css.
+
+Then write a single self-contained HTML file for a technical blog post titled "Feature Flags Are a Liability After They Ship" about why flags left in code past their rollout create long-term risk, and what a disciplined cleanup process looks like.
+
+Requirements:
+- Roughly 500-700 words of running prose, organized into an intro and 2-3 sections with headings.
+- Somewhere in the post, flag a real risk of leaving a flag in code too long past its intended lifetime -- this should read as important enough that a reader shouldn't skim past it.
+- Somewhere in the post, label the lifecycle stage of an example flag (e.g. something like "active," "stale," or "cleanup-due") as a short visual label attached to the example.
+- Somewhere in the post, present a numbered sequence of concrete steps for safely removing a stale flag.
+- Somewhere in the post, warn about one common mistake teams make when cleaning up flags -- this should also read as something a reader shouldn't skim past.
+- A short closing takeaway.
+- This is a real, standalone piece of writing -- not a stub or placeholder. Write actual technical content with genuine explanatory value, as if for publication.
+
+design.md covers voice, composition, and judgment calls only -- it does not say which pre-built component fits which situation; that's a judgment call the file leaves to you, same as it would for a person writing this by hand. Colors, type, and spacing tokens live in stylesheet.css. Components themselves live as ready-to-use HTML markup in components/ -- each file there is a complete, correctly-structured, already-styled snippet.
+
+Do this exactly the way the two are meant to be used together:
+- Link the stylesheet in <head> with a relative path: <link rel="stylesheet" href="stylesheet.css">
+- Do NOT write your own <style> block, and do not override any documented token inline.
+- For every component you use, copy the exact markup from its file in components/ and only replace its placeholder text -- do not restructure the markup, rename its tags, or change its classes.
+- Do not invent a component of your own. If nothing in components/ fits, use the closest one.
+- Follow design.md for voice, composition, hierarchy, and the named anti-patterns/do's-and-don'ts it lists.
+
+Save the finished file to exactly this path: post.html
+
+Do not create any other files (stylesheet.css and components/ already exist -- use them, don't recreate them). Do not ask clarifying questions -- make reasonable decisions yourself within these constraints. When done, confirm the file was written and give a one-paragraph description of exactly which component file you used for each of the four requirements above, and why.

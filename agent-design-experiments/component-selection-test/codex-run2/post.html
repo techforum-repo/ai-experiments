@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feature Flags Are a Liability After They Ship</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<main class="page">
+<article class="prose">
+  <h1>Feature Flags Are a Liability After They Ship</h1>
+  <p>Learn why completed rollout flags remain operational liabilities and how to remove them without changing the behavior users depend on.</p>
+
+  <p>A rollout flag buys a team time: deploy code, expose it gradually, and reverse exposure if evidence turns bad. Once the rollout is complete, that temporary decision point often stays behind. The dashboard looks settled, so the work feels finished. But the repository still contains two promises about how the system can behave, and someone must maintain both.</p>
+
+  <h2>The dormant path still matters</h2>
+  <p>Leaving a flag behind expands the state space that engineers must reason about. Two independent binary flags can produce four combinations; ten can produce 1,024. Not every combination is reachable, but each surviving branch complicates reviews, tests, and incident diagnosis. A future change may update the default path while leaving its alternative incompatible with a new schema or validation rule.</p>
+
+  <!-- Banner: full-width solid block, heaviest visual weight. Variants: default, warn, crit -->
+<div class="banner">
+  An obsolete branch can become a production incident without a deployment. If the old path misses a later authorization fix, a targeting change or fallback evaluation can route requests into vulnerable code. A flag set to 100 percent is not proof that its other branch is unreachable.
+</div>
+
+  <p>For example, <code>checkout_tax_v2</code> <!-- Badge: small solid-fill label. Reads as a definitive status marker. -->
+<span class="badge">cleanup-due</span> has served all intended traffic for six weeks. Its rollback window has closed, yet the old calculator remains callable. The label records a lifecycle decision: the owner has accepted the replacement, and removal is due. It does not claim that deletion is already safe. Workers, regional deployments, or older mobile clients may still depend on the key.</p>
+
+  <h2>Remove the branch before the switch</h2>
+  <p>Cleanup is a small migration, not a search-and-delete exercise. Start with evidence about actual consumers and the behavior they require. Dashboard percentages describe configured exposure; they do not establish which deployed versions still evaluate the flag. Search the repository and configuration, inspect available evaluation data, and account for consumers that report intermittently.</p>
+
+  <!-- Steps: numbered procedure list, decimal-leading-zero counters. Use for a genuinely ordered sequence. -->
+<ol class="steps">
+  <li>Establish the intended behavior and prove coverage. Confirm the winning value with the owner; inspect targeting, prerequisites, defaults, and evaluation telemetry across supported deployments. Exercise the surviving behavior in tests, including failure handling. Resolve unexplained evaluations before deleting either branch.</li>
+  <li>Remove the decision from code. Replace evaluations with the surviving behavior, then delete the losing branch and its exclusive dependencies. Preserve tests for the product contract, remove tests that only check flag permutations, and run integration checks around callers, stored data, and background jobs.</li>
+  <li>Deploy and verify before retiring configuration. Roll out the cleanup while watching errors and business outcomes. Keep the flag definition compatible with supported older clients and rollback artifacts. After those consumers age out and reference checks are clear, archive the definition and close the cleanup record.</li>
+</ol>
+
+  <!-- Callout: boxed aside, left-accent border. Variants: default, warn, crit -->
+<div class="callout">
+  Do not delete the remote flag first. Older binaries may still evaluate its key, and a missing definition can select an SDK default instead of the intended behavior. Configuration removal comes after code removal and consumer retirement, not before them.
+</div>
+
+  <p>Rollback deserves an explicit decision here. If the previous release still reads the flag, preserve its expected configuration for as long as that release remains a rollback option. If schema changes have already made the old branch unusable, the flag was never a credible recovery mechanism; document the recovery path that actually works.</p>
+
+  <h2>Make expiration part of shipping</h2>
+  <p>At creation, give each rollout flag an owner, a purpose, a review date, and an exit condition. An exit condition might require full exposure, acceptable error rates, and completion of a defined observation window. When that condition is met, create the removal change as part of finishing the rollout. Review overdue flags regularly, with ownership transfers when teams change.</p>
+
+  <p>Some switches are intentionally permanent, such as operational kill switches. Treat those as maintained controls with tested behavior and an explicit operating contract. Do not let an expired experiment acquire permanent status through neglect.</p>
+
+  <p>The takeaway: a rollout is complete when the intended behavior stands on its own and the temporary decision machinery is gone.</p>
+</article>
+</main>
+</body>
+</html>

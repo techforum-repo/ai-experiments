@@ -1,0 +1,399 @@
+Reading additional input from stdin...
+OpenAI Codex v0.153.4
+--------
+workdir: /home/albinissac/projects/Utilities/cloudflared/shared/desing-agent/design-md-test
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: danger-full-access
+reasoning effort: none
+reasoning summaries: none
+session id: 01a07794-25fc-7611-8c32-09d3600149b8
+--------
+user
+First, read this design system specification file in full: design-systems/google/DESIGN.md
+
+Then write a single self-contained HTML file for a technical blog post titled "Retries Aren't Idempotent By Accident" about why retry logic in distributed systems needs a deliberately designed idempotency key, not just "retry and hope."
+
+Requirements:
+- Roughly 500-700 words of running prose, organized into an intro and 2-3 sections with headings.
+- At least one code snippet showing an idempotency-key pattern (any language you like, e.g. a POST handler checking a stored key before processing).
+- At least one diagram/figure illustrating a client -> server retry flow with an idempotency key (inline SVG is fine, or a styled HTML/CSS diagram -- no external image files).
+- A short closing takeaway.
+- This is a real, standalone piece of writing -- not a stub or placeholder. Write actual technical content with genuine explanatory value, as if for publication.
+- All CSS must be inline in a <style> block in this one file -- no external stylesheets, no build step, no JS framework. You may link Google Fonts if the file specifies them.
+
+Treat design-systems/google/DESIGN.md as the strict house style guide for this piece: match its color tokens, typography rules, spacing scale, component patterns (eyebrow, scene wrapper for figures with caption bar, callouts, thesis-lead, pills, step-list, sources section), voice/tone, and its Do's and Don'ts exactly. Where it gives you a choice (e.g. which 2-5 semantic role colors to use for this specific post's subject matter), make a sensible choice consistent with its rules and note your reasoning briefly at the end.
+
+Save the finished file to exactly this path: post.html
+
+Do not create any other files. Do not ask clarifying questions -- make reasonable decisions yourself within the file's constraints. When done, confirm the file was written and give a one-paragraph description of how you applied it. (Save the finished file to exactly this path instead: codex-google/post.html)
+codex
+I’ll read the full house style guide, then write the standalone post to `codex-google/post.html` and check it against the content and design requirements.
+exec
+/bin/bash -lc 'cat design-systems/google/DESIGN.md' in /home/albinissac/projects/Utilities/cloudflared/shared/desing-agent/design-md-test
+ succeeded in 0ms:
+---
+version: alpha
+name: albins-blog-architecture-reference
+description: >
+  Single-post, self-contained HTML essays for share.albinsblog.com — long-form
+  systems/architecture writing (e.g. "The Chain Doesn't Care Why It Broke").
+  Each post is one HTML file with a fully inlined <style> block: no external
+  CSS files, no build step, no JS framework. Content ships as static markup.
+colors:
+  bg: "#f5f6f9"
+  surface: "#ffffff"
+  ink: "#161a22"
+  ink-soft: "#525a6e"
+  ink-faint: "#8a91a3"
+  line: "#e1e4ea"
+  line-strong: "#c7cbd6"
+  accent: "#2f5fed"
+  accent-ink: "#1c3fb0"
+  accent-soft: "#e9eefd"
+  code-bg: "#edf0f5"
+typography:
+  h1:
+    fontFamily: "Big Shoulders Display, Archivo Narrow, ui-sans-serif, sans-serif"
+    fontWeight: 700
+    textTransform: uppercase
+    fontSize: "clamp(2.4rem, 5.6vw, 3.7rem)"
+    lineHeight: 0.98
+  h2:
+    fontFamily: "Big Shoulders Display, Archivo Narrow, ui-sans-serif, sans-serif"
+    fontWeight: 700
+    textTransform: uppercase
+    fontSize: "clamp(1.65rem, 3.5vw, 2.1rem)"
+  body:
+    fontFamily: "IBM Plex Sans, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "16.5px"
+    lineHeight: 1.68
+  mono:
+    fontFamily: "IBM Plex Mono, ui-monospace, monospace"
+    usage: "eyebrows, tags, code, thesis-lead callouts, table headers, figure labels"
+rounded:
+  sm: "4px"
+  md: "8px"
+  lg: "12px"
+  pill: "100px"
+spacing:
+  scale: [6, 10, 14, 18, 22, 28, 34, 44, 58, 60, 90]
+  unit: px
+  note: >
+    Not a strict 8pt grid — a hand-tuned scale. Section vertical rhythm is
+    ~58px between sections, ~22-34px around figures/callouts, ~14px between
+    paragraphs. Prose column caps at 680px inside a 900px page shell.
+components:
+  eyebrow:
+    font: mono
+    fontSize: "0.72rem"
+    letterSpacing: "0.14em"
+    textTransform: uppercase
+    color: accent-ink
+  scene:
+    description: "The one wrapper every figure/diagram/split-panel lives in — never a bare <img> or bare <svg>."
+    border: "1px solid var(--line)"
+    borderRadius: lg
+    background: surface
+    shadow: "0 1px 2px rgba(22,26,34,.04), 0 8px 24px rgba(22,26,34,.05)"
+    parts: [scene-label (mono caption bar, top), scene-body (padded content), scene-foot (mono footnote, optional)]
+  callout:
+    border-left: "3px solid var(--accent)"
+    background: accent-soft
+    variant-alt:
+      border-left: "3px solid var(--cyber)"
+      background: cyber-soft
+  thesis-lead:
+    font: mono
+    fontSize: "0.95rem"
+    lineHeight: 1.9
+    border-left: "3px solid var(--accent)"
+    usage: "one or two per post, max — the single load-bearing sentence of a section"
+  pill:
+    fontFamily: mono
+    fontSize: "0.72rem"
+    borderRadius: pill
+    variants: [neutral, accent, ok, warn, crit]
+    dotBefore: true
+  step-list:
+    style: "counter(step, decimal-leading-zero) — 01, 02, 03 — not bullets, not plain numbers"
+  sources:
+    required: true
+    position: end-of-document
+    format: "ordered list, each item a link + em-dash + publisher name"
+omitted:
+  - motion
+  - dark-mode-illustration-variants
+---
+
+# DESIGN.md — Architecture-Reference Essays
+
+## Overview
+
+This is the house style for long-form technical essays published as standalone
+HTML files (no CMS, no framework, one file per post, view-source is the
+distribution format). The voice is **a senior engineer explaining a pattern
+to another senior engineer** — declarative, citation-backed, allergic to
+hype. Think "internal architecture doc that escaped," not "marketing landing
+page" and not "Medium listicle."
+
+Every post opens with an eyebrow (series/part label), a title, a one-sentence
+dek, and 3–4 stat chips summarizing the shape of the argument in numbers
+before a single paragraph of prose has been read. Every post closes with a
+short "chain" of takeaway lines and a numbered, linked Sources list — real
+citations, not vibes.
+
+## Colors
+
+Core neutrals and the single accent (`--accent` / `--accent-ink` / `--accent-soft`,
+a cobalt blue) are **fixed across every post** — do not invent a new base
+palette per piece. What changes post-to-post is a small set of 2–5
+**semantic role colors** (e.g. one post uses `ok` / `warn` / `crit` / `cyber`
+/ `infra` for failure taxonomy; another uses `dev` / `stage` / `prod` / `alt`
+for environment tiers). Each semantic role always ships as a pair: a
+saturated `-ink`/main value for text and strokes, and a `-soft` background
+tint at roughly 90% lightness for chips, callouts, and diagram fills. Never
+add a role color without also deriving its `-soft` pairing the same way.
+
+Both a light palette and a dark-mode palette are defined for every token —
+dark mode is not an afterthought, it's a parallel set of CSS custom
+properties swapped under `prefers-color-scheme` and a `[data-theme]`
+override, using the exact same role structure.
+
+## Typography
+
+Two-family system, strictly divided by job:
+
+- **Big Shoulders Display** (condensed, heavy, uppercase) — headings only
+  (h1/h2/h3, footer thesis lines). It never appears in a sentence of running
+  prose.
+- **IBM Plex Sans** — all body copy, deks, list items, table cells.
+- **IBM Plex Mono** — the "structural" voice: eyebrows, section tags,
+  figure labels, code, table headers, pills, the thesis-lead callout, and
+  the arrow-prefixed closing chain-list. Mono signals "this is a label or a
+  claim being made precisely," sans signals "this is explanation."
+
+Headings are uppercase with tight tracking; body text is not. Nothing is
+italic except the disclaimer line, which is the one deliberately
+de-emphasized element on the page.
+
+## Layout
+
+Single column. A 900px outer page shell with a tighter 680px prose column
+inside it — figures, tables, and split-panels are allowed to use the full
+900px width; paragraphs and lists are not. Sections are separated by ~58px
+of top padding and a component rhythm, not by rules/dividers between every
+block — the divider (`border-top`) is reserved for the header/footer
+boundary and the sources block. Everything is a static single page: no
+tabs, no accordions, no client-side routing.
+
+## Elevation & Depth
+
+Flat by default. The only elevated surface is `.scene` (the figure/diagram
+wrapper) and the sources table wrap, both using the same one-line soft
+double-shadow token — never a heavier shadow, never more than one elevation
+level on the page at a time.
+
+## Shapes
+
+Consistent radius scale: 4px on inline chips/code, 8px on callouts, 12px on
+`.scene` wrappers and split-cards, full pill (100px) on status pills and
+badges only. No sharp-cornered cards and no fully-rounded cards outside
+those two exceptions.
+
+## Components
+
+See the `components` block in the frontmatter above for exact specs. In
+prose: every diagram or non-trivial visual lives inside a `.scene` wrapper
+with a monospace caption bar reading `FIG. NN — TITLE` on the left and a
+short all-caps descriptor on the right. Every SVG diagram gets a real
+`aria-label` summarizing what it shows in one sentence — the diagram is
+never the only place the information exists.
+
+## Do's and Don'ts
+
+**Do**
+- Open with an eyebrow + h1 + one-sentence dek + a stat-chip row.
+- Keep prose at 680px max-width even when the page shell is wider.
+- Use exactly one accent color for interactive/emphasis elements; use
+  semantic role colors only for the specific taxonomy that post is about.
+- Cite real, checkable sources in a closing numbered list.
+- Use the mono thesis-lead sparingly — it should read as the one sentence
+  a reader would highlight.
+- Wrap every diagram in `.scene` with a caption bar.
+
+**Don't**
+- Don't reach for a generic "hero gradient + rounded SaaS card" template —
+  that's the exact genre this system is defined against.
+- Don't use Big Shoulders Display (or any display face) inside a paragraph
+  of body text.
+- Don't invent a new accent color per post — extend the semantic-role set
+  instead, following the `-ink`/`-soft` pairing convention.
+- Don't ship a diagram as a flat raster image if it can be an inline SVG —
+  raster diagrams can't inherit the color tokens or respond to dark mode.
+- Don't skip the Sources section, and don't cite anything that isn't a real,
+  linkable, checkable reference.
+- Don't use drop shadows, glassmorphism, or more than one elevation level.
+
+exec
+/bin/bash -lc 'pwd && rg --files -g AGENTS.md -g hosting.json -g post.html' in /home/albinissac/projects/Utilities/cloudflared/shared/desing-agent/design-md-test
+ succeeded in 0ms:
+/home/albinissac/projects/Utilities/cloudflared/shared/desing-agent/design-md-test
+claude-vercel/post.html
+claude-blind/post.html
+claude-google/post.html
+
+web search: 
+web search: https://docs.stripe.com/api/idempotent_requests
+codex
+The guide calls for a narrow prose column, full-width figure scenes, paired light and dark tokens, and numbered sources. I’m centering the post on the atomic database boundary that makes key reuse safe, with green for committed results and amber for uncertain delivery.
+exec
+/bin/bash -lc "mkdir -p codex-google && cat > codex-google/post.html <<'EOF'
+<"'!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="A retry is another delivery attempt. Safe repetition requires a durable identity, an atomic commit, and an explicit retention contract.">
+<title>Retries Aren'"'t Idempotent By Accident</title>
+<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
+<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
+<link href=\"https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap\" rel=\"stylesheet\">
+<style>
+:root,[data-theme=\"light\"]{--bg:#f5f6f9;--surface:#ffffff;--ink:#161a22;--ink-soft:#525a6e;--ink-faint:#8a91a3;--line:#e1e4ea;--line-strong:#c7cbd6;--accent:#2f5fed;--accent-ink:#1c3fb0;--accent-soft:#e9eefd;--code-bg:#edf0f5;--ok-ink:#187044;--ok-soft:#e6f5ed;--warn-ink:#925800;--warn-soft:#fff1d6;--shadow:0 1px 2px rgba(22,26,34,.04),0 8px 24px rgba(22,26,34,.05);--display:'Big Shoulders Display','Archivo Narrow',ui-sans-serif,sans-serif;--sans:'IBM Plex Sans',ui-sans-serif,system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+@media(prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){--bg:#11141b;--surface:#191e28;--ink:#edf0f7;--ink-soft:#b5bdd0;--ink-faint:#929db3;--line:#303848;--line-strong:#4a566c;--accent:#8ca9ff;--accent-ink:#adc1ff;--accent-soft:#222e50;--code-bg:#202735;--ok-ink:#82d9aa;--ok-soft:#19372b;--warn-ink:#f1c16f;--warn-soft:#3b2e1b;--shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05)}}
+[data-theme=\"dark\"]{--bg:#11141b;--surface:#191e28;--ink:#edf0f7;--ink-soft:#b5bdd0;--ink-faint:#929db3;--line:#303848;--line-strong:#4a566c;--accent:#8ca9ff;--accent-ink:#adc1ff;--accent-soft:#222e50;--code-bg:#202735;--ok-ink:#82d9aa;--ok-soft:#19372b;--warn-ink:#f1c16f;--warn-soft:#3b2e1b;--shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.68 var(--sans)}main{max-width:900px;margin:auto;padding:60px 0 90px}.prose{max-width:680px;margin-inline:auto}h1,h2,h3{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:-.025em}h1{font-size:clamp(2.4rem,5.6vw,3.7rem);line-height:.98;margin:18px 0 22px}h2{font-size:clamp(1.65rem,3.5vw,2.1rem);line-height:1.1;margin:10px 0 22px}p{margin:0 0 14px}.eyebrow,.tag{font: .72rem/1.5 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}.dek{color:var(--ink-soft);margin-bottom:22px}.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:34px}.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--line);border-radius:100px;font:.72rem/1.5 var(--mono);background:var(--surface)}.pill:before{content:'';width:6px;height:6px;border-radius:100px;background:currentColor}.pill.accent{color:var(--accent-ink);background:var(--accent-soft);border-color:transparent}.pill.ok{color:var(--ok-ink);background:var(--ok-soft);border-color:transparent}.pill.warn{color:var(--warn-ink);background:var(--warn-soft);border-color:transparent}header{padding-bottom:28px}.intro{border-top:1px solid var(--line);padding-top:28px}section{padding-top:58px}a{color:var(--accent-ink);text-underline-offset:3px}a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}.thesis-lead{font:.95rem/1.9 var(--mono);border-left:3px solid var(--accent);padding:10px 0 10px 22px;margin:28px 0}.scene{margin:28px 0 34px;border:1px solid var(--line);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}.scene-label{display:flex;justify-content:space-between;gap:14px;padding:14px 22px;background:var(--code-bg);font:.72rem/1.5 var(--mono);text-transform:uppercase;color:var(--ink-soft)}.scene-body{padding:22px;overflow-x:auto}.scene-foot{padding:14px 22px;font:.72rem/1.6 var(--mono);color:var(--ink-soft)}svg{display:block;width:100%;min-width:560px;height:auto}svg text{font:13px var(--mono);fill:var(--ink)}svg .muted{fill:var(--ink-soft)}svg .wire{stroke:var(--accent);stroke-width:2;fill:none}svg .life{stroke:var(--line-strong);stroke-dasharray:5 5}svg .good{fill:var(--ok-soft);stroke:var(--ok-ink)}svg .warning{fill:var(--warn-ink)}code,pre{font-family:var(--mono)}:not(pre)>code{font-size:.85em;background:var(--code-bg);padding:0 6px;border-radius:4px}pre{margin:0;font-size:12px;line-height:1.8;tab-size:4}.callout{border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:8px;padding:18px 22px;margin:28px 0}.step-list{list-style:none;counter-reset:step;padding:0;margin:22px 0}.step-list li{counter-increment:step;position:relative;padding-left:44px;margin-bottom:14px}.step-list li:before{content:counter(step,decimal-leading-zero);position:absolute;left:0;font-family:var(--mono);color:var(--accent-ink)}footer{border-top:1px solid var(--line);margin-top:58px;padding-top:28px}.chain{list-style:none;padding:0;font:.95rem/1.9 var(--mono)}.chain li:before{content:'→ ';color:var(--accent)}.sources{border-top:1px solid var(--line);margin-top:34px;padding-top:28px}.sources ol{padding-left:22px}.sources li{margin-bottom:10px}.design-note{font-size:14px;color:var(--ink-soft);margin-top:28px}@media(max-width:948px){main{margin-inline:22px}}@media(max-width:600px){main{padding-top:34px}.scene-label{flex-direction:column;gap:6px}.scene-body{padding:14px}section{padding-top:44px}}
+</style>
+</head>
+<body>
+<main>
+<article>
+<header class=\"prose\">
+<div class=\"eyebrow\">Distributed systems / field notes 01</div>
+<h1>Retries Aren't Idempotent By Accident</h1>
+<p class=\"dek\">A retry repeats delivery; an idempotency contract preserves the identity and outcome of the work.</p>
+<div class=\"stats\" aria-label=\"The example in numbers\"><span class=\"pill accent\">1 operation key</span><span class=\"pill warn\">2 delivery attempts</span><span class=\"pill ok\">1 committed order</span></div>
+</header>
+<div class=\"prose intro\">
+<p>A client submits an order. The server commits it, but the response disappears behind a broken connection. The client sees a timeout: evidence that it lacks an answer, not evidence that the order failed. Retrying an ordinary POST can create another order. Exponential backoff changes when that happens; it does nothing to change what happens.</p>
+<p>Idempotency makes repeated requests converge on one intended effect. For an operation that creates something, that property needs a protocol: the client names its intent, and the server remembers what that intent produced. “Retry and hope” supplies neither identity nor memory.</p>
+</div>
+<section aria-labelledby=\"identity\">
+<div class=\"prose\"><div class=\"tag\">01 / Identity</div><h2 id=\"identity\">Name the intent before sending</h2>
+<p>Generate a random operation key before the first attempt and persist it with the pending client operation. Every retry, including one after a client restart, sends that same key. A second intentional purchase gets a new key, even when its basket is identical. A hash of the payload alone cannot distinguish those two purchases; AWS explains this distinction in its <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">discussion of caller-provided request identifiers</a>.</p>
+<p>Scope the server record to the authenticated tenant, operation, and key. Store a fingerprint of validated, normalized parameters alongside it. Reusing the key with a different quantity should produce a conflict, not silently return an unrelated order. Authentication still runs on every attempt; possession of a key never grants access to somebody else’s result.</p>
+<p class=\"thesis-lead\">The key identifies one business intention, not one network attempt.</p></div>
+<figure class=\"scene\">
+<figcaption class=\"scene-label\"><span>Fig. 01 — An answer lost, an order retained</span><span>Same key / same result</span></figcaption>
+<div class=\"scene-body\"><svg viewBox=\"0 0 800 320\" role=\"img\" aria-label=\"The client sends POST with key k7, the server commits order 42 but its response is lost; the client retries with k7 and receives the stored result without another order.\">
+<defs><marker id=\"arrow\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10Z\" fill=\"var(--accent)\"/></marker></defs>
+<rect x=\"28\" y=\"10\" width=\"150\" height=\"40\" rx=\"8\" fill=\"var(--accent-soft)\"/><text x=\"103\" y=\"35\" text-anchor=\"middle\">CLIENT</text>
+<rect x=\"608\" y=\"10\" width=\"160\" height=\"40\" rx=\"8\" fill=\"var(--code-bg)\"/><text x=\"688\" y=\"35\" text-anchor=\"middle\">SERVER + DB</text>
+<path class=\"life\" d=\"M103 58V312M688 58V312\"/>
+<path class=\"wire\" d=\"M103 89H688\" marker-end=\"url(#arrow)\"/><text x=\"220\" y=\"77\">POST /orders · key=k7</text>
+<rect class=\"good\" x=\"525\" y=\"104\" width=\"245\" height=\"36\" rx=\"8\"/><text x=\"647\" y=\"127\" text-anchor=\"middle\">COMMIT order 42 + result</text>
+<path class=\"wire\" d=\"M688 167H290\" stroke-dasharray=\"6 6\"/><text x=\"346\" y=\"156\">201 · order 42</text><text class=\"warning\" x=\"116\" y=\"172\">× response lost</text>
+<path class=\"wire\" d=\"M103 222H688\" marker-end=\"url(#arrow)\"/><text x=\"220\" y=\"210\">RETRY /orders · key=k7</text>
+<path class=\"wire\" d=\"M688 279H103\" marker-end=\"url(#arrow)\"/><text x=\"220\" y=\"267\">201 · stored order 42</text>
+</svg></div>
+<div class=\"scene-foot\">The second delivery reads the committed result. It does not create order 43.</div>
+</figure>
+</section>
+<section aria-labelledby=\"atomic\">
+<div class=\"prose\"><div class=\"tag\">02 / Atomicity</div><h2 id=\"atomic\">Make the record and effect indivisible</h2>
+<p>A cache lookup followed by processing leaves a race: two workers can both observe an absent key. A durable unique constraint must arbitrate ownership. In this database-only example, the claim, order insert, and saved response share one transaction. PostgreSQL’s <a href=\"https://www.postgresql.org/docs/current/sql-insert.html\">ON CONFLICT mechanism</a> supplies the competing-insert behavior.</p></div>
+<figure class=\"scene\">
+<figcaption class=\"scene-label\"><span>Listing 01 — POST /orders</span><span>Python-style pseudocode</span></figcaption>
+<div class=\"scene-body\"><pre><code># Authenticate and validate first. Reject a missing key.
+# UNIQUE (tenant_id, operation, key) on requests.
+# claim(): INSERT ... ON CONFLICT DO NOTHING RETURNING *
+# PostgreSQL READ COMMITTED; conflicting inserts wait.
+scope = (auth.tenant_id, \"create_order\", request.key)
+fingerprint = sha256(canonical_json(validated_body))
+
+with db.transaction(isolation=\"READ COMMITTED\") as tx:
+    owned = tx.claim(scope, fingerprint)
+    if not owned:
+        previous = tx.get_request(scope)  # new statement snapshot
+        if previous.fingerprint "'!= fingerprint:
+            raise Conflict("Key reused with different parameters")
+        response = previous.response
+    else:
+        order = tx.insert_order(validated_body)
+        response = (201, {"id": order.id})
+        tx.save_response(scope, response)
+# Commit succeeds before any response is sent.
+return response</code></pre></div>
+<div class="scene-foot">Helpers are illustrative. The transaction contains only local database work.</div>
+</figure>
+<div class="prose">
+<p>A crash before commit rolls everything back. A crash after commit leaves both the order and its replayable response intact. A concurrent duplicate waits on the unique constraint, then reads the committed record. Bound that wait; if it expires, return a documented retryable outcome rather than starting the work again.</p>
+<aside class="callout">An external payment call cannot join this local transaction. Commit an outbox task with the order, then deliver it using a stable downstream idempotency key. The receiver must enforce its own deduplication contract.</aside>
+</div>
+</section>
+<section aria-labelledby="contract"><div class="prose"><div class="tag">03 / Boundaries</div><h2 id="contract">Specify when the promise ends</h2>
+<p>Retention is part of correctness. Once a record expires, a late retry can become new work. Choose a retention window that covers client retries, queued redelivery, and operational recovery. Longer-lived business constraints may still be necessary: a unique merchant order reference can prevent duplication after the request ledger has been pruned.</p>
+<p>Write the remaining behavior into the API contract:</p>
+<ol class="step-list"><li><strong>Replay policy.</strong> Define which status codes and response fields are stored. Stripe, for example, <a href="https://docs.stripe.com/api/idempotent_requests">replays stored results including server errors</a>; your policy must be equally explicit.</li><li><strong>Retry budget.</strong> Use bounded backoff with jitter for transient failures. A parameter conflict requires correction, not another automatic attempt.</li><li><strong>Recovery evidence.</strong> Log the operation key, attempt identifier, and committed resource identifier separately. Operators need to distinguish repeated delivery from repeated effects.</li></ol>
+<p>Test the lost-response boundary deliberately: commit, drop the connection, and resend the original key. Also race two identical requests and reuse a key with changed input. Those tests establish the promise that a happy-path retry cannot.</p>
+</div></section>
+<footer class="prose">
+<h2>Keep the intention stable</h2>
+<ul class="chain"><li>Name the work once.</li><li>Commit its effect and memory together.</li><li>Retry within an explicit contract.</li></ul>
+<p class="design-note">Design note: cobalt carries emphasis and navigation; green marks committed effects, and amber marks uncertain delivery. Each semantic role has a paired tint in both themes, keeping delivery uncertainty distinct from durable state.</p>
+<section class="sources" aria-labelledby="sources"><div class="eyebrow">References / further reading</div><h2 id="sources">Sources</h2>
+<ol><li><a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a> — Amazon Builders’ Library</li><li><a href="https://www.postgresql.org/docs/current/sql-insert.html">INSERT: ON CONFLICT clause</a> — PostgreSQL Global Development Group</li><li><a href="https://docs.stripe.com/api/idempotent_requests">Idempotent requests</a> — Stripe</li></ol>
+</section>
+</footer>
+</article>
+</main>
+</body>
+</html>
+EOF' in /home/albinissac/projects/Utilities/cloudflared/shared/desing-agent/design-md-test
+ succeeded in 0ms:
+web search: 
+web search: https://www.postgresql.org/docs/current/sql-insert.html
+exec
+/bin/bash -lc "python - <<'PY'
+from pathlib import Path
+from bs4 import BeautifulSoup
+p=Path('codex-google/post.html'); s=BeautifulSoup(p.read_text(),'html.parser')
+nodes=s.select('.intro p, article > section .prose p, article > section .prose aside, .step-list li')
+print('Running prose words:',sum(len(n.get_text(' ',strip=True).split()) for n in nodes))
+assert len(s.select('style'))==1 and not s.select('script')
+assert len(s.select('svg[aria-label]'))==1
+assert len(s.select('.sources li a'))==3
+assert len(s.select('.pill'))==3
+print('Structure verified; file bytes:',p.stat().st_size)
+PY" in /home/albinissac/projects/Utilities/cloudflared/shared/desing-agent/design-md-test
+ exited 1 in 0ms:
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+ModuleNotFoundError: No module named 'bs4'
+
+exec
+/bin/bash -lc "python - <<'PY'
+from pathlib import Path
+import re
+s=Path('codex-google/post.html').read_text()
+body=s.split('<div class=\"prose intro\">')[1].split('<footer')[0]
+body=re.sub(r'<figure.*?</figure>','',body,flags=re.S)
+chunks=re.findall(r'<(?:p|li|aside)\\b["'^>]*>(.*?)</(?:p|li|aside)>'"',body,re.S)
+print('Running prose words:',len(re.sub('<["'^>]+>'"',' ', ' '.join(chunks)).split()))
+assert s.count('<style>')==1 and '<script' not in s
+assert '<svg' in s and 'aria-label=\"The client' in s
+assert s.count('<span class=\"pill')==3
+print('Verified single inline stylesheet, labeled SVG, three chips and complete document:',s.endswith('</html>\\n'))
+PY" in /home/albinissac/projects/Utilities/cloudflared/shared/desing-agent/design-md-test
+ succeeded in 0ms:
+Running prose words: 518
+Verified single inline stylesheet, labeled SVG, three chips and complete document: True
+
+codex
+Written to [codex-google/post.html](codex-google/post.html). The standalone post applies the house typography, exact light-mode tokens, paired dark palette, spacing, stat pills, captioned SVG scene, thesis lead, callout, numbered steps, closing chain, and linked sources. It includes substantive technical prose and an atomic idempotency-key example, with a brief closing note explaining green for committed results and amber for uncertain delivery.
+tokens used
+27,118
+Written to [codex-google/post.html](codex-google/post.html). The standalone post applies the house typography, exact light-mode tokens, paired dark palette, spacing, stat pills, captioned SVG scene, thesis lead, callout, numbered steps, closing chain, and linked sources. It includes substantive technical prose and an atomic idempotency-key example, with a brief closing note explaining green for committed results and amber for uncertain delivery.

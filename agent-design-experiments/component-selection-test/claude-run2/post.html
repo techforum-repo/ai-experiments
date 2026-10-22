@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feature Flags Are a Liability After They Ship</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+  <div class="page">
+    <div class="prose">
+      <h1>Feature Flags Are a Liability After They Ship</h1>
+      <p>A flag that shipped successfully still has to be removed — and most teams never schedule the removal, which is how a rollout mechanism quietly turns into permanent, unowned risk.</p>
+
+      <p>
+        Feature flags earn their keep during a rollout. They let you ship dark,
+        test against production traffic, and back out of a bad release without
+        a redeploy. None of that is in dispute. The trouble starts after the
+        rollout finishes — when the flag is sitting at 100% on, the migration
+        it guarded is long done, and nobody has scheduled the fifteen minutes
+        it would take to delete it. That flag doesn't sit there neutrally. It
+        keeps costing you, and the cost compounds the longer it's ignored.
+      </p>
+
+      <h2>Why flags outlive their purpose</h2>
+      <p>
+        Flags get added under deadline pressure, as part of a launch checklist
+        with a clear owner and a clear deadline. Removing them has neither.
+        There's no incident if a stale flag stays in the code, so it never
+        wins a prioritization fight against the next feature. The engineer who
+        added it moves to a different team, the on-call rotation turns over,
+        and eventually nobody who remembers why the flag exists is still
+        around to say it's safe to pull out. The flag isn't forgotten because
+        anyone decided that; it's forgotten because deleting it was never
+        anyone's job in the first place.
+      </p>
+      <p>
+        This is worse than ordinary technical debt because a flag doesn't just
+        sit inertly like an unused function — it actively forks your code into
+        two maintained paths whether or not anyone is testing both. Every
+        change to the surrounding logic now has to consider what happens on
+        both sides of the conditional, even though only one side has run in
+        production for months.
+      </p>
+
+      <h2>The cost that compounds</h2>
+      <p>
+        Consider <code>checkout-v2-flow</code>, a flag introduced to gate a
+        rewrite of the payment confirmation step.
+        <span class="badge">cleanup-due</span>
+        It rolled out to 100% of traffic nine months ago, the old
+        <code>checkout-v1</code> path hasn't executed for a customer since,
+        and the team that owned the migration has since been reorganized into
+        a different group. The flag is still in the code, still evaluated on
+        every checkout request, and still branching into a legacy path that
+        no one has run a test against in three quarters.
+      </p>
+
+      <div class="banner crit">
+        This is the real risk, and it's easy to wave off as tidiness: a stale
+        flag is a dead code path that still executes on demand. If the flag
+        service misbehaves, someone fat-fingers a config change, or an old
+        default gets restored during an incident, that "dead" branch comes
+        back alive — unreviewed, untested against your current data model,
+        and often carrying assumptions (old auth checks, old schema shapes,
+        old rate limits) that the rest of the system has since moved past.
+        Teams have shipped security regressions this way: not by writing bad
+        new code, but by accidentally re-enabling old code that everyone
+        assumed was gone.
+      </div>
+
+      <p>
+        Beyond that failure mode, every stale flag is a permanent tax on
+        anyone reading the surrounding function: they have to hold both
+        branches in their head to know what the code actually does for a real
+        user, even though only one branch has mattered for months.
+      </p>
+
+      <h2>A disciplined removal process</h2>
+      <p>
+        Cleanup doesn't need to be heroic; it needs to be routine. The
+        following sequence works for most flags once a rollout has fully
+        settled:
+      </p>
+      <ol class="steps">
+        <li>Confirm the flag has been at its final value (100% on or fully off) for at least one full release cycle, with no exceptions or override rules still active.</li>
+        <li>Check flag evaluation logs or metrics to verify no traffic is still hitting the losing branch, including internal tools, staging, and any allow-listed accounts.</li>
+        <li>Search the codebase for every reference to the flag, not just the primary conditional — helper functions, tests, config files, and analytics events often check it too.</li>
+        <li>Delete the losing branch entirely, then inline the winning branch so the code reads as if the flag never existed.</li>
+        <li>Remove the flag definition from the flagging service or config so it can't be accidentally re-enabled later.</li>
+        <li>Delete or update any tests that exercised the removed branch, and add coverage for the now-permanent path if it was thin.</li>
+        <li>Ship the cleanup as its own small, reviewable change — not bundled into an unrelated feature PR.</li>
+      </ol>
+
+      <div class="callout warn">
+        A common mistake worth calling out directly: teams flip the flag off
+        or leave it permanently on and stop there, treating the flag value as
+        the finish line. The flag's state was never the point — the point was
+        removing the branch and the flag definition so the decision can't
+        silently reverse itself. A flag left in place "at 100%ish forever" is
+        exactly as dangerous as one nobody's looked at in a year, because
+        both are one bad config push away from resurrecting code nobody is
+        watching.
+      </div>
+
+      <h2>Takeaway</h2>
+      <p>
+        A feature flag is scaffolding, not infrastructure. It should have a
+        removal date attached the day it's created, and that removal should
+        be treated as a normal, expected follow-up task rather than an
+        optional favor to future maintainers. The rollout was the easy part —
+        the discipline that actually protects you is the one where cleanup
+        ships on schedule, every time, whether or not anything went wrong.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

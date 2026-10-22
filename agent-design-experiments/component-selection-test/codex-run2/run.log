@@ -1,0 +1,391 @@
+Reading additional input from stdin...
+OpenAI Codex v0.153.4
+--------
+workdir: /home/albinissac/projects/Utilities/cloudflared/shared/component-selection-test/codex-run2
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: danger-full-access
+reasoning effort: none
+reasoning summaries: none
+session id: 01a0778c-841b-7843-8139-e36a65e1bbd2
+--------
+user
+First, read design.md in full, then read every file in the components/ directory, then read stylesheet.css.
+
+Then write a single self-contained HTML file for a technical blog post titled "Feature Flags Are a Liability After They Ship" about why flags left in code past their rollout create long-term risk, and what a disciplined cleanup process looks like.
+
+Requirements:
+- Roughly 500-700 words of running prose, organized into an intro and 2-3 sections with headings.
+- Somewhere in the post, flag a real risk of leaving a flag in code too long past its intended lifetime -- this should read as important enough that a reader shouldn't skim past it.
+- Somewhere in the post, label the lifecycle stage of an example flag (e.g. something like "active," "stale," or "cleanup-due") as a short visual label attached to the example.
+- Somewhere in the post, present a numbered sequence of concrete steps for safely removing a stale flag.
+- Somewhere in the post, warn about one common mistake teams make when cleaning up flags -- this should also read as something a reader shouldn't skim past.
+- A short closing takeaway.
+- This is a real, standalone piece of writing -- not a stub or placeholder. Write actual technical content with genuine explanatory value, as if for publication.
+
+design.md covers voice, composition, and judgment calls only -- it does not say which pre-built component fits which situation; that's a judgment call the file leaves to you, same as it would for a person writing this by hand. Colors, type, and spacing tokens live in stylesheet.css. Components themselves live as ready-to-use HTML markup in components/ -- each file there is a complete, correctly-structured, already-styled snippet.
+
+Do this exactly the way the two are meant to be used together:
+- Link the stylesheet in <head> with a relative path: <link rel="stylesheet" href="stylesheet.css">
+- Do NOT write your own <style> block, and do not override any documented token inline.
+- For every component you use, copy the exact markup from its file in components/ and only replace its placeholder text -- do not restructure the markup, rename its tags, or change its classes.
+- Do not invent a component of your own. If nothing in components/ fits, use the closest one.
+- Follow design.md for voice, composition, hierarchy, and the named anti-patterns/do's-and-don'ts it lists.
+
+Save the finished file to exactly this path: post.html
+
+Do not create any other files (stylesheet.css and components/ already exist -- use them, don't recreate them). Do not ask clarifying questions -- make reasonable decisions yourself within these constraints. When done, confirm the file was written and give a one-paragraph description of exactly which component file you used for each of the four requirements above, and why.
+codex
+I’ll read the design guidance, every component, and the stylesheet in that order, then write `post.html` using the supplied markup.
+exec
+/bin/bash -lc 'cat design.md' in /home/albinissac/projects/Utilities/cloudflared/shared/component-selection-test/codex-run2
+ succeeded in 0ms:
+# design.md — Fictive Docs (judgment layer)
+
+This is the house style for Fictive's technical documentation and blog
+posts. It covers judgment calls — voice, composition, hierarchy, what to
+avoid — not exact values. For colors, type, and spacing, use
+`stylesheet.css` (linked in `<head>`). For components, use the pre-built
+markup in `components/` — each file there is a copy-ready HTML snippet,
+already correctly structured and already styled. Use a component's markup
+exactly as given, only replacing its placeholder text/content — do not
+restructure it, do not rewrite its tags, and do not invent a component of
+your own. If nothing in `components/` fits, use the closest one rather than
+building something new.
+
+## Voice
+
+Direct, practitioner-to-practitioner. Explain the reasoning, not just the
+steps. No marketing language, no exclamation points, no "simply" or "just"
+before an instruction that isn't actually simple.
+
+## Composition and hierarchy
+
+Single column, generous whitespace. Every post opens with a title and a
+one-sentence summary of what the reader will walk away knowing. Use `h1`,
+`h2`, `h3` as already styled in the stylesheet — don't rebuild heading
+styles with inline CSS.
+
+## Drawing attention to something
+
+Three components in `components/` surface important information:
+`callout.html`, `note.html`, `banner.html`. Each is fully built and
+production-ready. Use whichever fits the content.
+
+## Status and category labels
+
+Three components in `components/` present a short status or category
+label: `badge.html`, `tag.html`, `pill.html`. Each is fully built. Use
+whichever fits the content.
+
+## Sequences and itemized content
+
+Three components in `components/` present a list: `steps.html` (a numbered
+procedure), `ordered-list.html` (a plain numbered list), and
+`unordered-list.html` (a plain bulleted list). Use whichever best presents
+the content.
+
+## Named anti-patterns — what we never want to see again
+
+- A generic "hero gradient + rounded SaaS card" layout.
+- A new color, font, or component class invented instead of using a
+  documented one.
+- Marketing tone in technical documentation.
+
+## Do's and don'ts
+
+**Do**
+- Build every page against `stylesheet.css`'s tokens, linked in `<head>` —
+  don't inline a competing `<style>` block.
+- Use the pre-built components in `components/` exactly as given, wherever
+  the content calls for them.
+
+**Don't**
+- Don't restructure a component's markup or invent one of your own.
+- Don't override a documented token's value inline.
+
+exec
+/bin/bash -lc 'rg --files components' in /home/albinissac/projects/Utilities/cloudflared/shared/component-selection-test/codex-run2
+ succeeded in 0ms:
+components/pill.html
+components/callout.html
+components/unordered-list.html
+components/banner.html
+components/tag.html
+components/steps.html
+components/note.html
+components/ordered-list.html
+components/badge.html
+
+exec
+/bin/bash -lc "for file in components/*; do printf '\\n%s\\n' \""'$file"; cat "$file"; done' in /home/albinissac/projects/Utilities/cloudflared/shared/component-selection-test/codex-run2
+ succeeded in 0ms:
+
+components/badge.html
+<!-- Badge: small solid-fill label. Reads as a definitive status marker. -->
+<span class="badge">label-text</span>
+
+components/banner.html
+<!-- Banner: full-width solid block, heaviest visual weight. Variants: default, warn, crit -->
+<div class="banner">
+  Replace this with the content. Add class="banner warn" or class="banner crit" for severity.
+</div>
+
+components/callout.html
+<!-- Callout: boxed aside, left-accent border. Variants: default, warn, crit -->
+<div class="callout">
+  Replace this with the content. Add class="callout warn" or class="callout crit" for severity.
+</div>
+
+components/note.html
+<!-- Note: small inline flagged text, sits inline within a sentence. No severity variants. -->
+<span class="note">Replace this with the note text.</span>
+
+components/ordered-list.html
+<!-- Plain ordered list: standard numbering, no visual weight. Use for a loose or non-critical sequence. -->
+<ol>
+  <li>Replace with item one.</li>
+  <li>Replace with item two.</li>
+  <li>Replace with item three.</li>
+</ol>
+
+components/pill.html
+<!-- Pill: rounded, tinted label. Reads as a lightweight status chip. -->
+<span class="pill">label-text</span>
+
+components/steps.html
+<!-- Steps: numbered procedure list, decimal-leading-zero counters. Use for a genuinely ordered sequence. -->
+<ol class="steps">
+  <li>Replace with step one.</li>
+  <li>Replace with step two.</li>
+  <li>Replace with step three.</li>
+</ol>
+
+components/tag.html
+<!-- Tag: outlined label, reads as a soft category marker rather than a status. -->
+<span class="tag">label-text</span>
+
+components/unordered-list.html
+<!-- Plain unordered list: bullets, no implied order. Use when sequence doesn't matter. -->
+<ul>
+  <li>Replace with item one.</li>
+  <li>Replace with item two.</li>
+  <li>Replace with item three.</li>
+</ul>
+
+exec
+/bin/bash -lc 'cat stylesheet.css' in /home/albinissac/projects/Utilities/cloudflared/shared/component-selection-test/codex-run2
+ succeeded in 0ms:
+/* Fictive Docs — house stylesheet. Build only with these classes. */
+
+:root {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --ink: #1c1917;
+  --ink-soft: #57534e;
+  --ink-faint: #a8a29e;
+  --line: #e7e5e4;
+  --accent: #0f766e;
+  --accent-ink: #115e59;
+  --accent-soft: #ecfdf5;
+  --warn: #b45309;
+  --warn-soft: #fffbeb;
+  --crit: #b91c1c;
+  --crit-soft: #fef2f2;
+  --code-bg: #f5f5f4;
+  --radius: 8px;
+  --shadow: 0 1px 2px rgba(28,25,23,.04), 0 6px 16px rgba(28,25,23,.05);
+}
+
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Inter", ui-sans-serif, system-ui, sans-serif; font-size: 17px; line-height: 1.65; }
+.page { max-width: 760px; margin: 0 auto; padding: 48px 24px 96px; }
+.prose { max-width: 680px; }
+h1 { font-size: 2.1rem; line-height: 1.15; margin: 0 0 12px; }
+h2 { font-size: 1.4rem; margin: 2em 0 0.6em; }
+h3 { font-size: 1.1rem; margin: 1.6em 0 0.5em; }
+p { margin: 0 0 1em; }
+code { background: var(--code-bg); padding: 0.1em 0.4em; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 0.9em; }
+pre { background: var(--code-bg); border-radius: var(--radius); padding: 16px 18px; overflow-x: auto; }
+a { color: var(--accent-ink); }
+
+/* --- Drawing-attention family: callout / note / banner --- */
+/* All three are documented and production-ready. The spec does not say which to use when. */
+
+.callout {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin: 1.4em 0;
+}
+.callout.warn { border-left-color: var(--warn); background: var(--warn-soft); }
+.callout.crit { border-left-color: var(--crit); background: var(--crit-soft); }
+
+.note {
+  display: inline-block;
+  background: var(--code-bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 0.88em;
+  color: var(--ink-soft);
+}
+
+.banner {
+  background: var(--ink);
+  color: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin: 1.6em 0;
+  font-size: 0.95em;
+}
+.banner.warn { background: var(--warn); }
+.banner.crit { background: var(--crit); }
+
+/* --- Status/label family: badge / tag / pill --- */
+/* All three are documented and production-ready. The spec does not say which to use when. */
+
+.badge {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 2px 8px;
+}
+
+.tag {
+  display: inline-block;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  padding: 2px 8px;
+}
+
+.pill {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 3px 10px;
+}
+
+/* --- Sequence family: .steps / <ol> / <ul> --- */
+/* All three are documented and production-ready. The spec does not say which to use when. */
+
+.steps { list-style: none; counter-reset: step; padding: 0; margin: 1.4em 0; }
+.steps li { counter-increment: step; position: relative; padding: 4px 0 4px 40px; margin-bottom: 10px; }
+.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute; left: 0; top: 2px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  border-radius: 4px;
+  width: 26px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+ol, ul { padding-left: 1.4em; margin: 1.2em 0; }
+li { margin-bottom: 0.4em; }
+
+codex
+I’ll use a banner for the production risk, a badge for the example flag’s lifecycle stage, a steps list for removal, and a callout for the cleanup mistake. I’ll preserve each component’s tags and classes exactly.
+exec
+/bin/bash -lc "python - <<'PY'
+from pathlib import Path
+
+def component(name, replacements):
+    value = Path('components', name + '.html').read_text()
+    for old, new in replacements.items():
+        assert old in value
+        value = value.replace(old, new)
+    return value.strip()
+
+risk = component('banner', {'Replace this with the content. Add class=\"banner warn\" or class=\"banner crit\" for severity.': 'An obsolete branch can become a production incident without a deployment. If the old path misses a later authorization fix, a targeting change or fallback evaluation can route requests into vulnerable code. A flag set to 100 percent is not proof that its other branch is unreachable.'})
+badge = component('badge', {'label-text': 'cleanup-due'})
+steps = component('steps', {
+    'Replace with step one.': 'Establish the intended behavior and prove coverage. Confirm the winning value with the owner; inspect targeting, prerequisites, defaults, and evaluation telemetry across supported deployments. Exercise the surviving behavior in tests, including failure handling. Resolve unexplained evaluations before deleting either branch.',
+    'Replace with step two.': 'Remove the decision from code. Replace evaluations with the surviving behavior, then delete the losing branch and its exclusive dependencies. Preserve tests for the product contract, remove tests that only check flag permutations, and run integration checks around callers, stored data, and background jobs.',
+    'Replace with step three.': 'Deploy and verify before retiring configuration. Roll out the cleanup while watching errors and business outcomes. Keep the flag definition compatible with supported older clients and rollback artifacts. After those consumers age out and reference checks are clear, archive the definition and close the cleanup record.'})
+warning = component('callout', {'Replace this with the content. Add class=\"callout warn\" or class=\"callout crit\" for severity.': 'Do not delete the remote flag first. Older binaries may still evaluate its key, and a missing definition can select an SDK default instead of the intended behavior. Configuration removal comes after code removal and consumer retirement, not before them.'})
+html = '''<"'!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feature Flags Are a Liability After They Ship</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<main class="page">
+<article class="prose">
+  <h1>Feature Flags Are a Liability After They Ship</h1>
+  <p>Learn why completed rollout flags remain operational liabilities and how to remove them without changing the behavior users depend on.</p>
+
+  <p>A rollout flag buys a team time: deploy code, expose it gradually, and reverse exposure if evidence turns bad. Once the rollout is complete, that temporary decision point often stays behind. The dashboard looks settled, so the work feels finished. But the repository still contains two promises about how the system can behave, and someone must maintain both.</p>
+
+  <h2>The dormant path still matters</h2>
+  <p>Leaving a flag behind expands the state space that engineers must reason about. Two independent binary flags can produce four combinations; ten can produce 1,024. Not every combination is reachable, but each surviving branch complicates reviews, tests, and incident diagnosis. A future change may update the default path while leaving its alternative incompatible with a new schema or validation rule.</p>
+
+  RISK
+
+  <p>For example, <code>checkout_tax_v2</code> BADGE has served all intended traffic for six weeks. Its rollback window has closed, yet the old calculator remains callable. The label records a lifecycle decision: the owner has accepted the replacement, and removal is due. It does not claim that deletion is already safe. Workers, regional deployments, or older mobile clients may still depend on the key.</p>
+
+  <h2>Remove the branch before the switch</h2>
+  <p>Cleanup is a small migration, not a search-and-delete exercise. Start with evidence about actual consumers and the behavior they require. Dashboard percentages describe configured exposure; they do not establish which deployed versions still evaluate the flag. Search the repository and configuration, inspect available evaluation data, and account for consumers that report intermittently.</p>
+
+  STEPS
+
+  WARNING
+
+  <p>Rollback deserves an explicit decision here. If the previous release still reads the flag, preserve its expected configuration for as long as that release remains a rollback option. If schema changes have already made the old branch unusable, the flag was never a credible recovery mechanism; document the recovery path that actually works.</p>
+
+  <h2>Make expiration part of shipping</h2>
+  <p>At creation, give each rollout flag an owner, a purpose, a review date, and an exit condition. An exit condition might require full exposure, acceptable error rates, and completion of a defined observation window. When that condition is met, create the removal change as part of finishing the rollout. Review overdue flags regularly, with ownership transfers when teams change.</p>
+
+  <p>Some switches are intentionally permanent, such as operational kill switches. Treat those as maintained controls with tested behavior and an explicit operating contract. Do not let an expired experiment acquire permanent status through neglect.</p>
+
+  <p>The takeaway: a rollout is complete when the intended behavior stands on its own and the temporary decision machinery is gone.</p>
+</article>
+</main>
+</body>
+</html>
+'"'''.replace('RISK', risk).replace('BADGE', badge).replace('STEPS', steps).replace('WARNING', warning)
+Path('post.html').write_text(html)
+
+from html.parser import HTMLParser
+class Check(HTMLParser):
+    def __init__(self):
+        super().__init__(); self.words=[]; self.in_article=False
+    def handle_starttag(self, tag, attrs):
+        if tag == 'article': self.in_article=True
+        assert tag "'!= '"'style'
+        assert not any(k == 'style' for k,v in attrs)
+    def handle_endtag(self, tag):
+        if tag == 'article': self.in_article=False
+    def handle_data(self, data):
+        if self.in_article: self.words.extend(data.split())
+check=Check(); check.feed(html)
+assert all(c in html for c in [risk,badge,steps,warning])
+assert '<link rel=\"stylesheet\" href=\"stylesheet.css\">' in html
+print(f'Wrote post.html; {len(check.words)} article words including headings and label. Component markup preserved; no inline styles or style blocks.')
+PY" in /home/albinissac/projects/Utilities/cloudflared/shared/component-selection-test/codex-run2
+ succeeded in 0ms:
+Wrote post.html; 659 article words including headings and label. Component markup preserved; no inline styles or style blocks.
+
+codex
+Wrote [post.html](post.html), with 659 words including headings and the label.
+
+Used `components/banner.html` to emphasize the production risk of obsolete branches; `components/badge.html` to attach the definitive `cleanup-due` status to the example flag; `components/steps.html` for the ordered, three-step removal procedure; and `components/callout.html` to highlight the mistake of deleting remote configuration too early. All component markup is preserved, and the page links to `stylesheet.css` without style overrides.
+tokens used
+11,307
+Wrote [post.html](post.html), with 659 words including headings and the label.
+
+Used `components/banner.html` to emphasize the production risk of obsolete branches; `components/badge.html` to attach the definitive `cleanup-due` status to the example flag; `components/steps.html` for the ordered, three-step removal procedure; and `components/callout.html` to highlight the mistake of deleting remote configuration too early. All component markup is preserved, and the page links to `stylesheet.css` without style overrides.

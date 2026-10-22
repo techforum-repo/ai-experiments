@@ -1,0 +1,10 @@
+`post.html` has been written to `/home/albinissac/projects/Utilities/cloudflared/shared/component-selection-test/claude-run1/post.html`.
+
+Component choices, one per requirement:
+
+1. **Real risk warning** → `components/banner.html` (`class="banner crit"`). Banner is documented as the heaviest-weight, full-width block, so it's the right choice for the claim that a stale flag can route production traffic into an unpatched, unverified code path during an incident — something that needs to visually stop a skimming reader, not just sit as an aside.
+2. **Lifecycle stage label** → `components/badge.html` (`<span class="badge">stale</span>`). Badge is described as reading like "a definitive status marker" with a solid fill, which matches labeling a specific flag's lifecycle stage as a fact about that flag, rather than a soft category (`tag`) or a lightweight chip (`pill`).
+3. **Numbered removal steps** → `components/steps.html` (`<ol class="steps">`). This is the one component built specifically for "a genuinely ordered sequence" with a procedural feel (decimal-leading-zero counters), which fits a step-by-step safe-removal procedure better than a plain `ordered-list.html`, whose spec says to use it for a "loose or non-critical sequence."
+4. **Common-mistake warning** → `components/callout.html` (`class="callout warn"`). Callout is a boxed aside with left-accent border — enough visual weight to flag "don't skim this" without duplicating the banner's heaviest-weight treatment already used for the top risk; the `warn` variant (amber) also distinguishes it in severity from the `crit` banner above it.
+
+No `<style>` block was added, no components were restructured, and only placeholder text was replaced in each snippet.

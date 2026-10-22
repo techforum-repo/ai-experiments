@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feature Flags Are a Liability After They Ship</title>
+  <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+  <main class="page">
+    <article class="prose">
+      <h1>Feature Flags Are a Liability After They Ship</h1>
+      <p>Learn why completed rollout flags accumulate operational risk and how to retire them without breaking live traffic or your recovery plan.</p>
+
+      <p>A rollout flag buys time: you can expose a change gradually, compare behavior, and stop expansion when something fails. Once the rollout is complete, that temporary control often becomes permanent by accident. The ticket closes, the owner moves on, and both branches remain available long after anyone remembers why.</p>
+
+      <p>The cost is more than clutter. Every surviving branch makes another claim about supported behavior. Engineers must understand it during refactoring, tests must exercise it, and incident responders must know whether switching it is safe. A flag that nobody intends to use still expands the system you have to reason about.</p>
+
+      <h2>A dormant branch is still production code</h2>
+      <p>Consider <code>checkout_v2</code> <span class="badge">cleanup-due</span>. It has served every customer for six weeks, its acceptance criteria are met, and its agreed rollback window has ended. Yet the old checkout path still exists behind the disabled variation. Meanwhile, a schema migration and a new validation rule have landed only in the current path.</p>
+
+      <div class="banner">
+  A forgotten flag can reactivate obsolete behavior during an incident. If its old branch skips validation added after rollout, switching the flag back can admit invalid orders precisely when responders are already under pressure. Treat that branch as a live correctness risk until it is removed.
+</div>
+
+      <p>Serving the new variation to everyone does not establish that the old path is unreachable. Targeting exceptions, cached configuration, SDK defaults, and evaluation failures can select different behavior. Interacting flags also multiply possible paths; passing tests for each flag independently does not prove that their combinations work.</p>
+
+      <h2>Remove the flag in a controlled sequence</h2>
+      <p>Start with evidence that the rollout is finished, not an age threshold alone. Check evaluation data across environments and customer cohorts, including scheduled jobs and infrequent workflows. Confirm with the owner that no experiment, contractual exception, or operational dependency still needs the alternate behavior. Then make removal an ordinary reviewed change.</p>
+
+      <ol class="steps">
+  <li>Establish the permanent behavior. Inventory flag reads, targeting rules, defaults, dependent flags, and supported client versions. Record why the alternate path can retire, and agree on recovery through a compatible previous build or a forward fix before removing the switch.</li>
+  <li>Change and verify the code. Replace evaluations with the chosen behavior, delete the obsolete branch, and remove tests that exist only for that branch. Keep regression coverage for the surviving behavior and test its failure handling. Review schema and data compatibility for the planned recovery option.</li>
+  <li>Deploy before deleting configuration. Watch errors, business outcomes, and remaining evaluations through a window that covers relevant workloads. After supported consumers and rollback builds no longer need the key, archive or delete it in the flag service and remove obsolete dashboards, documentation, and ownership records.</li>
+</ol>
+
+      <div class="callout">
+  Common cleanup mistake: deleting the remote flag first. Older application instances or mobile clients may still evaluate it and receive their SDK fallback value, potentially selecting the retired behavior. Keep the configuration until those consumers are accounted for; a repository search alone cannot prove they are gone.
+</div>
+
+      <h2>Make retirement part of shipping</h2>
+      <p>Give each temporary flag an owner, a purpose, an expected retirement date, and explicit exit criteria when it is created. Put the cleanup task in the rollout plan. Review overdue flags regularly, using age to start a conversation and runtime evidence to decide what can go.</p>
+
+      <p>Separate temporary rollout controls from intentional operational switches. A lasting kill switch needs documented semantics, exercised recovery behavior, and a maintained owner. Calling an abandoned rollout flag a kill switch does not make its old branch safe.</p>
+
+      <p>The takeaway: rollout completion should trigger deletion work. A feature is easier to operate when its intended behavior is the only maintained path.</p>
+    </article>
+  </main>
+</body>
+</html>
