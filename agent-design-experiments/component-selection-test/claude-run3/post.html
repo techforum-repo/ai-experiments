@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feature Flags Are a Liability After They Ship</title>
+<link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<div class="page">
+  <div class="prose">
+    <h1>Feature Flags Are a Liability After They Ship</h1>
+    <p>A flag that outlives its rollout stops being a release tool and starts being unmanaged risk — here's how to recognize the moment it turns, and how to remove it without breaking anything.</p>
+
+    <p>Feature flags earn their keep during a rollout. They let you ship dark, expose a change to five percent of traffic, and roll back in seconds if something looks wrong. That value has a shelf life. Once a change has been at 100% for a few weeks and nobody is watching the dashboard anymore, the flag isn't protecting you from anything — it's just an extra branch in the code that has to be read, tested, and reasoned about forever, by people who increasingly have no idea why it's there.</p>
+
+    <h2>The half-life of a flag</h2>
+    <p>Every flag is born with a purpose: gate a migration, de-risk a launch, run an experiment. That purpose has a natural end date, but the flag itself doesn't expire on its own. It sits in the codebase, in config, and often in three or four places at once — the application, the flag-management dashboard, the deploy scripts, the test suite's mocks. Each of those copies has to be found and reconciled by hand, months after the person who added them has moved to a different project or a different company. The flag doesn't get more dangerous the day after launch; it gets more dangerous every week after that, as the reasoning behind it decays into "I think it's safe to remove but I'm not sure."</p>
+
+    <div class="banner crit">
+      The real risk isn't clutter, it's a live, untested code path. A flag that's been "on" for six months usually means the <code>false</code> branch hasn't executed in six months either — the old code, the fallback, the pre-migration logic is still sitting there, silently rotting. If that flag gets flipped by accident, by a config rollback, or by someone debugging an unrelated incident, you don't get the old known-good behavior back. You get whatever that branch has quietly become: pointed at deprecated APIs, missing months of bug fixes, or incompatible with data written under the new path. Stale flags are the single most common cause of "it worked in the last incident, why didn't it work this time."
+    </div>
+
+    <h3>Example: <code>checkout_v2_ledger</code> <span class="badge">cleanup-due</span></h3>
+    <p>Consider a flag that gated a rewrite of the checkout ledger. It shipped to 100% traffic four months ago, the old ledger path hasn't run since, and the team that owns it has since shifted to a different quarter's priorities. Nobody is against removing it — nobody has just gotten around to it. That's the profile of a flag in the <span class="badge">cleanup-due</span> state: fully rolled out, no active experiment, no owner tracking it, and a growing gap between "safe to delete" and "actually deleted."</p>
+
+    <h2>A disciplined removal process</h2>
+    <p>Removing a stale flag safely isn't just deleting an <code>if</code> statement. Treat it as a small, reviewable change with its own checklist, not a drive-by cleanup at the end of an unrelated PR:</p>
+    <ol class="steps">
+      <li>Confirm the flag has been at its final rollout state (100% on or fully off) for at least one full deploy cycle, with no open experiment or staged rollout still depending on it.</li>
+      <li>Check production metrics and logs to verify the inactive branch genuinely isn't being hit by any traffic segment, including internal tooling and backfill jobs.</li>
+      <li>Delete the dead branch first, in its own commit, keeping the surviving behavior exactly as it runs today.</li>
+      <li>Remove the flag's declaration from the flag-management system and any config or environment files that reference it.</li>
+      <li>Search the codebase and test suite for the flag's name to catch mocks, feature-flag overrides in CI, and documentation that still mentions it.</li>
+      <li>Ship the removal as a normal, reviewed change and watch the usual dashboards through the next deploy, the same as any other code change.</li>
+    </ol>
+
+    <h2>The mistake teams keep making</h2>
+    <p>Even teams that agree flags should be cleaned up tend to trip on the same step:</p>
+    <div class="callout warn">
+      Don't delete the flag and the "dead" branch in the same commit as a larger, unrelated change. When the removal is buried inside a bigger diff, reviewers wave it through without checking that the branch was truly dead, and if something breaks, you're bisecting a commit that touched five other things instead of one clean revert. Flag removals deserve their own small, boring, easy-to-revert pull request — every time.
+    </div>
+
+    <h2>Takeaway</h2>
+    <p>A feature flag is a loan against future clarity: cheap to take out, and it accrues interest the longer it's outstanding. Treat rollout completion as the start of a deadline, not the end of the story, and removal as a first-class, reviewed change rather than janitorial work nobody owns.</p>
+  </div>
+</div>
+</body>
+</html>

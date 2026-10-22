@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retries Aren't Idempotent By Accident</title>
+<link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <span class="eyebrow">Distributed Systems / Reliability Patterns</span>
+    <h1>Retries Aren't Idempotent By Accident</h1>
+    <p class="dek">A network timeout tells you nothing about whether the request it was waiting on actually succeeded — which means every retry is a bet, and the idempotency key is the only thing that makes the bet safe.</p>
+    <div class="stat-row">
+      <div class="stat"><b>2×</b> the side effects, if a blind retry hits a request that already succeeded</div>
+      <div class="stat"><b>1</b> unique constraint away from turning a race into a guarantee</div>
+      <div class="stat"><b>24–48h</b> typical TTL for a stored idempotency key in production APIs</div>
+      <div class="stat"><b>0</b> idempotency work needed for a pure read</div>
+    </div>
+  </header>
+
+  <div class="prose">
+  <section>
+    <h2>When "At Least Once" Means "At Least Twice"</h2>
+    <p>Every retry strategy is built on an assumption most engineers never say out loud: that sending the same request twice is safe. It usually isn't. A client library times out waiting for a response from the payments service, retries with backoff, and gets a 200 back — except the first request had already succeeded on the server, and the customer is now charged twice. The server had no way to know the second POST was a retry of the first. It looked like a brand-new request, because as far as HTTP is concerned, that's exactly what it was.</p>
+    <p class="thesis-lead">A retry is only as idempotent as the key you gave it — everything else is optimistic accounting.</p>
+    <p>This is the gap between transport-level reliability and business-logic correctness. TCP, and the retry logic most people build on top of it, guarantee that bytes eventually arrive — that's "at least once" delivery. They say nothing about whether the client ever learns the outcome. A dropped response, a load balancer that recycles a connection mid-flight, a Lambda that gets frozen and retried by the platform — all of these produce the exact same symptom from the client's point of view: silence. And silence is indistinguishable from "still processing," "failed before doing anything," and "succeeded but the response got lost." Treating all three as "just retry" is how idempotency bugs get into production.</p>
+  </section>
+
+  <section>
+    <h2>Designing the Key, Not Just Checking It</h2>
+    <p>An idempotency key isn't a nonce you bolt onto a request as an afterthought — it's a statement of intent from the client: "this is one logical operation, no matter how many times you see it." That statement only works if three things are true. First, the key is generated once per logical operation, client-side, before the first attempt — never regenerated on retry. Second, the server persists the key and the outcome atomically with the side effect it's protecting, not in a separate step that can itself fail halfway. Third, a request that arrives while the original is still in flight gets rejected or queued, not processed a second time in parallel — the classic gap that a naive "check, then act" pattern leaves wide open.</p>
+    <p>That last point is the one most implementations get wrong. Checking whether a key exists and then inserting a record are two operations; if two retries race between them, both can pass the check. The fix is to make the claim on the key atomic — typically a unique constraint on the idempotency key column, so the second insert fails fast and the handler can treat that failure as "someone's already working on this."</p>
+
+    <div class="scene">
+      <div class="scene-label"><span>server.ts</span><span>POST /charges</span></div>
+      <div class="scene-body"><pre style="margin:0; font-size:0.85rem; line-height:1.7; background:var(--code-bg); padding:16px 18px; border-radius:8px; overflow-x:auto;"><code>app.post('/charges', async (req, res) => {
+  const key = req.header('Idempotency-Key');
+  if (!key) return res.status(400).json({ error: 'missing key' });
+
+  // Atomic claim: unique constraint on (account_id, key) does the
+  // real work here. A duplicate insert throws, it doesn't race.
+  const claim = await db.query(
+    `insert into idempotency_keys (account_id, key, status)
+     values ($1, $2, 'in_progress')
+     on conflict (account_id, key) do nothing
+     returning id`,
+    [req.account.id, key]
+  );
+
+  if (claim.rowCount === 0) {
+    const prior = await db.query(
+      `select status, response from idempotency_keys
+       where account_id = $1 and key = $2`,
+      [req.account.id, key]
+    );
+    if (prior.rows[0].status === 'in_progress') {
+      return res.status(409).json({ error: 'request already in flight' });
+    }
+    return res.status(200).json(prior.rows[0].response); // replay
+  }
+
+  const result = await chargeCard(req.body);
+  await db.query(
+    `update idempotency_keys set status = 'done', response = $1
+     where account_id = $2 and key = $3`,
+    [result, req.account.id, key]
+  );
+  res.status(200).json(result);
+});</code></pre></div>
+      <div class="scene-foot">The unique constraint on <code>(account_id, key)</code> is what actually prevents the double charge — the lookup logic around it is just there to answer politely.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>The Retry, Drawn Out</h2>
+    <p>It helps to see the failure mode the key is defending against, because it's the response that goes missing, not the request. The diagram below traces one logical operation across two physical HTTP attempts: the first succeeds on the server but the confirmation never makes it back; the second is a genuine retry carrying the same key, and the server recognizes it instead of re-running the charge.</p>
+
+    <div class="scene">
+      <div class="scene-label"><span>fig. 1 — retry sequence</span><span>same Idempotency-Key on both attempts</span></div>
+      <div class="scene-body">
+        <svg viewBox="0 0 640 300" width="100%" role="img" aria-label="Sequence diagram: client sends a charge request with an idempotency key, the response is lost to a timeout, the client retries with the same key, and the server returns the stored result instead of charging again.">
+          <line x1="90" y1="26" x2="90" y2="278" stroke="var(--line-strong)" stroke-width="1.5"/>
+          <line x1="550" y1="26" x2="550" y2="278" stroke="var(--line-strong)" stroke-width="1.5"/>
+          <text x="90" y="16" text-anchor="middle" style="fill:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:12px;">CLIENT</text>
+          <text x="550" y="16" text-anchor="middle" style="fill:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-size:12px;">SERVER</text>
+
+          <line x1="90" y1="55" x2="540" y2="55" style="stroke:var(--accent); stroke-width:1.6;" marker-end="url(#arrow)"/>
+          <text x="320" y="45" text-anchor="middle" style="fill:var(--ink); font-family:'IBM Plex Mono',monospace; font-size:11px;">POST /charges  Idempotency-Key: k1</text>
+
+          <rect x="500" y="65" width="60" height="18" rx="3" style="fill:var(--ok-soft); stroke:var(--ok);"/>
+          <text x="530" y="78" text-anchor="middle" style="fill:var(--ok); font-family:'IBM Plex Mono',monospace; font-size:9px;">charged</text>
+
+          <line x1="540" y1="95" x2="90" y2="130" style="stroke:var(--crit); stroke-width:1.6; stroke-dasharray:5,4;" marker-end="url(#arrowcrit)"/>
+          <text x="320" y="105" text-anchor="middle" style="fill:var(--crit); font-family:'IBM Plex Mono',monospace; font-size:11px;">200 OK — lost in transit / client timeout</text>
+
+          <line x1="90" y1="180" x2="540" y2="180" style="stroke:var(--accent); stroke-width:1.6;" marker-end="url(#arrow)"/>
+          <text x="320" y="170" text-anchor="middle" style="fill:var(--ink); font-family:'IBM Plex Mono',monospace; font-size:11px;">POST /charges  Idempotency-Key: k1 (retry)</text>
+
+          <rect x="470" y="190" width="90" height="18" rx="3" style="fill:var(--accent-soft); stroke:var(--accent);"/>
+          <text x="515" y="203" text-anchor="middle" style="fill:var(--accent-ink); font-family:'IBM Plex Mono',monospace; font-size:9px;">key found → replay</text>
+
+          <line x1="540" y1="225" x2="90" y2="255" style="stroke:var(--ok); stroke-width:1.6;" marker-end="url(#arrowok)"/>
+          <text x="320" y="245" text-anchor="middle" style="fill:var(--ok); font-family:'IBM Plex Mono',monospace; font-size:11px;">200 OK — stored result, card charged once</text>
+
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" style="fill:var(--accent);"/></marker>
+            <marker id="arrowcrit" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" style="fill:var(--crit);"/></marker>
+            <marker id="arrowok" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" style="fill:var(--ok);"/></marker>
+          </defs>
+        </svg>
+        <div class="legend-row">
+          <span class="swatch"><span class="dot" style="background:var(--accent);"></span>request, same key both times</span>
+          <span class="swatch"><span class="dot" style="background:var(--crit);"></span>response lost — client sees a timeout, not a failure</span>
+          <span class="swatch"><span class="dot" style="background:var(--ok);"></span>replayed result, no second charge</span>
+        </div>
+      </div>
+      <div class="scene-foot">The card is only ever charged once, on the first attempt — the retry's job is to fetch that outcome, not repeat the work.</div>
+    </div>
+
+    <div class="callout">
+      <span class="eyebrow">Caveat</span>
+      <p>Scope the key to the account and the operation, not just a raw string the client picks. A key that's globally unique but not tied to <code>account_id</code> lets one tenant's retry collide with another's request by coincidence — rare, but not rare enough to ignore in a multi-tenant system.</p>
+    </div>
+  </section>
+  </div>
+
+  <footer class="closing">
+    <p class="thesis">The retry logic decides when to try again. The idempotency key is the only thing that decides whether trying again is safe — design it with the same care you'd give the operation it's protecting.</p>
+    <ul class="chain-list">
+      <li>At-least-once delivery is a transport guarantee, not a business-logic guarantee</li>
+      <li>The key belongs to the client's intent — generated once, reused on every attempt</li>
+      <li>Claim the key atomically before doing the work, not after finishing it</li>
+      <li>A lost response and a failed request look identical to the client — the key is what tells them apart</li>
+    </ul>
+    <div class="byline">Published 2026-09-02 · Distributed Systems series</div>
+  </footer>
+
+  <div class="sources">
+    <h3>Sources</h3>
+    <ol>
+      <li>Stripe. "Idempotent Requests." <a href="https://stripe.com/docs/api/idempotent_requests" target="_blank" rel="noopener">stripe.com/docs/api/idempotent_requests</a></li>
+      <li>IETF HTTPAPI Working Group. "The Idempotency-Key HTTP Header Field" (Internet-Draft). <a href="https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header" target="_blank" rel="noopener">datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header</a></li>
+      <li>Amazon Web Services. "Amazon SQS Standard Queues" (at-least-once delivery semantics). <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html" target="_blank" rel="noopener">docs.aws.amazon.com/AWSSimpleQueueService</a></li>
+      <li>Kleppmann, Martin. <em>Designing Data-Intensive Applications</em>, Chapter 9: "Consistency and Consensus." O'Reilly Media, 2017.</li>
+    </ol>
+  </div>
+
+</div>
+</body>
+</html>

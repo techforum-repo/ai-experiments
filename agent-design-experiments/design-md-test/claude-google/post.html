@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Retries Aren't Idempotent By Accident</title>
+<meta name="description" content="A timeout can't tell a client whether the server never saw the request, finished it and lost the reply, or crashed halfway through. The fix is a key the server was built to recognize — designed, not assumed.">
+<link rel="canonical" href="https://share.albinsblog.com/retries-arent-idempotent-by-accident/post.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Retries Aren't Idempotent By Accident">
+<meta property="og:description" content="A timeout can't tell a client whether the server never saw the request, finished it and lost the reply, or crashed halfway through. The fix is a key the server was built to recognize — designed, not assumed.">
+<meta property="og:url" content="https://share.albinsblog.com/retries-arent-idempotent-by-accident/post.html">
+<meta property="article:published_time" content="2026-09-02">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #f5f6f9;
+    --surface: #ffffff;
+    --ink: #161a22;
+    --ink-soft: #525a6e;
+    --ink-faint: #8a91a3;
+    --line: #e1e4ea;
+    --line-strong: #c7cbd6;
+    --accent: #2f5fed;
+    --accent-ink: #1c3fb0;
+    --accent-soft: #e9eefd;
+    --ok: #1f8a5f;
+    --ok-soft: #e3f3ec;
+    --warn: #a06a12;
+    --warn-soft: #f7edd9;
+    --crit: #c23b3b;
+    --crit-soft: #fbe6e6;
+    --store: #0f766e;
+    --store-soft: #e1f2f0;
+    --code-bg: #edf0f5;
+    --grid-dot: rgba(22, 26, 34, 0.05);
+    --shadow: 0 1px 2px rgba(22,26,34,0.04), 0 8px 24px rgba(22,26,34,0.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10131a; --surface: #171c26; --ink: #e8eaf1; --ink-soft: #a7aec2; --ink-faint: #6d7590;
+      --line: #262c3a; --line-strong: #363e50; --accent: #7d9dff; --accent-ink: #b9caff; --accent-soft: #1c2740;
+      --ok: #3ecb90; --ok-soft: #123326; --warn: #d9a441; --warn-soft: #2c2417; --crit: #e5726f; --crit-soft: #341918;
+      --store: #4fd3c4; --store-soft: #122b28;
+      --code-bg: #1b202b; --grid-dot: rgba(232, 234, 241, 0.045); --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10131a; --surface: #171c26; --ink: #e8eaf1; --ink-soft: #a7aec2; --ink-faint: #6d7590;
+    --line: #262c3a; --line-strong: #363e50; --accent: #7d9dff; --accent-ink: #b9caff; --accent-soft: #1c2740;
+    --ok: #3ecb90; --ok-soft: #123326; --warn: #d9a441; --warn-soft: #2c2417; --crit: #e5726f; --crit-soft: #341918;
+    --store: #4fd3c4; --store-soft: #122b28;
+    --code-bg: #1b202b; --grid-dot: rgba(232, 234, 241, 0.045); --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+    background-size: 22px 22px;
+    color: var(--ink);
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 16.5px;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent-ink); }
+  a:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  h1, h2, h3 {
+    font-family: "Big Shoulders Display", "Archivo Narrow", ui-sans-serif, sans-serif;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; text-wrap: balance; color: var(--ink); margin: 0;
+  }
+  .eyebrow { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); }
+  code, .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+  p code { background: var(--code-bg); padding: 1px 6px; border-radius: 4px; font-size: 0.87em; }
+
+  .page { max-width: 900px; margin: 0 auto; padding: clamp(28px, 6vw, 64px) clamp(18px, 5vw, 28px) 90px; }
+  .prose { max-width: 680px; }
+  section { padding-top: 58px; scroll-margin-top: 24px; }
+  section:first-of-type { padding-top: 0; }
+
+  header.hero { padding-bottom: 40px; border-bottom: 1px solid var(--line); }
+  header.hero .eyebrow { display: block; margin-bottom: 14px; }
+  header.hero h1 { font-size: clamp(2.4rem, 5.6vw, 3.7rem); line-height: 0.98; }
+  header.hero .dek { max-width: 640px; margin-top: 18px; font-size: 1.08rem; color: var(--ink-soft); }
+  .stat-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .stat { border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 9px 14px; font-size: 0.82rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  .stat b { color: var(--ink); font-weight: 600; }
+
+  h2 { font-size: clamp(1.65rem, 3.5vw, 2.1rem); display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+  h2 .tag { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.88rem; text-transform: none; letter-spacing: 0; color: var(--ink-faint); font-weight: 500; }
+  .section-dek { color: var(--ink-soft); margin-top: 10px; max-width: 680px; }
+  p { margin: 14px 0; max-width: 680px; }
+  .thesis-lead { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.95rem; line-height: 1.9; color: var(--ink);
+    border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; margin: 20px 0; }
+  .prose ul, .prose ol { max-width: 680px; padding-left: 1.15em; }
+  .prose li { margin: 6px 0; }
+  strong { font-weight: 600; }
+
+  .step-list { list-style: none; padding: 0; margin: 20px 0; max-width: 680px; counter-reset: step; }
+  .step-list li { counter-increment: step; display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding: 14px 0; border-top: 1px solid var(--line); }
+  .step-list li:first-child { border-top: none; }
+  .step-list li::before { content: counter(step, decimal-leading-zero); font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.78rem; color: var(--accent-ink); padding-top: 2px; }
+  .step-list b { display: block; margin-bottom: 2px; font-family: "IBM Plex Mono", ui-monospace, monospace; letter-spacing: 0.02em; }
+
+  /* ---------- Scene wrapper (shared frame for every figure / listing) ---------- */
+  .scene { margin: 26px 0 34px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
+  .scene-label { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--ink-faint); padding: 12px 18px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; }
+  .scene-body { padding: 30px 22px; overflow-x: auto; }
+  .scene-body.tight { padding: 0; }
+  .scene-foot { padding: 12px 18px; border-top: 1px solid var(--line); font-size: 0.8rem; color: var(--ink-faint); }
+
+  /* ---------- Code listing ---------- */
+  pre.code-block { margin: 0; padding: 22px 24px; background: var(--code-bg); overflow-x: auto; }
+  pre.code-block code { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.82rem; line-height: 1.7; color: var(--ink); white-space: pre; }
+
+  /* ---------- SVG diagram (sequence: client / server / key store) ---------- */
+  .dicon { stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; color: var(--ink-soft); }
+  svg.diagram { display: block; width: 100%; height: auto; min-width: 760px; }
+  svg.diagram .lane { stroke: var(--line-strong); stroke-width: 1.2; stroke-dasharray: 3 4; }
+  svg.diagram rect { stroke-width: 1.6; rx: 10; }
+  svg.diagram text.sd-name { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12.5px; font-weight: 600; text-anchor: middle; }
+  svg.diagram text.sd-edge { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; text-anchor: middle; fill: var(--ink-soft); }
+  svg.diagram text.sd-edge.crit { fill: var(--crit); }
+  .sd-box-neutral rect { fill: var(--surface); stroke: var(--ink-faint); }
+  .sd-box-neutral text.sd-name { fill: var(--ink); }
+  .sd-box-store rect { fill: var(--store-soft); stroke: var(--store); }
+  .sd-box-store text.sd-name { fill: var(--store); }
+  svg.diagram .sd-arrow-neutral { stroke: var(--ink-faint); fill: none; stroke-width: 1.6; }
+  svg.diagram .sd-arrow-crit { stroke: var(--crit); fill: none; stroke-width: 1.6; }
+  svg.diagram .sd-arrow-ok { stroke: var(--ok); fill: none; stroke-width: 1.6; }
+  svg.diagram .sd-arrow-accent { stroke: var(--accent); fill: none; stroke-width: 1.6; }
+  svg.diagram .sd-arrow-store { stroke: var(--store); fill: none; stroke-width: 1.6; }
+  svg.diagram marker path { fill: var(--ink-faint); }
+  svg.diagram marker.m-crit path { fill: var(--crit); }
+  svg.diagram marker.m-ok path { fill: var(--ok); }
+  svg.diagram marker.m-accent path { fill: var(--accent); }
+  svg.diagram marker.m-store path { fill: var(--store); }
+
+  .legend-row { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 18px; font-size: 0.78rem; color: var(--ink-soft); }
+  .legend-row .swatch { display: inline-flex; align-items: center; gap: 6px; }
+  .legend-row .dot { width: 9px; height: 9px; border-radius: 50%; }
+
+  .pill { display: inline-flex; align-items: center; gap: 5px; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.72rem; letter-spacing: 0.02em; padding: 3px 9px; border-radius: 100px; font-weight: 600; }
+  .pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; }
+  .pill.neutral { background: var(--code-bg); color: var(--ink-soft); } .pill.neutral::before { background: var(--ink-faint); }
+  .pill.accent { background: var(--accent-soft); color: var(--accent-ink); } .pill.accent::before { background: var(--accent); }
+  .pill.ok { background: var(--ok-soft); color: var(--ok); } .pill.ok::before { background: var(--ok); }
+  .pill.warn { background: var(--warn-soft); color: var(--warn); } .pill.warn::before { background: var(--warn); }
+  .pill.crit { background: var(--crit-soft); color: var(--crit); } .pill.crit::before { background: var(--crit); }
+
+  .callout { max-width: 680px; margin: 22px 0; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; background: var(--accent-soft); padding: 16px 18px; }
+  .callout .eyebrow { color: var(--accent-ink); margin-bottom: 6px; }
+  .callout p { margin: 6px 0 0; font-size: 0.92rem; color: var(--ink); max-width: none; }
+  .callout p + p { margin-top: 10px; }
+  .callout code { background: var(--surface); }
+
+  footer.closing { margin-top: 60px; padding-top: 32px; border-top: 1px solid var(--line); }
+  footer.closing .thesis { font-family: "Big Shoulders Display", sans-serif; font-weight: 600; text-transform: none; letter-spacing: 0; font-size: clamp(1.3rem, 3vw, 1.6rem); line-height: 1.28; max-width: 640px; color: var(--ink); text-wrap: balance; }
+  footer.closing .byline { margin-top: 22px; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.76rem; color: var(--ink-faint); }
+  .chain-list { list-style: none; padding: 0; margin: 18px 0 22px; max-width: 640px; display: flex; flex-direction: column; gap: 7px; }
+  .chain-list li { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.92rem; color: var(--ink-soft); padding-left: 20px; position: relative; }
+  .chain-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent-ink); }
+
+  .sources { margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .sources h3 { margin-bottom: 12px; font-family: "Big Shoulders Display", "Archivo Narrow", ui-sans-serif, sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; font-size: 1.05rem; color: var(--ink); }
+  .sources ol { max-width: 680px; padding-left: 1.15em; margin: 0; }
+  .sources li { font-size: 0.86rem; color: var(--ink-soft); margin: 7px 0; }
+  .sources a { color: var(--accent-ink); word-break: break-word; }
+
+</style>
+</head>
+<body>
+
+<!-- Icon library -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-browser" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="8.4" x2="21" y2="8.4"/><circle cx="6.2" cy="6.2" r="0.6" fill="currentColor" stroke="none"/><circle cx="8.6" cy="6.2" r="0.6" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-gateway" viewBox="0 0 24 24"><line x1="7" y1="3" x2="7" y2="21"/><line x1="17" y1="3" x2="17" y2="21"/><line x1="3" y1="12" x2="19" y2="12"/><polyline points="15,8 19,12 15,16"/></symbol>
+    <symbol id="i-table" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1.5"/><line x1="3" y1="9.5" x2="21" y2="9.5"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9.5" y1="4" x2="9.5" y2="20"/></symbol>
+  </defs>
+</svg>
+
+<div class="page">
+
+  <header class="hero">
+    <span class="eyebrow">Architecture Reference · API Reliability</span>
+    <h1>Retries Aren't Idempotent By Accident</h1>
+    <p class="dek">A timeout can't tell a client whether the server never saw the request, finished it and lost the reply, or crashed halfway through. Retrying blindly treats all three the same — the fix is a key the server was built to recognize, not a loop that hopes for the best.</p>
+    <div class="stat-row">
+      <span class="stat"><b>3</b> outcomes hide behind one timeout</span>
+      <span class="stat"><b>1</b> key, deliberately designed</span>
+      <span class="stat"><b>24h+</b> typical idempotency-store TTL</span>
+      <span class="stat"><b>0</b> free retries on a POST</span>
+    </div>
+  </header>
+
+  <section id="intro">
+    <div class="prose">
+      <p>A request leaves the client. Somewhere between there and the server, the connection stalls, and the client's only observation is a timeout — no confirmation, no error it can fully trust, just silence where a response should have been. The reasonable-sounding move is to retry. Most HTTP clients, SDK wrappers, and service meshes will do exactly that automatically, on the theory that trying again is strictly safer than giving up.</p>
+      <p>It isn't, not by itself. A timeout doesn't tell you what happened on the other end — only that you stopped hearing about it. The request might never have reached the server. It might have been received, processed, and fully committed, with only the acknowledgment lost on the way back. It might have been half-processed when the server itself crashed. All three look identical from the client's chair, and "retry and hope" responds to them as if they were the same problem. For a request that charges a card, books a seat, or sends an email, that's how a single blip becomes two.</p>
+    </div>
+    <p class="thesis-lead">An idempotent retry isn't a retry that happened not to change anything.<br>It's a retry the server was built to recognize.</p>
+  </section>
+
+  <section id="ambiguity">
+    <h2>The Timeout Doesn't Tell You What Happened <span class="tag">three outcomes, one signal</span></h2>
+    <div class="prose">
+      <p>Every call that doesn't return cleanly collapses onto the same observable at the client: no response, or an error it can't fully trust. Underneath that single signal sit at least three distinct server-side outcomes, and they call for opposite responses. The request may have died before it arrived, in which case retrying is exactly correct — nothing happened yet. The server may have received and fully committed the write, with only the response lost on the way back, in which case retrying without protection reprocesses a request that already succeeded. Or the server may have started the work and failed partway through — a payment authorized but the order row never written — leaving a state a naive retry can't safely resume and a naive skip can't safely ignore.</p>
+      <p>This is a practical instance of the <a href="#sources">two generals problem</a>: no protocol over an unreliable network can guarantee both sides agree a message was received, because the acknowledgment itself can be lost the same way the original message can. You can't fix this by trying harder to deliver the response. What you can fix is what happens when the same logical request arrives at the server twice — which is the only lever a retry actually gives you.</p>
+    </div>
+  </section>
+
+  <section id="pattern">
+    <h2>The Idempotency Key Pattern <span class="tag">check before you act, not after</span></h2>
+    <div class="prose">
+      <p>The fix is a token the client generates once per logical operation — not once per HTTP attempt — and attaches to every retry of that same operation, typically as an <code>Idempotency-Key</code> header. The server's job is to treat that key, not the request body, as the real unit of work: before running anything with side effects, it checks whether the key has been seen before. Internally, a key's record moves through three states — <span class="pill accent">pending</span> reserved but not yet started, <span class="pill warn">in_flight</span> a worker is actively running the handler, <span class="pill ok">completed</span> the response is cached and ready to replay — and only a key that has genuinely never been seen is allowed to trigger the underlying business logic.</p>
+    </div>
+
+    <div class="scene">
+      <div class="scene-label"><span>FIG. 01 — IDEMPOTENT POST HANDLER</span><span>PSEUDOCODE · PYTHON-STYLE</span></div>
+      <div class="scene-body tight">
+        <pre class="code-block"><code>@app.post("/charges")
+def create_charge():
+    key = request.headers.get("Idempotency-Key")
+    if not key:
+        abort(400, "Idempotency-Key header is required")
+
+    existing = idempotency_store.get(key, scope=current_account.id)
+
+    if existing is None:
+        # First time we've seen this key — reserve it atomically
+        # before doing anything with side effects.
+        reserved = idempotency_store.reserve(
+            key, scope=current_account.id, request_hash=hash_body(request)
+        )
+        if not reserved:
+            # Lost a race with a concurrent duplicate attempt.
+            abort(409, "Request with this key is already in flight")
+    elif existing.request_hash != hash_body(request):
+        abort(422, "Key reused with a different request body")
+    elif existing.status == "completed":
+        return existing.response, existing.status_code
+    elif existing.status == "in_flight":
+        abort(409, "Request with this key is already in flight")
+
+    charge = payment_gateway.charge(request.json)   # the actual side effect
+    idempotency_store.complete(key, current_account.id, charge.to_json(), 201)
+    return charge.to_json(), 201</code></pre>
+      </div>
+      <div class="scene-foot"><code>reserve()</code> has to be a single atomic operation — a unique constraint on <code>(account_id, key)</code>, not a check followed by a separate insert — or two concurrent retries can both pass the check before either has finished writing.</div>
+    </div>
+
+    <ol class="step-list">
+      <li><div><b>Scope the key</b>Pair it with the account or tenant, not a global namespace — two different customers reusing the same client-generated UUID shouldn't collide.</div></li>
+      <li><div><b>Fingerprint the request</b>Store a hash of the body alongside the key, and reject a retry that reuses the key with a materially different payload instead of silently serving the wrong cached result.</div></li>
+      <li><div><b>Reserve before you act</b>The row that claims the key has to exist before the side effect starts, in the same transaction or a preceding one — never as an afterthought written once the charge already went through.</div></li>
+      <li><div><b>Expire it after a bounded window</b>24 hours is a common default: long enough to outlive a realistic retry storm, short enough that the store doesn't grow forever.</div></li>
+    </ol>
+  </section>
+
+  <section id="flow">
+    <h2>What The Retry Actually Looks Like <span class="tag">same key, two attempts</span></h2>
+    <div class="prose">
+      <p>Trace one logical charge across an attempt that times out and a retry that succeeds, and the value of the key becomes concrete: the server never runs the handler twice, no matter how many times the client asks.</p>
+    </div>
+
+    <div class="scene">
+      <div class="scene-label"><span>FIG. 02 — THE RETRY, TRACED</span><span>SAME KEY, TWO ATTEMPTS</span></div>
+      <div class="scene-body">
+        <svg class="diagram" viewBox="0 0 900 430" role="img" aria-label="Sequence diagram: the client sends a POST with Idempotency-Key X to the server, which reserves the key in the key store and completes the charge. The response is lost in transit and the client times out. The client retries with the same key. The server looks up the key in the store, finds a completed record, and returns the cached response instead of running the charge again.">
+          <defs>
+            <marker id="arrow-neutral2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="arrow-crit2" class="m-crit" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="arrow-accent2" class="m-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="arrow-store2" class="m-store" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="arrow-ok2" class="m-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
+          </defs>
+
+          <!-- lifelines -->
+          <line x1="120" y1="84" x2="120" y2="400" class="lane"/>
+          <line x1="450" y1="84" x2="450" y2="400" class="lane"/>
+          <line x1="750" y1="84" x2="750" y2="400" class="lane"/>
+
+          <!-- actors -->
+          <g class="sd-box-neutral">
+            <rect x="45" y="10" width="150" height="64"/>
+            <svg class="dicon" x="105" y="18" width="20" height="20" viewBox="0 0 24 24"><use href="#i-browser"/></svg>
+            <text x="120" y="60" class="sd-name">CLIENT</text>
+          </g>
+          <g class="sd-box-neutral">
+            <rect x="375" y="10" width="150" height="64"/>
+            <svg class="dicon" x="435" y="18" width="20" height="20" viewBox="0 0 24 24"><use href="#i-gateway"/></svg>
+            <text x="450" y="60" class="sd-name">SERVER</text>
+          </g>
+          <g class="sd-box-store">
+            <rect x="675" y="10" width="150" height="64"/>
+            <svg class="dicon" x="735" y="18" width="20" height="20" viewBox="0 0 24 24"><use href="#i-table"/></svg>
+            <text x="750" y="60" class="sd-name">KEY STORE</text>
+          </g>
+
+          <!-- attempt 1: client -> server -->
+          <text x="285" y="102" class="sd-edge">POST /charges · Idempotency-Key: X</text>
+          <line x1="120" y1="112" x2="450" y2="112" class="sd-arrow-neutral" marker-end="url(#arrow-neutral2)"/>
+
+          <!-- server -> store: reserve -->
+          <text x="600" y="142" class="sd-edge" style="fill:var(--store)">reserve key X → pending</text>
+          <line x1="450" y1="152" x2="750" y2="152" class="sd-arrow-store" marker-end="url(#arrow-store2)"/>
+
+          <text x="460" y="188" class="sd-edge" text-anchor="start" style="fill:var(--ink-faint)">charge succeeds · key marked completed</text>
+
+          <!-- server -> client: response lost -->
+          <line x1="450" y1="222" x2="255" y2="222" class="sd-arrow-crit" stroke-dasharray="5 5" marker-end="url(#arrow-crit2)"/>
+          <text x="240" y="228" class="sd-edge crit" text-anchor="middle" style="font-size:15px">✕</text>
+          <text x="300" y="245" class="sd-edge crit" text-anchor="middle">response lost in transit — client times out</text>
+
+          <!-- attempt 2: client retries -->
+          <text x="285" y="272" class="sd-edge" style="fill:var(--accent-ink)">POST /charges · Idempotency-Key: X (retry)</text>
+          <line x1="120" y1="282" x2="450" y2="282" class="sd-arrow-accent" marker-end="url(#arrow-accent2)"/>
+
+          <!-- server -> store: lookup -->
+          <text x="600" y="312" class="sd-edge" style="fill:var(--store)">lookup key X</text>
+          <line x1="450" y1="320" x2="750" y2="320" class="sd-arrow-store" marker-end="url(#arrow-store2)"/>
+
+          <!-- store -> server: cached result -->
+          <text x="600" y="342" class="sd-edge" style="fill:var(--store)">status: completed → cached response</text>
+          <line x1="750" y1="352" x2="450" y2="352" class="sd-arrow-store" marker-end="url(#arrow-store2)"/>
+
+          <!-- server -> client: cached response -->
+          <text x="285" y="378" class="sd-edge" style="fill:var(--ok)">200 · cached response · charge not repeated</text>
+          <line x1="450" y1="388" x2="120" y2="388" class="sd-arrow-ok" marker-end="url(#arrow-ok2)"/>
+        </svg>
+        <div class="legend-row">
+          <span class="swatch"><span class="dot" style="background:var(--ink-faint)"></span>first attempt</span>
+          <span class="swatch"><span class="dot" style="background:var(--store)"></span>key store read/write</span>
+          <span class="swatch"><span class="dot" style="background:var(--crit)"></span>lost in transit</span>
+          <span class="swatch"><span class="dot" style="background:var(--accent)"></span>retry, same key</span>
+          <span class="swatch"><span class="dot" style="background:var(--ok)"></span>served from store, not reprocessed</span>
+        </div>
+      </div>
+      <div class="scene-foot">The client can't tell attempt one succeeded until attempt two comes back — but the server never has to guess, because the key, not the timing, is what it checks.</div>
+    </div>
+
+    <div class="callout">
+      <span class="eyebrow">Also worth knowing</span>
+      <p>HTTP already has a notion of idempotent methods — <code>GET</code>, <code>PUT</code>, and <code>DELETE</code> are specified as safe to repeat, because a correctly implemented server produces the same end state regardless of how many identical requests arrive. That guarantee is structural to those methods; <code>POST</code> gets no such promise from the spec; it's defined as neither safe nor idempotent, because a POST typically creates something new each time it's called. An idempotency key is what gives a <code>POST</code> the property <code>PUT</code> gets for free — deliberately, at the application layer, not as a side effect of the HTTP verb.</p>
+    </div>
+  </section>
+
+  <footer class="closing" id="closing">
+    <p class="thesis">A retry without a designed idempotency key isn't resilience — it's a bet that duplication won't matter, running until it does.</p>
+    <ul class="chain-list">
+      <li>A timeout tells the client nothing about what the server did.</li>
+      <li>Idempotency is a contract the server enforces, not a side effect of a retry loop.</li>
+      <li>The key is scoped, fingerprinted, and reserved atomically before the write.</li>
+      <li>GET is idempotent by accident; POST only by design.</li>
+    </ul>
+    <p class="byline">Architecture reference · API reliability · Distributed systems</p>
+  </footer>
+
+  <div class="sources" id="sources">
+    <h3>Sources</h3>
+    <ol>
+      <li><a href="https://docs.stripe.com/api/idempotent_requests" target="_blank" rel="noopener">Idempotent Requests</a> — Stripe API Reference</li>
+      <li><a href="https://stripe.com/blog/idempotency" target="_blank" rel="noopener">Designing robust and predictable APIs with idempotency</a> — Stripe Engineering Blog</li>
+      <li><a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/" target="_blank" rel="noopener">Making retries safe with idempotent APIs</a> — Amazon Builders' Library</li>
+      <li><a href="https://datatracker.ietf.org/doc/draft-ietf-httpapi-idempotency-key-header/" target="_blank" rel="noopener">The Idempotency-Key HTTP Header Field</a> — IETF HTTPAPI Working Group, Internet-Draft</li>
+      <li><a href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.2.2" target="_blank" rel="noopener">RFC 7231 §4.2.2 — Idempotent Methods</a> — IETF</li>
+      <li><a href="https://google.aip.dev/155" target="_blank" rel="noopener">AIP-155: Request identification</a> — Google API Improvement Proposals</li>
+      <li><a href="https://en.wikipedia.org/wiki/Two_Generals%27_Problem" target="_blank" rel="noopener">Two Generals' Problem</a> — Wikipedia</li>
+      <li><a href="https://blog.jonathanoliver.com/idempotency-patterns/" target="_blank" rel="noopener">Idempotency Patterns</a> — Jonathan Oliver</li>
+    </ol>
+  </div>
+
+</div>
+</body>
+</html>

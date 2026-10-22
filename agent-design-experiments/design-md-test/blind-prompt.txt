@@ -1,0 +1,14 @@
+Write a single self-contained HTML file for a technical blog post titled "Retries Aren't Idempotent By Accident" about why retry logic in distributed systems needs a deliberately designed idempotency key, not just "retry and hope."
+
+Requirements:
+- Roughly 500-700 words of running prose, organized into an intro and 2-3 sections with headings.
+- At least one code snippet showing an idempotency-key pattern (any language you like, e.g. a POST handler checking a stored key before processing).
+- At least one diagram/figure illustrating a client -> server retry flow with an idempotency key (inline SVG is fine, or a styled HTML/CSS diagram -- no external image files).
+- A short closing takeaway.
+- This is a real, standalone piece of writing -- not a stub or placeholder. Write actual technical content with genuine explanatory value, as if for publication.
+- All CSS must be inline in a <style> block in this one file -- no external stylesheets, no build step, no JS framework. You may link Google Fonts if you want.
+- Make it look as polished and professional as you can -- this is meant to be publication-quality, portfolio-grade work. Use your own best judgment on visual design, typography, color, and layout. There is no existing brand or style guide to match -- this is a standalone piece with its own identity.
+
+Save the finished file to exactly this path: post.html
+
+Do not create any other files. Do not ask clarifying questions -- make reasonable creative decisions yourself. When done, just confirm the file was written and give a one-paragraph description of the visual design choices you made.

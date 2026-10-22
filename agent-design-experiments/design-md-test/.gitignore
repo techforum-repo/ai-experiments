@@ -1,0 +1,17 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+
+# codex-blind/codex-google/codex-vercel used to be excluded here as
+# reproducible scratch, since nothing published cited a specific byte of
+# them. That's no longer true -- the article now cites this exact run
+# (the "reran through Codex" update), so they're tracked like claude-*/:
+# real evidence now, not to be silently regenerated.
+
+# Local scratch, if any test output lands here by accident
+*.tmp

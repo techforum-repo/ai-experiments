@@ -1,0 +1,8 @@
+`post.html` has been written to `/home/albinissac/projects/Utilities/cloudflared/shared/component-selection-test/claude-run2/post.html`.
+
+Component choices, one per requirement:
+
+- **Real risk of leaving a flag too long** → `banner.html` (`class="banner crit"`). Banner is documented as "full-width solid block, heaviest visual weight," which is the right tool for the one paragraph that must not be skimmed — the point that a "dead" branch can be resurrected by a config mistake and reintroduce a security regression.
+- **Lifecycle-stage label on the example flag** → `badge.html` (`<span class="badge">cleanup-due</span>`). Badge is described as reading like "a definitive status marker," which fits a lifecycle stamp better than `tag` (soft category) or `pill` (lightweight chip) — the flag's status is meant to read as a hard fact, not a vague category.
+- **Numbered sequence for safely removing a stale flag** → `steps.html` (`<ol class="steps">`). This is a genuinely ordered procedure where sequence matters (you can't inline the winning branch before confirming no traffic hits the losing one), which is exactly what `steps` is documented for, versus the sequence-agnostic plain `ordered-list`.
+- **Common cleanup mistake warning** → `callout.html` (`class="callout warn"`). It needed to be prominent but distinct from the crit-level banner above it — a boxed aside with a left accent border reads as "important, read this" without duplicating the banner's heaviest-weight treatment, and `warn` (amber) fits a cautionary process note better than `crit` (reserved for the security-adjacent risk).

@@ -1,0 +1,22 @@
+First, read these two files in full: design-systems/vercel/design.md and design-systems/vercel/stylesheet.css
+
+Then write a single self-contained HTML file for a technical blog post titled "Retries Aren't Idempotent By Accident" about why retry logic in distributed systems needs a deliberately designed idempotency key, not just "retry and hope."
+
+Requirements:
+- Roughly 500-700 words of running prose, organized into an intro and 2-3 sections with headings.
+- At least one code snippet showing an idempotency-key pattern (any language you like, e.g. a POST handler checking a stored key before processing).
+- At least one diagram/figure illustrating a client -> server retry flow with an idempotency key (inline SVG is fine, or a styled HTML/CSS diagram -- no external image files).
+- A short closing takeaway.
+- This is a real, standalone piece of writing -- not a stub or placeholder. Write actual technical content with genuine explanatory value, as if for publication.
+
+This is the split-artifact version of the house style, not the single-file version: design-systems/vercel/design.md covers voice, composition, and judgment calls only. It does not contain color or type values. Those live in design-systems/vercel/stylesheet.css as documented CSS classes and custom-property tokens.
+
+Do this exactly the way the stylesheet intends:
+- Link the stylesheet in <head> with a relative path: <link rel="stylesheet" href="stylesheet.css">
+- Do NOT write your own <style> block, and do not override any documented token or class inline. Build the page using only the classes stylesheet.css already defines (eyebrow, page, prose, header.hero, stat-row/stat, thesis-lead, step-list, scene/scene-label/scene-body/scene-foot, legend-row, table-wrap/table, pill, callout, footer.closing/chain-list, sources, etc).
+- If something you need genuinely has no documented class or token, pick the closest existing one rather than inventing a new rule.
+- Follow design-systems/vercel/design.md for voice, composition, hierarchy, and the named anti-patterns/do's-and-don'ts it lists.
+
+Save the finished file to exactly this path: post.html
+
+Do not create any other files (the stylesheet already exists — link to it, don't recreate it). Do not ask clarifying questions -- make reasonable decisions yourself within these constraints. When done, confirm the file was written and give a one-paragraph description of how you used the two files together.

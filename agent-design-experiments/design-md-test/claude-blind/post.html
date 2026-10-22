@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retries Aren't Idempotent By Accident</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b1f23;
+    --ink-soft:#4a5058;
+    --paper:#fbfaf7;
+    --paper-raised:#ffffff;
+    --line:#e3ded4;
+    --accent:#b3541e;
+    --accent-dim:#e8dccb;
+    --accent-ink:#7a3c14;
+    --code-bg:#22262b;
+    --code-ink:#e8e6df;
+    --code-accent:#e0a458;
+    --success:#3b6e4f;
+    --fail:#a5433a;
+    --radius:10px;
+    --measure:700px;
+  }
+
+  *{box-sizing:border-box;}
+
+  html{background:var(--paper);}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    font-size:19px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  .wrap{
+    max-width:var(--measure);
+    margin:0 auto;
+    padding:0 24px 100px;
+  }
+
+  header.hero{
+    max-width:var(--measure);
+    margin:0 auto;
+    padding:78px 24px 40px;
+    border-bottom:1px solid var(--line);
+  }
+
+  .kicker{
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+
+  .kicker::before{
+    content:"";
+    width:28px;
+    height:2px;
+    background:var(--accent);
+    display:inline-block;
+  }
+
+  h1{
+    font-family:'Source Serif 4', serif;
+    font-weight:700;
+    font-size:clamp(2.1rem, 4.2vw, 3.05rem);
+    line-height:1.12;
+    letter-spacing:-0.01em;
+    margin:0 0 22px;
+    color:var(--ink);
+  }
+
+  .dek{
+    font-family:'Inter', sans-serif;
+    font-size:17.5px;
+    line-height:1.6;
+    color:var(--ink-soft);
+    max-width:58ch;
+    margin:0 0 28px;
+  }
+
+  .byline{
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+
+  .byline .avatar{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--accent), #d98a3f);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    flex-shrink:0;
+  }
+
+  .byline strong{color:var(--ink); font-weight:600;}
+
+  main{padding-top:48px;}
+
+  h2{
+    font-family:'Inter', sans-serif;
+    font-weight:800;
+    font-size:1.5rem;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin:3em 0 0.75em;
+    padding-top:0.1em;
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+  }
+
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.62em;
+    font-weight:600;
+    color:var(--accent);
+    background:var(--accent-dim);
+    padding:2px 8px;
+    border-radius:5px;
+    letter-spacing:0;
+  }
+
+  h3{
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:1.08rem;
+    color:var(--ink);
+    margin:2em 0 0.6em;
+  }
+
+  p{margin:0 0 1.15em;}
+
+  strong{color:var(--ink); font-weight:600;}
+
+  em.term{
+    font-style:italic;
+    color:var(--accent-ink);
+  }
+
+  code{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.83em;
+    background:var(--accent-dim);
+    color:var(--accent-ink);
+    padding:0.14em 0.4em;
+    border-radius:4px;
+  }
+
+  a{color:var(--accent-ink);}
+
+  ul, ol{
+    margin:0 0 1.2em;
+    padding-left:1.35em;
+  }
+  li{margin-bottom:0.5em;}
+
+  blockquote{
+    margin:1.8em 0;
+    padding:0.2em 0 0.2em 1.3em;
+    border-left:3px solid var(--accent);
+    font-family:'Inter', sans-serif;
+    font-size:0.98em;
+    color:var(--ink-soft);
+    font-style:normal;
+  }
+
+  /* Code block */
+  .code-block{
+    background:var(--code-bg);
+    color:var(--code-ink);
+    border-radius:var(--radius);
+    margin:1.8em 0 2.2em;
+    overflow:hidden;
+    box-shadow:0 8px 24px -12px rgba(20,15,5,0.35);
+  }
+
+  .code-block .code-title{
+    font-family:'Inter', sans-serif;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:0.03em;
+    color:#a9b0ba;
+    background:#191c20;
+    padding:9px 16px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    border-bottom:1px solid #33383f;
+  }
+
+  .code-block .dots{display:flex; gap:6px; margin-right:4px;}
+  .code-block .dots span{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .code-block .dots span:nth-child(1){background:#e5605a;}
+  .code-block .dots span:nth-child(2){background:#e6b450;}
+  .code-block .dots span:nth-child(3){background:#5cb56b;}
+
+  .code-block pre{
+    margin:0;
+    padding:18px 20px 22px;
+    overflow-x:auto;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14.5px;
+    line-height:1.65;
+  }
+
+  .code-block .c-kw{color:#e0a458;}
+  .code-block .c-str{color:#9fca8f;}
+  .code-block .c-com{color:#7d848d; font-style:italic;}
+  .code-block .c-fn{color:#7fb6e0;}
+  .code-block .c-type{color:#d98cd9;}
+
+  /* Diagram */
+  figure.diagram{
+    margin:2.4em 0 1em;
+    padding:28px 20px 20px;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+  }
+
+  figure.diagram svg{
+    width:100%;
+    height:auto;
+    display:block;
+  }
+
+  figcaption{
+    font-family:'Inter', sans-serif;
+    font-size:13px;
+    color:var(--ink-soft);
+    text-align:center;
+    margin-top:14px;
+    padding-top:14px;
+    border-top:1px dashed var(--line);
+  }
+
+  figcaption strong{color:var(--ink-soft);}
+
+  /* callout box */
+  .callout{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-left:4px solid var(--accent);
+    border-radius:0 var(--radius) var(--radius) 0;
+    padding:18px 22px;
+    margin:1.8em 0;
+    font-family:'Inter', sans-serif;
+    font-size:15.5px;
+    color:var(--ink-soft);
+  }
+  .callout strong{color:var(--ink);}
+
+  /* closing */
+  .takeaway{
+    margin-top:3.4em;
+    padding:32px 28px;
+    background:linear-gradient(145deg, #24211c, #1c1a17);
+    color:#f2ece2;
+    border-radius:14px;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .takeaway::before{
+    content:"";
+    position:absolute;
+    top:-40px; right:-40px;
+    width:160px; height:160px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(224,164,88,0.35), transparent 70%);
+  }
+
+  .takeaway .label{
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--code-accent);
+    margin-bottom:12px;
+    display:block;
+  }
+
+  .takeaway p{
+    font-family:'Source Serif 4', serif;
+    font-size:1.18rem;
+    line-height:1.55;
+    color:#f2ece2;
+    margin:0;
+    position:relative;
+  }
+
+  footer{
+    max-width:var(--measure);
+    margin:0 auto;
+    padding:40px 24px 60px;
+    font-family:'Inter', sans-serif;
+    font-size:13px;
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid var(--line);
+    margin-top:20px;
+  }
+
+  @media (max-width: 560px){
+    body{font-size:17.5px;}
+    header.hero{padding:52px 20px 32px;}
+    main{padding-top:32px;}
+    .code-block pre{font-size:13px;}
+    footer{flex-direction:column; gap:8px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="kicker">Distributed Systems &middot; Reliability</div>
+  <h1>Retries Aren't Idempotent By Accident</h1>
+  <p class="dek">A retry only makes a request safer if the server has been taught to recognize it as a repeat. Without a deliberately designed idempotency key, "retry and hope" is just a slower way to double-charge your customers.</p>
+  <div class="byline">
+    <span class="avatar">AI</span>
+    <span><strong>Field notes</strong> on request semantics, network failure, and why "just add a retry" is the sentence that precedes most duplicate-payment incidents.</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <p>Every distributed system eventually grows a retry loop. A request times out, the client shrugs, and sends it again. This works beautifully for reads — asking twice for the same account balance is harmless. It works terribly for writes. If the first "charge $40" request actually succeeded on the server but the response never made it back to the client, the client has no way to know that. From its point of view, the request simply vanished. So it does the reasonable thing and retries — and now the customer has been charged twice.</p>
+
+  <p>The instinctive fix is to reach for HTTP's own vocabulary: <code>PUT</code> and <code>DELETE</code> are supposed to be <em class="term">idempotent</em>, meaning repeating them produces the same end state as doing them once. But idempotency is a property of how a server <em>handles</em> a request, not a property that a verb grants for free. A <code>PUT /accounts/42/balance</code> that runs <code>balance = balance - 40</code> is idempotent in name and dangerous in practice. Real idempotency has to be built, and the tool for building it is the idempotency key.</p>
+
+  <h2><span class="num">01</span>Why "just retry" fails at the worst moment</h2>
+
+  <p>The core problem is that a network timeout is ambiguous. When a client doesn't get a response, there are at least three possible histories: the request never reached the server, the request reached the server but failed before doing anything, or the request reached the server, succeeded, and only the response got lost on the way back. A naive retry treats all three as the same case and just fires the request again. The first two histories make that safe. The third does not — and the client has no way to distinguish it from the outside.</p>
+
+  <p>This is why retries are most dangerous exactly where they're most tempting: payments, order placement, provisioning, anything with a side effect that costs money or resources. The system that "just retries on timeout" will work fine in testing, where failures are rare and clean, and will misbehave in production, where failures cluster around the exact moments — partial outages, packet loss, overloaded downstreams — when a duplicate write does the most damage.</p>
+
+  <h2><span class="num">02</span>Designing the key, not just adding one</h2>
+
+  <p>An idempotency key turns an ambiguous retry into an unambiguous one. The client generates a unique token — a UUID is fine — for each <em>logical</em> operation, not for each HTTP attempt, and sends it as a header. The server's job is to remember, for some retention window, which keys it has already seen and what it did about them. On a repeat, it doesn't reprocess; it returns the stored outcome.</p>
+
+  <div class="code-block">
+    <div class="code-title"><span class="dots"><span></span><span></span><span></span></span>payments_api.py</div>
+    <pre><span class="c-com"># POST /charges  — client sends Idempotency-Key header once per logical attempt
+</span><span class="c-kw">@app</span>.route(<span class="c-str">"/charges"</span>, methods=[<span class="c-str">"POST"</span>])
+<span class="c-kw">def</span> <span class="c-fn">create_charge</span>(request):
+    key = request.headers.get(<span class="c-str">"Idempotency-Key"</span>)
+    <span class="c-kw">if not</span> key:
+        <span class="c-kw">return</span> error(<span class="c-str">400</span>, <span class="c-str">"Idempotency-Key required"</span>)
+
+    <span class="c-kw">with</span> db.transaction():
+        <span class="c-com"># Unique constraint on `key` makes this check-then-act atomic:
+</span>        <span class="c-com"># a concurrent duplicate insert fails instead of racing past us.
+</span>        existing = db.execute(
+            <span class="c-str">"SELECT status, response_body FROM idempotency_keys "</span>
+            <span class="c-str">"WHERE key = %s FOR UPDATE"</span>, key
+        )
+
+        <span class="c-kw">if</span> existing:
+            <span class="c-kw">if</span> existing.status == <span class="c-str">"in_progress"</span>:
+                <span class="c-kw">return</span> error(<span class="c-str">409</span>, <span class="c-str">"Request with this key is still processing"</span>)
+            <span class="c-com"># Same key, already resolved — replay the stored result, do nothing new.
+</span>            <span class="c-kw">return</span> respond(existing.response_body, status=existing.status)
+
+        db.execute(
+            <span class="c-str">"INSERT INTO idempotency_keys (key, status) VALUES (%s, 'in_progress')"</span>,
+            key
+        )
+
+    <span class="c-com"># Only reached on a genuinely new key.
+</span>    result = charge_card(request.body.amount, request.body.card_token)
+
+    db.execute(
+        <span class="c-str">"UPDATE idempotency_keys SET status = %s, response_body = %s WHERE key = %s"</span>,
+        <span class="c-str">"completed"</span>, result.to_json(), key
+    )
+    <span class="c-kw">return</span> respond(result, status=<span class="c-str">201</span>)</pre>
+  </div>
+
+  <p>Three details separate a working implementation from a decorative one. First, the check-and-reserve step must be atomic with respect to concurrent requests carrying the same key — hence the row lock and the unique constraint, so two retries arriving at once can't both slip past the check and both call <code>charge_card</code>. Second, the key must scope to the operation, not the client or session; a UUID generated fresh per "attempt to place order #8891" and reused across retries of that exact attempt, never across two different orders. Third, stored keys need a retention window and, ideally, a hash of the request body — so a key reused with different parameters is rejected rather than silently replayed with stale data.</p>
+
+  <h2><span class="num">03</span>What the flow actually looks like on the wire</h2>
+
+  <p>The value of the key becomes clearest when you trace a single logical operation across a lost response and a retry:</p>
+
+  <figure class="diagram">
+    <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="diagTitle diagDesc">
+      <title id="diagTitle">Client-server retry flow using an idempotency key</title>
+      <desc id="diagDesc">Client sends a POST with Idempotency-Key K1. Server processes it and charges the card, but the response is lost in transit. Client times out and retries with the same key K1. Server recognizes K1 as already completed and returns the stored result without charging again.</desc>
+
+      <!-- lifelines -->
+      <line x1="90" y1="40" x2="90" y2="270" stroke="#c9c2b3" stroke-width="1.5"/>
+      <line x1="550" y1="40" x2="550" y2="270" stroke="#c9c2b3" stroke-width="1.5"/>
+
+      <rect x="30" y="12" width="120" height="30" rx="6" fill="#f2ede3" stroke="#c9c2b3"/>
+      <text x="90" y="32" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#1b1f23">Client</text>
+
+      <rect x="490" y="12" width="120" height="30" rx="6" fill="#f2ede3" stroke="#c9c2b3"/>
+      <text x="550" y="32" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="700" fill="#1b1f23">Server</text>
+
+      <!-- request 1 -->
+      <line x1="95" y1="70" x2="545" y2="70" stroke="#b3541e" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="320" y="62" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#7a3c14">POST /charges  Idempotency-Key: K1</text>
+
+      <!-- server processes -->
+      <rect x="500" y="82" width="60" height="34" rx="5" fill="#e8dccb" stroke="#b3541e"/>
+      <text x="530" y="103" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#7a3c14">charge()</text>
+      <text x="530" y="129" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#4a5058">stores result under K1</text>
+
+      <!-- response lost -->
+      <line x1="545" y1="150" x2="180" y2="150" stroke="#a5433a" stroke-width="2" stroke-dasharray="6 5"/>
+      <text x="365" y="143" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#a5433a">200 OK  (lost in transit)</text>
+      <circle cx="178" cy="150" r="5" fill="#a5433a"/>
+      <text x="150" y="167" text-anchor="end" font-family="Inter, sans-serif" font-size="10.5" fill="#a5433a">response never arrives</text>
+
+      <!-- timeout -->
+      <text x="90" y="190" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-style="italic" fill="#4a5058">client times out</text>
+
+      <!-- retry -->
+      <line x1="95" y1="215" x2="545" y2="215" stroke="#b3541e" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="320" y="207" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#7a3c14">POST /charges  Idempotency-Key: K1  (retry)</text>
+
+      <!-- server recognizes -->
+      <rect x="480" y="227" width="80" height="34" rx="5" fill="#dcece0" stroke="#3b6e4f"/>
+      <text x="520" y="248" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#3b6e4f">K1 seen — replay</text>
+
+      <!-- response 2 -->
+      <line x1="545" y1="270" x2="95" y2="270" stroke="#3b6e4f" stroke-width="2" marker-end="url(#arrow2)"/>
+      <text x="320" y="263" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#3b6e4f">200 OK  (stored result, no re-charge)</text>
+
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#b3541e"/>
+        </marker>
+        <marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#3b6e4f"/>
+        </marker>
+      </defs>
+    </svg>
+    <figcaption><strong>Figure 1.</strong> The card is only ever charged once. The second request is identical on the wire, but the server treats it as a lookup, not a command.</figcaption>
+  </figure>
+
+  <div class="callout">
+    <strong>Edge case worth naming:</strong> what if the retry arrives while the first attempt is still mid-flight, not yet lost, just slow? This is why the handler above returns <code>409</code> for an <code>in_progress</code> key rather than blocking indefinitely or, worse, letting a second worker start a second charge. The client should back off and poll or retry again shortly — the key guarantees at-most-once execution, not instant confirmation.</div>
+
+  <p>None of this requires exotic infrastructure. A single table with a unique key column and a status enum is enough to convert a large class of double-processing bugs into a non-issue. What it does require is treating idempotency as a contract between client and server that's specified up front — which fields form the key, how long results are retained, what happens on a concurrent collision — rather than a property you hope emerges from calling the right HTTP verb.</p>
+
+  <div class="takeaway">
+    <span class="label">Takeaway</span>
+    <p>Idempotency isn't a side effect of retrying carefully — it's a mechanism you build, keyed on the operation, checked atomically, and honored on every replay. Design the key before you design the retry.</p>
+  </div>
+
+</main>
+
+<footer>
+  <span>Retries Aren't Idempotent By Accident</span>
+  <span>Distributed Systems Notes</span>
+</footer>
+
+</body>
+</html>

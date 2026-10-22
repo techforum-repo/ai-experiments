@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feature Flags Are a Liability After They Ship</title>
+<link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+<div class="page">
+<div class="prose">
+
+<h1>Feature Flags Are a Liability After They Ship</h1>
+<p>A feature flag earns its keep during a rollout and starts costing you the day after — this post explains why, and lays out a concrete process for retiring flags before they calcify into permanent, untested branches of your codebase.</p>
+
+<p>Feature flags are cheap to add and expensive to remove, which is exactly backwards from how most teams treat them. Adding a flag takes one conditional and a config entry. Removing one means tracing every code path it touches, confirming nobody depends on the losing branch, and shipping that removal with the same care as any other production change. Because the add is cheap and the remove is not, flags accumulate. Most codebases that have shipped behind flags for more than a year are carrying dozens of them that finished their job months ago and never got cleaned up.</p>
+
+<h2>The Flag You Forgot Is Still Running</h2>
+<p>Take <code>enable_checkout_v2</code> <span class="badge">stale</span>. It shipped nine months ago, reached 100% rollout in its second week, and nobody has touched the old checkout code path since. The flag isn't doing any work anymore — every request takes the same branch — but the conditional is still there, the old implementation is still compiled and deployed, and the flag definition is still live in whatever service controls it. It has quietly moved from "active" to "stale" to what should be "cleanup-due," except nobody assigned that stage to anyone.</p>
+
+<div class="banner crit">
+A dead code path behind a stale flag doesn't get exercised by your test suite, doesn't get touched by refactors, and doesn't receive the security or dependency patches that land on the code around it. If the flag's default ever changes unexpectedly — a config store outage, a bad deploy, a fat-fingered targeting rule, or simply the SDK falling back to its baked-in default when it can't reach the flag service — traffic can be routed straight into a nine-month-old code path that nobody has verified against anything shipped since. That is not a hypothetical edge case; it is the specific failure mode that stale flags exist to create, and it tends to surface during an incident, not during a calm Tuesday code review.
+</div>
+
+<p>The risk compounds with every additional stale flag, because each one is another latent fork that has to be mentally reconstructed before an engineer can be confident about what the running system actually does. A codebase with fifteen resolved-but-unremoved flags doesn't have fifteen simple booleans; it has fifteen silent forking points, any of which could be the one that misbehaves during a bad week.</p>
+
+<h2>A Disciplined Cleanup Process</h2>
+<p>Removing a flag safely is not the same as deleting an <code>if</code> statement. It means confirming the rollout is genuinely finished everywhere it matters, removing the losing branch without disturbing the winning one, and retiring the flag from every system that references it — not just the one you happen to be looking at.</p>
+
+<ol class="steps">
+  <li>Confirm the flag has held its final value (100% on or fully off) in every environment for at least one full deploy cycle, not just production.</li>
+  <li>Search the codebase, config files, analytics events, and dashboards for every reference to the flag key — flags are rarely checked in only one place.</li>
+  <li>Delete the losing code branch entirely and inline the winning branch in its place.</li>
+  <li>Remove the flag definition and any targeting rules from the flag-management service.</li>
+  <li>Ship the removal as its own reviewed change, with a normal rollback plan, separate from unrelated work.</li>
+  <li>Confirm in production that behavior is unchanged before considering the flag closed out.</li>
+</ol>
+
+<div class="callout warn">
+The mistake teams make most often is doing this in the wrong order: deleting the flag from the flag-management dashboard first, while the code's conditional still references it. Once the flag definition is gone, the SDK falls back to whatever default is baked into the client — which is not guaranteed to match the value production was actually running. Always remove the code's dependency on the flag before you remove the flag itself from the management system, so that deleting the remote definition has no behavioral effect at all.
+</div>
+
+<h2>Takeaway</h2>
+<p>A feature flag is a loan against future clarity, taken out to make a risky rollout safe. Like any loan, it has to be paid off — the moment the rollout finishes is the moment the cleanup clock starts, not the moment the flag becomes someone else's problem. Treat flag removal as a routine, scheduled part of shipping, not a someday project, and your codebase will never accumulate the kind of dead forks that turn a quiet Tuesday into an incident.</p>
+
+</div>
+</div>
+</body>
+</html>

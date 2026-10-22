@@ -1,0 +1,17 @@
+First, read this design system specification file in full: design-systems/google/DESIGN.md
+
+Then write a single self-contained HTML file for a technical blog post titled "Retries Aren't Idempotent By Accident" about why retry logic in distributed systems needs a deliberately designed idempotency key, not just "retry and hope."
+
+Requirements:
+- Roughly 500-700 words of running prose, organized into an intro and 2-3 sections with headings.
+- At least one code snippet showing an idempotency-key pattern (any language you like, e.g. a POST handler checking a stored key before processing).
+- At least one diagram/figure illustrating a client -> server retry flow with an idempotency key (inline SVG is fine, or a styled HTML/CSS diagram -- no external image files).
+- A short closing takeaway.
+- This is a real, standalone piece of writing -- not a stub or placeholder. Write actual technical content with genuine explanatory value, as if for publication.
+- All CSS must be inline in a <style> block in this one file -- no external stylesheets, no build step, no JS framework. You may link Google Fonts if the file specifies them.
+
+Treat design-systems/google/DESIGN.md as the strict house style guide for this piece: match its color tokens, typography rules, spacing scale, component patterns (eyebrow, scene wrapper for figures with caption bar, callouts, thesis-lead, pills, step-list, sources section), voice/tone, and its Do's and Don'ts exactly. Where it gives you a choice (e.g. which 2-5 semantic role colors to use for this specific post's subject matter), make a sensible choice consistent with its rules and note your reasoning briefly at the end.
+
+Save the finished file to exactly this path: post.html
+
+Do not create any other files. Do not ask clarifying questions -- make reasonable decisions yourself within the file's constraints. When done, confirm the file was written and give a one-paragraph description of how you applied it.

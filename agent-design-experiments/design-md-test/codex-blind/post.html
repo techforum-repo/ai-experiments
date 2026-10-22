@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Retries make delivery more reliable. Deliberately designed idempotency keys make their effects safe. A practical guide to the boundary between the two.">
+<title>Retries Aren't Idempotent By Accident — Boundary Conditions</title>
+<style>
+:root{--paper:#f5f3eb;--ink:#202a27;--muted:#616c64;--line:#ced1c5;--green:#275d45;--accent:#c9f17c}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}::selection{background:var(--accent)}.shell{max-width:1180px;margin:auto;padding:0 56px}.masthead{display:flex;align-items:center;justify-content:space-between;padding:30px 0 25px;border-bottom:1px solid var(--ink)}.brand{font-size:14px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;display:flex;align-items:center;gap:12px}.mark{display:inline-block;width:20px;height:20px;border:2px solid var(--green);box-shadow:5px -5px 0 -2px var(--paper),5px -5px 0 0 var(--green)}.edition,.eyebrow,.meta,.section-num,.figure-label,.code-label,footer{font-family:"Courier New",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase}.edition{color:var(--muted)}header.hero{padding:59px 0 42px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--green);font-weight:bold;display:flex;align-items:center;gap:10px}.eyebrow:before{content:"";width:7px;height:7px;background:var(--green);border-radius:50%}h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(48px,6.8vw,83px);font-weight:400;letter-spacing:-.065em;line-height:1.02;max-width:950px;margin:26px 0 25px}h1 em{font-weight:400;color:var(--green)}.dek{font-size:20px;line-height:1.5;max-width:610px;color:var(--muted);margin:0 0 29px}.meta{display:flex;gap:22px;color:var(--muted);font-size:10px}.meta span+span{border-left:1px solid var(--line);padding-left:22px}.article-layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:48px;padding:42px 0 70px}aside{padding-top:7px}.side-label{font:11px "Courier New",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}.side-note{font-family:Georgia,serif;font-size:22px;line-height:1.35;margin:17px 0 22px;letter-spacing:-.025em}.side-rule{height:3px;width:32px;background:var(--green)}.side-small{font:12px/1.65 Arial,sans-serif;color:var(--muted);max-width:165px;margin-top:20px}article{min-width:0;max-width:766px}p{font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.75;margin:0 0 21px}.intro{font-size:21px;line-height:1.6}.intro:first-letter{float:left;font-size:65px;line-height:.85;margin:9px 9px 0 0;color:var(--green)}h2{font-size:26px;line-height:1.2;letter-spacing:-.035em;margin:39px 0 19px;display:flex;align-items:baseline;gap:14px}.section-num{font-size:11px;color:var(--green);font-weight:normal;letter-spacing:0}p code{font: .82em "Courier New",monospace;background:#e6e9dc;padding:2px 4px;border-radius:3px}figure{margin:28px 0 29px;padding:23px 25px 19px;border:1px solid var(--line);background:#edeFe5}.figure-label{color:var(--green);font-size:10px;font-weight:bold;margin-bottom:13px}.flow{width:100%;height:auto;display:block}.flow text{font-family:Arial,Helvetica,sans-serif;fill:var(--ink)}.flow .mono{font-family:"Courier New",monospace;font-size:12px}.flow .quiet{fill:var(--muted);font-size:11px}figcaption{border-top:1px solid var(--line);padding-top:13px;font-size:12px;color:var(--muted);line-height:1.5}.code-box{margin:26px 0;background:#202d27;color:#e3e9dd;border-radius:4px;overflow:hidden}.code-label{padding:14px 20px;border-bottom:1px solid #425146;color:#b6c4b5;font-size:10px;display:flex;justify-content:space-between}.code-label b{color:var(--accent);font-weight:normal}pre{margin:0;padding:22px 20px 26px;overflow:auto;font:12px/1.85 "Courier New",monospace;tab-size:4}.comment{color:#a2b29f}.keyword{color:#c9f17c}.string{color:#eacb9d}.takeaway{margin-top:34px;padding:23px 25px;background:#e4e9d9;border-left:3px solid var(--green)}.takeaway .eyebrow{font-size:10px;margin-bottom:10px}.takeaway p{font-size:20px;line-height:1.5;letter-spacing:-.02em;margin:0}footer{border-top:1px solid var(--ink);padding:22px 0 30px;display:flex;justify-content:space-between;color:var(--muted);font-size:10px}@media(max-width:800px){.shell{padding:0 28px}.article-layout{grid-template-columns:1fr;gap:0}aside{display:none}header.hero{padding-top:42px}h1{font-size:64px}.edition{font-size:9px}}@media(max-width:480px){.shell{padding:0 20px}.masthead{padding-top:25px}.brand{font-size:11px;letter-spacing:.09em}.edition{display:none}h1{font-size:49px}.dek{font-size:18px}.meta{font-size:9px;gap:12px}.meta span+span{padding-left:12px}.article-layout{padding-top:30px}p{font-size:17px}h2{font-size:24px;gap:10px}figure{padding:17px 10px}.flow{min-width:0}pre{font-size:11px;padding:17px 14px}.code-label{padding:13px 14px;font-size:9px}footer{font-size:9px;gap:20px}}@media print{.shell{max-width:none;padding:0}.article-layout{display:block}aside{display:none}h1{font-size:52px}.code-box{background:#eee;color:#222}pre span{color:#222!important}figure,.code-box,.takeaway{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="masthead"><div class="brand"><span class="mark" aria-hidden="true"></span>Boundary Conditions</div><div class="edition">Field notes on software / No. 007</div></div>
+<main>
+<header class="hero">
+<div class="eyebrow">Engineering / Distributed systems</div>
+<h1>Retries Aren't Idempotent<br><em>By Accident.</em></h1>
+<p class="dek">A timeout tells you the answer is missing.<br>It tells you nothing about whether the work happened.</p>
+<div class="meta"><span>Systems notebook</span><span>6 September 2026</span><span>5 min read</span></div>
+</header>
+<div class="article-layout">
+<aside aria-label="Article theme"><div class="side-label">The central distinction</div><div class="side-note">Repeat the request.<br>Preserve the effect.</div><div class="side-rule"></div><p class="side-small">Reliability is a delivery problem.<br>Idempotency is a state problem.</p></aside>
+<article>
+<p class="intro">Your client submits a payment. The server commits it, but the connection drops before the response arrives. The client sees a timeout and retries. Without an explicit agreement about what makes those two requests the same operation, you have just bought reliability at the price of a second charge.</p>
+<p>Backoff and jitter help a struggling service recover. They cannot tell it whether a request is new work or an uncertain repeat. Idempotency means repeating an operation preserves its intended effect. For a state-changing API, that property needs a protocol and durable state, not merely a retry loop.</p>
+<section aria-labelledby="identity">
+<h2 id="identity"><span class="section-num">01 /</span> Give the intent an identity</h2>
+<p>Generate an idempotency key when the user creates a logical operation, before the first network attempt. Persist it alongside the pending operation and reuse it for every retry, including after a client restart. Generating a fresh UUID inside the retry loop gives every duplicate a perfectly unique identity.</p>
+<p>Scope the key to an authenticated tenant and operation type. Store a fingerprint of the validated, normalized request too. The same key with different payment details should produce a conflict, not silently return an unrelated receipt. Conversely, identical payloads with different keys may represent two legitimate purchases: payload equality is not intent.</p>
+<figure>
+<div class="figure-label">Fig. 01 / One intent, two deliveries</div>
+<svg class="flow" viewBox="0 0 650 266" role="img" aria-labelledby="flow-title flow-desc">
+<title id="flow-title">A retry reuses the original idempotency key</title>
+<desc id="flow-desc">The client sends POST with key pay_7f. The server commits the payment and receipt, but the response is lost. The client retries with the same key and receives the stored receipt without a second payment.</desc>
+<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="#275d45"/></marker></defs>
+<rect x="15" y="4" width="100" height="31" rx="3" fill="#dce3d2"/><text x="65" y="24" font-size="12" text-anchor="middle" font-weight="bold">CLIENT</text>
+<rect x="443" y="4" width="185" height="31" rx="3" fill="#dce3d2"/><text x="535" y="24" font-size="12" text-anchor="middle" font-weight="bold">SERVER + DATABASE</text>
+<path d="M65 43V250M535 43V250" stroke="#b1bcac" stroke-dasharray="4 5"/>
+<text x="91" y="61" class="mono">POST /payments · key: pay_7f</text><path d="M65 73H530" stroke="#275d45" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="384" y="85" width="244" height="28" rx="3" fill="#275d45"/><text x="506" y="103" text-anchor="middle" style="fill:#f5f3eb;font-size:11px">Commit payment + saved receipt</text>
+<path d="M535 134H224" stroke="#8d998b" stroke-dasharray="5 4"/><path d="M211 129L221 139M221 129L211 139" stroke="#92654e" stroke-width="2"/><text x="258" y="127" class="quiet">201 response lost</text>
+<text x="91" y="174" class="mono">RETRY · same key: pay_7f</text><path d="M65 186H530" stroke="#275d45" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="405" y="207" class="quiet">Key found. No new payment.</text>
+<path d="M535 230H70" stroke="#275d45" stroke-width="1.5" marker-end="url(#arrow)"/><text x="171" y="222" class="mono">201 · replay stored receipt</text>
+<circle cx="65" cy="73" r="3" fill="#275d45"/><circle cx="65" cy="186" r="3" fill="#275d45"/>
+</svg>
+<figcaption>A lost response creates uncertainty at the client, not permission to repeat the side effect.</figcaption>
+</figure>
+</section>
+<section aria-labelledby="atomic">
+<h2 id="atomic"><span class="section-num">02 /</span> Make the decision atomic</h2>
+<p>A naive “look up the key, then process” handler races. Two workers can both observe an absent key and both execute. Use a database uniqueness constraint to arbitrate ownership, and put the business mutation and recorded response in the same transaction. Otherwise, a crash between them reopens the duplicate window.</p>
+<div class="code-box"><div class="code-label"><span>POST /payments</span><b>Python-like pseudocode</b></div><pre><code><span class="comment"># UNIQUE(tenant_id, operation, key) in the database</span>
+scope = (auth.tenant_id, <span class="string">"create_payment"</span>, request.key)
+fingerprint = hash_canonical(validated_payment)
+
+<span class="keyword">with</span> db.transaction():
+    <span class="comment"># INSERT ON CONFLICT; then SELECT FOR UPDATE.</span>
+    <span class="comment"># Competing inserts wait for commit or rollback.</span>
+    record = claim_and_lock(scope, fingerprint)
+    <span class="keyword">if</span> record.fingerprint != fingerprint:
+        <span class="keyword">raise</span> Conflict(<span class="string">"Key reused with different input"</span>)
+    <span class="keyword">if</span> record.response <span class="keyword">is not</span> None:
+        response = record.response
+    <span class="keyword">else</span>:
+        payment = create_payment_in_this_database()
+        response = Response(201, payment.receipt())
+        record.save_response(response)
+
+<span class="keyword">return</span> response <span class="comment"># Only after the transaction commits.</span></code></pre></div>
+<p>Here, an uncommitted claim disappears if the transaction rolls back; a committed claim includes the receipt. A concurrent request waits, then reads the winner’s result. Set a bounded wait and return a documented retryable response if it expires. Store the status and response body needed for replay, rather than rebuilding a receipt from business data that may have changed.</p>
+</section>
+<section aria-labelledby="boundary">
+<h2 id="boundary"><span class="section-num">03 /</span> Know where the guarantee ends</h2>
+<p>The example only protects effects inside that database. A card processor, email service, or message broker does not participate in its transaction. Calling one while holding the lock cannot make its effect roll back. Use the downstream service’s idempotency facility with a stable derived key, or write an outbox entry atomically and let a worker deliver it. An outbox still needs duplicate-safe consumers.</p>
+<p>Retention is also part of the contract. If keys expire after 24 hours, a retry on day two may execute again. Choose a retention window that covers realistic retries, document it, and consider a permanent business identifier for operations that must never recur. Idempotency records are correctness state; evicting them is a semantic decision.</p>
+<p>Finally, distinguish rejected input from an unknown outcome. Validation failures can be corrected before an operation is claimed. A timeout after a downstream call demands reconciliation or a retry with the same identity. Log the key with each attempt so operators can trace one operation across multiple deliveries. Track replay counts and fingerprint conflicts: both expose client bugs that ordinary request success rates can hide. Test that boundary deliberately: drop responses after commit, race duplicate requests, and crash workers between steps.</p>
+</section>
+<div class="takeaway"><div class="eyebrow">The takeaway</div><p>A retry asks for another answer. A well-designed idempotency key ensures it does not accidentally ask for another effect.</p></div>
+</article>
+</div>
+</main>
+<footer><span>Boundary Conditions / Engineering notes</span><span>End of note · 007</span></footer>
+</div>
+</body>
+</html>

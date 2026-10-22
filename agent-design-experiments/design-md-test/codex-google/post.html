@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="A retry is another delivery attempt. Safe repetition requires a durable identity, an atomic commit, and an explicit retention contract.">
+<title>Retries Aren't Idempotent By Accident</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root,[data-theme="light"]{--bg:#f5f6f9;--surface:#ffffff;--ink:#161a22;--ink-soft:#525a6e;--ink-faint:#8a91a3;--line:#e1e4ea;--line-strong:#c7cbd6;--accent:#2f5fed;--accent-ink:#1c3fb0;--accent-soft:#e9eefd;--code-bg:#edf0f5;--ok-ink:#187044;--ok-soft:#e6f5ed;--warn-ink:#925800;--warn-soft:#fff1d6;--shadow:0 1px 2px rgba(22,26,34,.04),0 8px 24px rgba(22,26,34,.05);--display:'Big Shoulders Display','Archivo Narrow',ui-sans-serif,sans-serif;--sans:'IBM Plex Sans',ui-sans-serif,system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11141b;--surface:#191e28;--ink:#edf0f7;--ink-soft:#b5bdd0;--ink-faint:#929db3;--line:#303848;--line-strong:#4a566c;--accent:#8ca9ff;--accent-ink:#adc1ff;--accent-soft:#222e50;--code-bg:#202735;--ok-ink:#82d9aa;--ok-soft:#19372b;--warn-ink:#f1c16f;--warn-soft:#3b2e1b;--shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05)}}
+[data-theme="dark"]{--bg:#11141b;--surface:#191e28;--ink:#edf0f7;--ink-soft:#b5bdd0;--ink-faint:#929db3;--line:#303848;--line-strong:#4a566c;--accent:#8ca9ff;--accent-ink:#adc1ff;--accent-soft:#222e50;--code-bg:#202735;--ok-ink:#82d9aa;--ok-soft:#19372b;--warn-ink:#f1c16f;--warn-soft:#3b2e1b;--shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.68 var(--sans)}main{max-width:900px;margin:auto;padding:60px 0 90px}.prose{max-width:680px;margin-inline:auto}h1,h2,h3{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:-.025em}h1{font-size:clamp(2.4rem,5.6vw,3.7rem);line-height:.98;margin:18px 0 22px}h2{font-size:clamp(1.65rem,3.5vw,2.1rem);line-height:1.1;margin:10px 0 22px}p{margin:0 0 14px}.eyebrow,.tag{font: .72rem/1.5 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}.dek{color:var(--ink-soft);margin-bottom:22px}.stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:34px}.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--line);border-radius:100px;font:.72rem/1.5 var(--mono);background:var(--surface)}.pill:before{content:'';width:6px;height:6px;border-radius:100px;background:currentColor}.pill.accent{color:var(--accent-ink);background:var(--accent-soft);border-color:transparent}.pill.ok{color:var(--ok-ink);background:var(--ok-soft);border-color:transparent}.pill.warn{color:var(--warn-ink);background:var(--warn-soft);border-color:transparent}header{padding-bottom:28px}.intro{border-top:1px solid var(--line);padding-top:28px}section{padding-top:58px}a{color:var(--accent-ink);text-underline-offset:3px}a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}.thesis-lead{font:.95rem/1.9 var(--mono);border-left:3px solid var(--accent);padding:10px 0 10px 22px;margin:28px 0}.scene{margin:28px 0 34px;border:1px solid var(--line);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}.scene-label{display:flex;justify-content:space-between;gap:14px;padding:14px 22px;background:var(--code-bg);font:.72rem/1.5 var(--mono);text-transform:uppercase;color:var(--ink-soft)}.scene-body{padding:22px;overflow-x:auto}.scene-foot{padding:14px 22px;font:.72rem/1.6 var(--mono);color:var(--ink-soft)}svg{display:block;width:100%;min-width:560px;height:auto}svg text{font:13px var(--mono);fill:var(--ink)}svg .muted{fill:var(--ink-soft)}svg .wire{stroke:var(--accent);stroke-width:2;fill:none}svg .life{stroke:var(--line-strong);stroke-dasharray:5 5}svg .good{fill:var(--ok-soft);stroke:var(--ok-ink)}svg .warning{fill:var(--warn-ink)}code,pre{font-family:var(--mono)}:not(pre)>code{font-size:.85em;background:var(--code-bg);padding:0 6px;border-radius:4px}pre{margin:0;font-size:12px;line-height:1.8;tab-size:4}.callout{border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:8px;padding:18px 22px;margin:28px 0}.step-list{list-style:none;counter-reset:step;padding:0;margin:22px 0}.step-list li{counter-increment:step;position:relative;padding-left:44px;margin-bottom:14px}.step-list li:before{content:counter(step,decimal-leading-zero);position:absolute;left:0;font-family:var(--mono);color:var(--accent-ink)}footer{border-top:1px solid var(--line);margin-top:58px;padding-top:28px}.chain{list-style:none;padding:0;font:.95rem/1.9 var(--mono)}.chain li:before{content:'→ ';color:var(--accent)}.sources{border-top:1px solid var(--line);margin-top:34px;padding-top:28px}.sources ol{padding-left:22px}.sources li{margin-bottom:10px}.design-note{font-size:14px;color:var(--ink-soft);margin-top:28px}@media(max-width:948px){main{margin-inline:22px}}@media(max-width:600px){main{padding-top:34px}.scene-label{flex-direction:column;gap:6px}.scene-body{padding:14px}section{padding-top:44px}}
+</style>
+</head>
+<body>
+<main>
+<article>
+<header class="prose">
+<div class="eyebrow">Distributed systems / field notes 01</div>
+<h1>Retries Aren't Idempotent By Accident</h1>
+<p class="dek">A retry repeats delivery; an idempotency contract preserves the identity and outcome of the work.</p>
+<div class="stats" aria-label="The example in numbers"><span class="pill accent">1 operation key</span><span class="pill warn">2 delivery attempts</span><span class="pill ok">1 committed order</span></div>
+</header>
+<div class="prose intro">
+<p>A client submits an order. The server commits it, but the response disappears behind a broken connection. The client sees a timeout: evidence that it lacks an answer, not evidence that the order failed. Retrying an ordinary POST can create another order. Exponential backoff changes when that happens; it does nothing to change what happens.</p>
+<p>Idempotency makes repeated requests converge on one intended effect. For an operation that creates something, that property needs a protocol: the client names its intent, and the server remembers what that intent produced. “Retry and hope” supplies neither identity nor memory.</p>
+</div>
+<section aria-labelledby="identity">
+<div class="prose"><div class="tag">01 / Identity</div><h2 id="identity">Name the intent before sending</h2>
+<p>Generate a random operation key before the first attempt and persist it with the pending client operation. Every retry, including one after a client restart, sends that same key. A second intentional purchase gets a new key, even when its basket is identical. A hash of the payload alone cannot distinguish those two purchases; AWS explains this distinction in its <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">discussion of caller-provided request identifiers</a>.</p>
+<p>Scope the server record to the authenticated tenant, operation, and key. Store a fingerprint of validated, normalized parameters alongside it. Reusing the key with a different quantity should produce a conflict, not silently return an unrelated order. Authentication still runs on every attempt; possession of a key never grants access to somebody else’s result.</p>
+<p class="thesis-lead">The key identifies one business intention, not one network attempt.</p></div>
+<figure class="scene">
+<figcaption class="scene-label"><span>Fig. 01 — An answer lost, an order retained</span><span>Same key / same result</span></figcaption>
+<div class="scene-body"><svg viewBox="0 0 800 320" role="img" aria-label="The client sends POST with key k7, the server commits order 42 but its response is lost; the client retries with k7 and receives the stored result without another order.">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="var(--accent)"/></marker></defs>
+<rect x="28" y="10" width="150" height="40" rx="8" fill="var(--accent-soft)"/><text x="103" y="35" text-anchor="middle">CLIENT</text>
+<rect x="608" y="10" width="160" height="40" rx="8" fill="var(--code-bg)"/><text x="688" y="35" text-anchor="middle">SERVER + DB</text>
+<path class="life" d="M103 58V312M688 58V312"/>
+<path class="wire" d="M103 89H688" marker-end="url(#arrow)"/><text x="220" y="77">POST /orders · key=k7</text>
+<rect class="good" x="525" y="104" width="245" height="36" rx="8"/><text x="647" y="127" text-anchor="middle">COMMIT order 42 + result</text>
+<path class="wire" d="M688 167H290" stroke-dasharray="6 6"/><text x="346" y="156">201 · order 42</text><text class="warning" x="116" y="172">× response lost</text>
+<path class="wire" d="M103 222H688" marker-end="url(#arrow)"/><text x="220" y="210">RETRY /orders · key=k7</text>
+<path class="wire" d="M688 279H103" marker-end="url(#arrow)"/><text x="220" y="267">201 · stored order 42</text>
+</svg></div>
+<div class="scene-foot">The second delivery reads the committed result. It does not create order 43.</div>
+</figure>
+</section>
+<section aria-labelledby="atomic">
+<div class="prose"><div class="tag">02 / Atomicity</div><h2 id="atomic">Make the record and effect indivisible</h2>
+<p>A cache lookup followed by processing leaves a race: two workers can both observe an absent key. A durable unique constraint must arbitrate ownership. In this database-only example, the claim, order insert, and saved response share one transaction. PostgreSQL’s <a href="https://www.postgresql.org/docs/current/sql-insert.html">ON CONFLICT mechanism</a> supplies the competing-insert behavior.</p></div>
+<figure class="scene">
+<figcaption class="scene-label"><span>Listing 01 — POST /orders</span><span>Python-style pseudocode</span></figcaption>
+<div class="scene-body"><pre><code># Authenticate and validate first. Reject a missing key.
+# UNIQUE (tenant_id, operation, key) on requests.
+# claim(): INSERT ... ON CONFLICT DO NOTHING RETURNING *
+# PostgreSQL READ COMMITTED; conflicting inserts wait.
+scope = (auth.tenant_id, "create_order", request.key)
+fingerprint = sha256(canonical_json(validated_body))
+
+with db.transaction(isolation="READ COMMITTED") as tx:
+    owned = tx.claim(scope, fingerprint)
+    if not owned:
+        previous = tx.get_request(scope)  # new statement snapshot
+        if previous.fingerprint != fingerprint:
+            raise Conflict("Key reused with different parameters")
+        response = previous.response
+    else:
+        order = tx.insert_order(validated_body)
+        response = (201, {"id": order.id})
+        tx.save_response(scope, response)
+# Commit succeeds before any response is sent.
+return response</code></pre></div>
+<div class="scene-foot">Helpers are illustrative. The transaction contains only local database work.</div>
+</figure>
+<div class="prose">
+<p>A crash before commit rolls everything back. A crash after commit leaves both the order and its replayable response intact. A concurrent duplicate waits on the unique constraint, then reads the committed record. Bound that wait; if it expires, return a documented retryable outcome rather than starting the work again.</p>
+<aside class="callout">An external payment call cannot join this local transaction. Commit an outbox task with the order, then deliver it using a stable downstream idempotency key. The receiver must enforce its own deduplication contract.</aside>
+</div>
+</section>
+<section aria-labelledby="contract"><div class="prose"><div class="tag">03 / Boundaries</div><h2 id="contract">Specify when the promise ends</h2>
+<p>Retention is part of correctness. Once a record expires, a late retry can become new work. Choose a retention window that covers client retries, queued redelivery, and operational recovery. Longer-lived business constraints may still be necessary: a unique merchant order reference can prevent duplication after the request ledger has been pruned.</p>
+<p>Write the remaining behavior into the API contract:</p>
+<ol class="step-list"><li><strong>Replay policy.</strong> Define which status codes and response fields are stored. Stripe, for example, <a href="https://docs.stripe.com/api/idempotent_requests">replays stored results including server errors</a>; your policy must be equally explicit.</li><li><strong>Retry budget.</strong> Use bounded backoff with jitter for transient failures. A parameter conflict requires correction, not another automatic attempt.</li><li><strong>Recovery evidence.</strong> Log the operation key, attempt identifier, and committed resource identifier separately. Operators need to distinguish repeated delivery from repeated effects.</li></ol>
+<p>Test the lost-response boundary deliberately: commit, drop the connection, and resend the original key. Also race two identical requests and reuse a key with changed input. Those tests establish the promise that a happy-path retry cannot.</p>
+</div></section>
+<footer class="prose">
+<h2>Keep the intention stable</h2>
+<ul class="chain"><li>Name the work once.</li><li>Commit its effect and memory together.</li><li>Retry within an explicit contract.</li></ul>
+<p class="design-note">Design note: cobalt carries emphasis and navigation; green marks committed effects, and amber marks uncertain delivery. Each semantic role has a paired tint in both themes, keeping delivery uncertainty distinct from durable state.</p>
+<section class="sources" aria-labelledby="sources"><div class="eyebrow">References / further reading</div><h2 id="sources">Sources</h2>
+<ol><li><a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a> — Amazon Builders’ Library</li><li><a href="https://www.postgresql.org/docs/current/sql-insert.html">INSERT: ON CONFLICT clause</a> — PostgreSQL Global Development Group</li><li><a href="https://docs.stripe.com/api/idempotent_requests">Idempotent requests</a> — Stripe</li></ol>
+</section>
+</footer>
+</article>
+</main>
+</body>
+</html>

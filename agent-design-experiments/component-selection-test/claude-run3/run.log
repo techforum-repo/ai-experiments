@@ -1,0 +1,10 @@
+The file was written to `post.html`. Word count of the running prose is ~650 words, within the requested range.
+
+Component choices, one per requirement:
+
+- **Real risk of leaving a flag too long** → `banner.html` (`class="banner crit"`), unedited except for content. This is the heaviest-weight component in the system (full-width solid block), so it's the right pick for the one thing a reader must not skim past — the risk that a stale flag's untested branch becomes a silent landmine if ever re-triggered.
+- **Lifecycle stage label** → `badge.html`. Badge is documented as reading like "a definitive status marker," which matches labeling a flag's lifecycle state (`cleanup-due`) as a factual, current status rather than a soft category (which is what `tag` or `pill` would imply).
+- **Numbered sequence for safe removal** → `steps.html` (`<ol class="steps">`). This is explicitly the "genuinely ordered procedure" component, as opposed to the plain `ordered-list.html`, which is documented for loose/non-critical sequences — removal order here actually matters (delete dead code before touching flag config, etc.), so `steps` was the correct fit.
+- **Common cleanup mistake to not skim past** → `callout.html` (`class="callout warn"`). It's a boxed aside with a left accent border — enough visual weight to stand out from prose without competing with the `banner` used for the bigger risk, and `warn` (amber) reads as "watch out for this" rather than the more severe `crit` used above.
+
+No new components, classes, or inline styles were introduced; `stylesheet.css` is linked via relative path and untouched.
