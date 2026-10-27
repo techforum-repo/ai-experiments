@@ -19,3 +19,7 @@ Adobe-specific tools (`cja-mcp`, `target-mcp`) moved to
 [martech-architect-toolkit](https://github.com/techforum-repo/martech-architect-toolkit).
 `openai-agents-api`, `agent-design-experiments`, `aem-generative-ai-samples` and `albinsblog-webmcp` came from their now-archived repos with history included;
 `lightning-ai-clip` came from the former `lightning.ai` repo (current files only).
+
+## License
+
+[MIT](LICENSE)
