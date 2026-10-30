@@ -1,0 +1,9 @@
+message:  I'm trying to get my receipt, not reset my account password.
+model:    jev-1.14.0
+category: billing (confidence 1.00)
+          {"billing": 1.0, "account": 0.0, "technical": 0.0, "delivery": 0.0, "unclear": 0.0}
+urgent:   0.02
+impact:   0.25 of 2
+enough:   0.84
+route:    route (billing)
+tokens:   590 in, 100 out

@@ -82,7 +82,7 @@ It prints the route, the reasons, and every answer. Write `metadata.txt` and `ri
 
 ## Notes
 
-- **Beta.** `gpt-6-luna` is the only model, and request or response details may change before general availability.
-- **Images.** They must be inline base64 data URLs. Hosted URLs and `file_id` are not supported, so send a downsized rendition, not the master.
-- **Gates.** The example gates on predicates and the score, and treats the `choice` answer as metadata. Early community tests reported overconfident, order-sensitive choice probabilities.
-- **Cost.** Pricing is per input token only ($0.10 per 1M at launch), and there is no input caching during the beta. Check the current pricing in the guide.
+- **Status.** The Decisions API was built and tested here during the public beta (October 2026). It became generally available on 22 October 2026 with `gpt-6-luna`, still the only model. The code runs unchanged against the GA API.
+- **Images.** This example sends inline base64 data URLs, which still work. Since GA you can also pass publicly accessible HTTP(S) image URLs. Either way, send a downsized rendition, not the master.
+- **Gates.** The example gates on predicates and the score, and treats the `choice` answer as metadata. Early community tests reported overconfident, order-sensitive choice probabilities. A later comparison in [`jev-decision-api-triage`](../jev-decision-api-triage/) found Decisions choice answers order-sensitive on 4 of 120 messages, and less concentrated rather than overconfident.
+- **Cost.** Uncached input costs $0.10 per 1M tokens and output is not charged. Since GA, prompt cache hits are discounted and cache writes are charged. Check the current pricing in the guide.

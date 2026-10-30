@@ -1,0 +1,120 @@
+{"id": "b01", "text": "My subscription went out of my account twice this month. Please return the second payment.", "category": "billing", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "b02", "text": "Can you send me a copy of the invoice for order 48213? My accountant needs it.", "category": "billing", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "b03", "text": "I'm trying to get my receipt, not reset my account password.", "category": "billing", "kind": "competing", "urgent": false, "impact": 0, "enough": true}
+{"id": "b04", "text": "My card was declined at checkout but the money still left my bank account.", "category": "billing", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "b05", "text": "How do I change the credit card on file for my monthly plan?", "category": "billing", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "b06", "text": "I cancelled my plan last week but was billed again today. I need this refunded before my rent goes out on Friday.", "category": "billing", "kind": "clear", "urgent": true, "impact": 2, "enough": true}
+{"id": "b07", "text": "The app works fine, I just want to know why the price went up on my last invoice.", "category": "billing", "kind": "competing", "urgent": false, "impact": 0, "enough": true}
+{"id": "b08", "text": "The refund for order 7731 still hasn't reached my card, 14 days after you confirmed it.", "category": "billing", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "b09", "text": "Please add our VAT number to the invoices for our company account.", "category": "billing", "kind": "competing", "urgent": false, "impact": 0, "enough": true}
+{"id": "b10", "text": "The package arrived fine, but I was charged for shipping even though my plan includes free delivery.", "category": "billing", "kind": "competing", "urgent": false, "impact": 1, "enough": true}
+{"id": "b11", "text": "Do you accept PayPal for annual subscriptions?", "category": "billing", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "b12", "text": "URGENT: our payment failed and the subscription for the whole team expires tonight. How do I pay another way?", "category": "billing", "kind": "clear", "urgent": true, "impact": 2, "enough": true}
+{"id": "b13", "text": "I got a promo code for 20% off but it didn't apply to my bill.", "category": "billing", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "b14", "text": "Wrong amount on my receipt: it shows $129 but I paid $99.", "category": "billing", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "b15", "text": "receipt pls", "category": "billing", "kind": "short", "urgent": false, "impact": 0, "enough": true}
+{"id": "b16", "text": "Need a refund.", "category": "billing", "kind": "short", "urgent": false, "impact": 1, "enough": true}
+{"id": "b17", "text": "I can log in fine, the problem is a $40 charge on my statement that I don't recognise.", "category": "billing", "kind": "competing", "urgent": false, "impact": 2, "enough": true}
+{"id": "b18", "text": "Can I switch from monthly to annual billing and get credit for this month?", "category": "billing", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "b19", "text": "You billed my old card, which I reported stolen. Stop charging it immediately.", "category": "billing", "kind": "clear", "urgent": true, "impact": 2, "enough": true}
+{"id": "b20", "text": "Tracking says delivered, which is fine. I just need the invoice to show my company name.", "category": "billing", "kind": "competing", "urgent": false, "impact": 0, "enough": true}
+{"id": "b21", "text": "Is there a student discount on the premium plan?", "category": "billing", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "b22", "text": "The checkout page charged me in euros instead of dollars, and my bank added a conversion fee.", "category": "billing", "kind": "competing", "urgent": false, "impact": 1, "enough": true}
+{"id": "b23", "text": "Where can I download all my past invoices? My tax return is due tomorrow.", "category": "billing", "kind": "clear", "urgent": true, "impact": 1, "enough": true}
+{"id": "b24", "text": "Please turn off auto-renew so I'm not billed next month.", "category": "billing", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "a01", "text": "I can't log in. The password reset email never arrives.", "category": "account", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "a02", "text": "How do I change the email address on my profile?", "category": "account", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "a03", "text": "My account was locked after too many attempts and I have a client demo in an hour.", "category": "account", "kind": "clear", "urgent": true, "impact": 2, "enough": true}
+{"id": "a04", "text": "I'm not asking about my bill. I need to change the name on my account after getting married.", "category": "account", "kind": "competing", "urgent": false, "impact": 0, "enough": true}
+{"id": "a05", "text": "Two-factor codes stopped coming to my new phone number, so I can't sign in.", "category": "account", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "a06", "text": "Someone seems to have logged into my account from another country. Please secure it now.", "category": "account", "kind": "clear", "urgent": true, "impact": 2, "enough": true}
+{"id": "a07", "text": "How do I delete my account and all my data?", "category": "account", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "a08", "text": "verification email expired", "category": "account", "kind": "short", "urgent": false, "impact": 1, "enough": true}
+{"id": "a09", "text": "Can I add a second user to my profile so my partner can sign in?", "category": "account", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "a10", "text": "The app isn't broken, I just forgot which email address I signed up with.", "category": "account", "kind": "competing", "urgent": false, "impact": 1, "enough": true}
+{"id": "a11", "text": "My order history looks fine, but I can't verify my identity to unlock the account.", "category": "account", "kind": "competing", "urgent": false, "impact": 2, "enough": true}
+{"id": "a12", "text": "Please merge my two accounts. I accidentally signed up twice.", "category": "account", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "a13", "text": "I changed my password but I'm still signed in on my old laptop. How do I sign out everywhere?", "category": "account", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "a14", "text": "I enter my password and it sends me straight back to the sign-in page. Same in every browser.", "category": "account", "kind": "competing", "urgent": false, "impact": 2, "enough": true}
+{"id": "a15", "text": "can't sign in", "category": "account", "kind": "short", "urgent": false, "impact": 2, "enough": true}
+{"id": "a16", "text": "I no longer have the phone number on my account. How do I recover access?", "category": "account", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "a17", "text": "Not a payment question: I want to update my security questions.", "category": "account", "kind": "competing", "urgent": false, "impact": 0, "enough": true}
+{"id": "a18", "text": "My profile shows someone else's name. Has my account been mixed up with another customer's?", "category": "account", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "a19", "text": "How do I turn on two-factor authentication?", "category": "account", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "a20", "text": "I'm locked out and payroll has to be submitted through your portal by 5pm today.", "category": "account", "kind": "clear", "urgent": true, "impact": 2, "enough": true}
+{"id": "a21", "text": "Can I change my username without losing my order history?", "category": "account", "kind": "competing", "urgent": false, "impact": 0, "enough": true}
+{"id": "a22", "text": "I got an email saying my password was changed, but I didn't change it.", "category": "account", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "a23", "text": "The delivery address is right; I just need to update the phone number on my profile.", "category": "account", "kind": "competing", "urgent": false, "impact": 0, "enough": true}
+{"id": "a24", "text": "Single sign-on with our company Google accounts stopped working for my whole team this morning.", "category": "account", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "t01", "text": "The app crashes every time I open the barcode scanner.", "category": "technical", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "t02", "text": "Search results take about 30 seconds to load since yesterday's update.", "category": "technical", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "t03", "text": "Export to CSV produces an empty file.", "category": "technical", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "t04", "text": "The dashboard charts show no data, but the raw reports have numbers.", "category": "technical", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "t05", "text": "I'm signed in fine. The problem is that the sync button does nothing.", "category": "technical", "kind": "competing", "urgent": false, "impact": 1, "enough": true}
+{"id": "t06", "text": "Notifications stopped working on Android 15.", "category": "technical", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "t07", "text": "Our API integration returns 500 errors on every request and production is down.", "category": "technical", "kind": "clear", "urgent": true, "impact": 2, "enough": true}
+{"id": "t08", "text": "Dark mode makes the table text unreadable.", "category": "technical", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "t09", "text": "Not a billing issue: the invoice builder in your app throws an error whenever I add a line item.", "category": "technical", "kind": "competing", "urgent": false, "impact": 2, "enough": true}
+{"id": "t10", "text": "How do I connect the app to my Slack workspace?", "category": "technical", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "t11", "text": "app keeps freezing", "category": "technical", "kind": "short", "urgent": false, "impact": 1, "enough": true}
+{"id": "t12", "text": "The scanner reads the wrong product code about half the time.", "category": "technical", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "t13", "text": "File uploads over 10 MB fail with 'network error', even on fast wifi.", "category": "technical", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "t14", "text": "The order tracking page in your app shows a blank screen. My parcel is fine; the page is broken.", "category": "technical", "kind": "competing", "urgent": false, "impact": 1, "enough": true}
+{"id": "t15", "text": "Calendar sync duplicates every event.", "category": "technical", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "t16", "text": "Does the desktop app support Apple Silicon?", "category": "technical", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "t17", "text": "Webhooks stopped firing after we rotated our signing key, and we launch tomorrow morning.", "category": "technical", "kind": "clear", "urgent": true, "impact": 2, "enough": true}
+{"id": "t18", "text": "The PDF reports cut off the last column.", "category": "technical", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "t19", "text": "Is there a keyboard shortcut to duplicate a row?", "category": "technical", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "t20", "text": "The pay button does nothing on my iPad, but it works on my laptop. My card is fine.", "category": "technical", "kind": "competing", "urgent": false, "impact": 1, "enough": true}
+{"id": "t21", "text": "Error E-4012 when saving settings.", "category": "technical", "kind": "short", "urgent": false, "impact": 1, "enough": true}
+{"id": "t22", "text": "Offline mode loses my changes when I reconnect.", "category": "technical", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "t23", "text": "The update installed, but the About screen still says version 3.2.", "category": "technical", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "t24", "text": "Push notifications arrive hours late, which breaks our on-call alerts. Please fix this as soon as possible.", "category": "technical", "kind": "clear", "urgent": true, "impact": 2, "enough": true}
+{"id": "d01", "text": "My package was marked as delivered but it isn't here.", "category": "delivery", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "d02", "text": "Where is my order? Tracking hasn't updated in five days.", "category": "delivery", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "d03", "text": "Can I change the delivery address for order 55120 before it ships?", "category": "delivery", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "d04", "text": "The parcel arrived with the box crushed and the lamp inside broken.", "category": "delivery", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "d05", "text": "I need the order by Saturday for my daughter's birthday. Can you upgrade it to express?", "category": "delivery", "kind": "clear", "urgent": true, "impact": 1, "enough": true}
+{"id": "d06", "text": "The tracking number doesn't work on the courier's website.", "category": "delivery", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "d07", "text": "I was charged correctly, but only two of the three items arrived.", "category": "delivery", "kind": "competing", "urgent": false, "impact": 2, "enough": true}
+{"id": "d08", "text": "Do you ship to Canada?", "category": "delivery", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "d09", "text": "where's my parcel", "category": "delivery", "kind": "short", "urgent": false, "impact": 1, "enough": true}
+{"id": "d10", "text": "The courier left my package with a neighbour I don't know.", "category": "delivery", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "d11", "text": "Not a login problem: the delivery notification email just shows the wrong date.", "category": "delivery", "kind": "competing", "urgent": false, "impact": 1, "enough": true}
+{"id": "d12", "text": "The app works, but the estimated delivery date keeps moving back.", "category": "delivery", "kind": "competing", "urgent": false, "impact": 1, "enough": true}
+{"id": "d13", "text": "My order went to my old address. Can you redirect it?", "category": "delivery", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "d14", "text": "My medication refill hasn't arrived and I run out tomorrow.", "category": "delivery", "kind": "clear", "urgent": true, "impact": 2, "enough": true}
+{"id": "d15", "text": "Can I collect from a parcel locker instead of home delivery?", "category": "delivery", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "d16", "text": "The driver said nobody was home, but I was here all day.", "category": "delivery", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "d17", "text": "I received someone else's order instead of mine.", "category": "delivery", "kind": "clear", "urgent": false, "impact": 2, "enough": true}
+{"id": "d18", "text": "The shipping label shows the wrong postcode.", "category": "delivery", "kind": "short", "urgent": false, "impact": 1, "enough": true}
+{"id": "d19", "text": "Will the holiday weekend delay my shipment?", "category": "delivery", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "d20", "text": "The refund isn't the issue. I just want to know when the replacement ships.", "category": "delivery", "kind": "competing", "urgent": false, "impact": 0, "enough": true}
+{"id": "d21", "text": "Package stuck in customs for two weeks.", "category": "delivery", "kind": "short", "urgent": false, "impact": 1, "enough": true}
+{"id": "d22", "text": "The return label you emailed has expired. Can you send a new one?", "category": "delivery", "kind": "clear", "urgent": false, "impact": 0, "enough": true}
+{"id": "d23", "text": "The order says shipped, but the courier says they never received it.", "category": "delivery", "kind": "clear", "urgent": false, "impact": 1, "enough": true}
+{"id": "d24", "text": "Our trade show materials must arrive by Thursday 9am, and tracking shows them in the wrong city.", "category": "delivery", "kind": "clear", "urgent": true, "impact": 2, "enough": true}
+{"id": "u01", "text": "I have a problem with my order.", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u02", "text": "It's not working.", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u03", "text": "Can someone help me?", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u04", "text": "Who can I talk to about my account and my last payment?", "category": "unclear", "kind": "multi", "urgent": false, "impact": null, "enough": false}
+{"id": "u05", "text": "Something went wrong again.", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u06", "text": "My card was billed two times, and now I'm locked out of my account as well.", "category": "unclear", "kind": "multi", "urgent": false, "impact": 2, "enough": false}
+{"id": "u07", "text": "Order 88213.", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u08", "text": "This is the third time I'm writing. Nobody has replied.", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u09", "text": "Can you check what happened?", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u10", "text": "My package never arrived, and the app crashes when I try to report it.", "category": "unclear", "kind": "multi", "urgent": false, "impact": 2, "enough": false}
+{"id": "u11", "text": "Is this fixed yet?", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u12", "text": "Urgent: please call me back today.", "category": "unclear", "kind": "vague", "urgent": true, "impact": null, "enough": false}
+{"id": "u13", "text": "I want to cancel.", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u14", "text": "I'm not happy with my purchase.", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u15", "text": "Following up on my previous email.", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u16", "text": "Refund my order and fix my login.", "category": "unclear", "kind": "multi", "urgent": false, "impact": null, "enough": false}
+{"id": "u17", "text": "Hi, quick question.", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u18", "text": "Why is this so complicated?", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u19", "text": "The tracking page asks me to sign in, and when I do, it says my payment failed.", "category": "unclear", "kind": "multi", "urgent": false, "impact": 2, "enough": false}
+{"id": "u20", "text": "Problem with my account, or maybe my card. I'm not sure which.", "category": "unclear", "kind": "multi", "urgent": false, "impact": null, "enough": false}
+{"id": "u21", "text": "Can this be done by Friday?", "category": "unclear", "kind": "vague", "urgent": true, "impact": null, "enough": false}
+{"id": "u22", "text": "ref #A-2291 still open", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u23", "text": "Same issue as last week.", "category": "unclear", "kind": "vague", "urgent": false, "impact": null, "enough": false}
+{"id": "u24", "text": "Something is wrong with my subscription. Can someone look?", "category": "unclear", "kind": "multi", "urgent": false, "impact": null, "enough": false}

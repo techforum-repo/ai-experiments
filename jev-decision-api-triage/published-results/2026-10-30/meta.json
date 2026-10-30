@@ -1,0 +1,15 @@
+{
+  "started": "2026-10-30T14:21:47+00:00",
+  "providers": [
+    "jev",
+    "openai"
+  ],
+  "runs": 3,
+  "cases": 120,
+  "order_check": true,
+  "models": {
+    "jev": "jev-latest",
+    "openai": "gpt-6-luna"
+  },
+  "finished": "2026-10-30T14:22:45+00:00"
+}
