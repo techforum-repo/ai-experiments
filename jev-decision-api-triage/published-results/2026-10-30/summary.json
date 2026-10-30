@@ -1,0 +1,1546 @@
+{
+  "meta": {
+    "started": "2026-10-30T14:21:47+00:00",
+    "providers": [
+      "jev",
+      "openai"
+    ],
+    "runs": 3,
+    "cases": 120,
+    "order_check": true,
+    "models": {
+      "jev": "jev-latest",
+      "openai": "gpt-6-luna"
+    },
+    "finished": "2026-10-30T14:22:45+00:00"
+  },
+  "providers": {
+    "jev": {
+      "requests": 360,
+      "errors": 0,
+      "error_samples": [],
+      "models": [
+        "jev-1.14.0"
+      ],
+      "category_accuracy": {
+        "k": 114,
+        "n": 120,
+        "rate": 0.95,
+        "ci95": [
+          0.895,
+          0.977
+        ]
+      },
+      "category_accuracy_clear": {
+        "k": 95,
+        "n": 96,
+        "rate": 0.99,
+        "ci95": [
+          0.943,
+          0.998
+        ]
+      },
+      "unclear_chosen": {
+        "k": 19,
+        "n": 24,
+        "rate": 0.792,
+        "ci95": [
+          0.595,
+          0.908
+        ]
+      },
+      "accuracy_by_kind": {
+        "clear": {
+          "k": 65,
+          "n": 65,
+          "rate": 1.0,
+          "ci95": [
+            0.944,
+            1.0
+          ]
+        },
+        "competing": {
+          "k": 21,
+          "n": 22,
+          "rate": 0.955,
+          "ci95": [
+            0.782,
+            0.992
+          ]
+        },
+        "multi": {
+          "k": 3,
+          "n": 7,
+          "rate": 0.429,
+          "ci95": [
+            0.158,
+            0.75
+          ]
+        },
+        "short": {
+          "k": 9,
+          "n": 9,
+          "rate": 1.0,
+          "ci95": [
+            0.701,
+            1
+          ]
+        },
+        "vague": {
+          "k": 16,
+          "n": 17,
+          "rate": 0.941,
+          "ci95": [
+            0.73,
+            0.99
+          ]
+        }
+      },
+      "confusions": [
+        {
+          "id": "u04",
+          "text": "Who can I talk to about my account and my last payment?",
+          "expected": "unclear",
+          "got": "billing",
+          "p": 0.85
+        },
+        {
+          "id": "u02",
+          "text": "It's not working.",
+          "expected": "unclear",
+          "got": "technical",
+          "p": 0.7
+        },
+        {
+          "id": "d11",
+          "text": "Not a login problem: the delivery notification email just shows the wrong date.",
+          "expected": "delivery",
+          "got": "technical",
+          "p": 0.69
+        },
+        {
+          "id": "u24",
+          "text": "Something is wrong with my subscription. Can someone look?",
+          "expected": "unclear",
+          "got": "billing",
+          "p": 0.69
+        },
+        {
+          "id": "u19",
+          "text": "The tracking page asks me to sign in, and when I do, it says my payment failed.",
+          "expected": "unclear",
+          "got": "billing",
+          "p": 0.65
+        },
+        {
+          "id": "u10",
+          "text": "My package never arrived, and the app crashes when I try to report it.",
+          "expected": "unclear",
+          "got": "delivery",
+          "p": 0.58
+        }
+      ],
+      "policy": {
+        "threshold": 0.75,
+        "coverage": {
+          "k": 92,
+          "n": 120,
+          "rate": 0.767,
+          "ci95": [
+            0.683,
+            0.833
+          ]
+        },
+        "routed_correct": {
+          "k": 92,
+          "n": 92,
+          "rate": 1.0,
+          "ci95": [
+            0.96,
+            1
+          ]
+        },
+        "unclear_held_back": {
+          "k": 24,
+          "n": 24,
+          "rate": 1.0,
+          "ci95": [
+            0.862,
+            1
+          ]
+        },
+        "wrong_routes": 0,
+        "without_enough": {
+          "coverage": {
+            "k": 94,
+            "n": 120,
+            "rate": 0.783,
+            "ci95": [
+              0.701,
+              0.848
+            ]
+          },
+          "routed_correct": {
+            "k": 93,
+            "n": 94,
+            "rate": 0.989,
+            "ci95": [
+              0.942,
+              0.998
+            ]
+          },
+          "wrong_routes": 1
+        }
+      },
+      "policy_curve": [
+        {
+          "threshold": 0.5,
+          "coverage": {
+            "k": 95,
+            "n": 120,
+            "rate": 0.792,
+            "ci95": [
+              0.711,
+              0.855
+            ]
+          },
+          "routed_correct": {
+            "k": 94,
+            "n": 95,
+            "rate": 0.989,
+            "ci95": [
+              0.943,
+              0.998
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 1,
+          "without_enough": {
+            "coverage": {
+              "k": 101,
+              "n": 120,
+              "rate": 0.842,
+              "ci95": [
+                0.766,
+                0.896
+              ]
+            },
+            "routed_correct": {
+              "k": 95,
+              "n": 101,
+              "rate": 0.941,
+              "ci95": [
+                0.876,
+                0.972
+              ]
+            },
+            "wrong_routes": 6
+          }
+        },
+        {
+          "threshold": 0.6,
+          "coverage": {
+            "k": 94,
+            "n": 120,
+            "rate": 0.783,
+            "ci95": [
+              0.701,
+              0.848
+            ]
+          },
+          "routed_correct": {
+            "k": 93,
+            "n": 94,
+            "rate": 0.989,
+            "ci95": [
+              0.942,
+              0.998
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 1,
+          "without_enough": {
+            "coverage": {
+              "k": 99,
+              "n": 120,
+              "rate": 0.825,
+              "ci95": [
+                0.747,
+                0.883
+              ]
+            },
+            "routed_correct": {
+              "k": 94,
+              "n": 99,
+              "rate": 0.949,
+              "ci95": [
+                0.887,
+                0.978
+              ]
+            },
+            "wrong_routes": 5
+          }
+        },
+        {
+          "threshold": 0.7,
+          "coverage": {
+            "k": 93,
+            "n": 120,
+            "rate": 0.775,
+            "ci95": [
+              0.692,
+              0.841
+            ]
+          },
+          "routed_correct": {
+            "k": 93,
+            "n": 93,
+            "rate": 1.0,
+            "ci95": [
+              0.96,
+              1.0
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 96,
+              "n": 120,
+              "rate": 0.8,
+              "ci95": [
+                0.72,
+                0.862
+              ]
+            },
+            "routed_correct": {
+              "k": 94,
+              "n": 96,
+              "rate": 0.979,
+              "ci95": [
+                0.927,
+                0.994
+              ]
+            },
+            "wrong_routes": 2
+          }
+        },
+        {
+          "threshold": 0.75,
+          "coverage": {
+            "k": 92,
+            "n": 120,
+            "rate": 0.767,
+            "ci95": [
+              0.683,
+              0.833
+            ]
+          },
+          "routed_correct": {
+            "k": 92,
+            "n": 92,
+            "rate": 1.0,
+            "ci95": [
+              0.96,
+              1
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 94,
+              "n": 120,
+              "rate": 0.783,
+              "ci95": [
+                0.701,
+                0.848
+              ]
+            },
+            "routed_correct": {
+              "k": 93,
+              "n": 94,
+              "rate": 0.989,
+              "ci95": [
+                0.942,
+                0.998
+              ]
+            },
+            "wrong_routes": 1
+          }
+        },
+        {
+          "threshold": 0.8,
+          "coverage": {
+            "k": 91,
+            "n": 120,
+            "rate": 0.758,
+            "ci95": [
+              0.674,
+              0.826
+            ]
+          },
+          "routed_correct": {
+            "k": 91,
+            "n": 91,
+            "rate": 1.0,
+            "ci95": [
+              0.959,
+              1
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 93,
+              "n": 120,
+              "rate": 0.775,
+              "ci95": [
+                0.692,
+                0.841
+              ]
+            },
+            "routed_correct": {
+              "k": 92,
+              "n": 93,
+              "rate": 0.989,
+              "ci95": [
+                0.942,
+                0.998
+              ]
+            },
+            "wrong_routes": 1
+          }
+        },
+        {
+          "threshold": 0.85,
+          "coverage": {
+            "k": 91,
+            "n": 120,
+            "rate": 0.758,
+            "ci95": [
+              0.674,
+              0.826
+            ]
+          },
+          "routed_correct": {
+            "k": 91,
+            "n": 91,
+            "rate": 1.0,
+            "ci95": [
+              0.959,
+              1
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 93,
+              "n": 120,
+              "rate": 0.775,
+              "ci95": [
+                0.692,
+                0.841
+              ]
+            },
+            "routed_correct": {
+              "k": 92,
+              "n": 93,
+              "rate": 0.989,
+              "ci95": [
+                0.942,
+                0.998
+              ]
+            },
+            "wrong_routes": 1
+          }
+        },
+        {
+          "threshold": 0.9,
+          "coverage": {
+            "k": 90,
+            "n": 120,
+            "rate": 0.75,
+            "ci95": [
+              0.666,
+              0.819
+            ]
+          },
+          "routed_correct": {
+            "k": 90,
+            "n": 90,
+            "rate": 1.0,
+            "ci95": [
+              0.959,
+              1.0
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 91,
+              "n": 120,
+              "rate": 0.758,
+              "ci95": [
+                0.674,
+                0.826
+              ]
+            },
+            "routed_correct": {
+              "k": 91,
+              "n": 91,
+              "rate": 1.0,
+              "ci95": [
+                0.959,
+                1
+              ]
+            },
+            "wrong_routes": 0
+          }
+        },
+        {
+          "threshold": 0.95,
+          "coverage": {
+            "k": 86,
+            "n": 120,
+            "rate": 0.717,
+            "ci95": [
+              0.63,
+              0.79
+            ]
+          },
+          "routed_correct": {
+            "k": 86,
+            "n": 86,
+            "rate": 1.0,
+            "ci95": [
+              0.957,
+              1
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 87,
+              "n": 120,
+              "rate": 0.725,
+              "ci95": [
+                0.639,
+                0.797
+              ]
+            },
+            "routed_correct": {
+              "k": 87,
+              "n": 87,
+              "rate": 1.0,
+              "ci95": [
+                0.958,
+                1
+              ]
+            },
+            "wrong_routes": 0
+          }
+        },
+        {
+          "threshold": 0.99,
+          "coverage": {
+            "k": 73,
+            "n": 120,
+            "rate": 0.608,
+            "ci95": [
+              0.519,
+              0.691
+            ]
+          },
+          "routed_correct": {
+            "k": 73,
+            "n": 73,
+            "rate": 1.0,
+            "ci95": [
+              0.95,
+              1.0
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 74,
+              "n": 120,
+              "rate": 0.617,
+              "ci95": [
+                0.527,
+                0.699
+              ]
+            },
+            "routed_correct": {
+              "k": 74,
+              "n": 74,
+              "rate": 1.0,
+              "ci95": [
+                0.951,
+                1.0
+              ]
+            },
+            "wrong_routes": 0
+          }
+        }
+      ],
+      "category_calibration": {
+        "ece": 0.024,
+        "bins": [
+          {
+            "bin": "0.4-0.6",
+            "n": 3,
+            "mean_probability": 0.577,
+            "accuracy": 0.667
+          },
+          {
+            "bin": "0.6-0.8",
+            "n": 7,
+            "mean_probability": 0.716,
+            "accuracy": 0.429
+          },
+          {
+            "bin": "0.8-1.0",
+            "n": 110,
+            "mean_probability": 0.986,
+            "accuracy": 0.991
+          }
+        ]
+      },
+      "enough": {
+        "accuracy": {
+          "k": 119,
+          "n": 120,
+          "rate": 0.992,
+          "ci95": [
+            0.954,
+            0.999
+          ]
+        },
+        "brier": 0.051,
+        "unclear_flagged": {
+          "k": 24,
+          "n": 24,
+          "rate": 1.0,
+          "ci95": [
+            0.862,
+            1
+          ]
+        }
+      },
+      "urgent": {
+        "accuracy": {
+          "k": 116,
+          "n": 120,
+          "rate": 0.967,
+          "ci95": [
+            0.917,
+            0.987
+          ]
+        },
+        "recall": {
+          "k": 11,
+          "n": 15,
+          "rate": 0.733,
+          "ci95": [
+            0.48,
+            0.891
+          ]
+        },
+        "false_alarms": 0,
+        "brier": 0.015
+      },
+      "impact": {
+        "n": 99,
+        "mean_abs_error": 0.212,
+        "nearest_level_correct": {
+          "k": 81,
+          "n": 99,
+          "rate": 0.818,
+          "ci95": [
+            0.731,
+            0.882
+          ]
+        }
+      },
+      "option_order": {
+        "same_choice": {
+          "k": 120,
+          "n": 120,
+          "rate": 1.0,
+          "ci95": [
+            0.969,
+            1
+          ]
+        },
+        "mean_probability_shift": 0.015,
+        "max_probability_shift": 0.18
+      },
+      "repeatability": {
+        "runs": 3,
+        "same_choice": {
+          "k": 120,
+          "n": 120,
+          "rate": 1.0,
+          "ci95": [
+            0.969,
+            1
+          ]
+        },
+        "max_probability_spread": 0.08
+      },
+      "latency_ms": {
+        "p50": 145,
+        "p95": 200,
+        "max": 296
+      },
+      "tokens": {
+        "mean_input": 589,
+        "total_input": 212154,
+        "mean_output": 100
+      },
+      "cost_per_1000_messages_usd": 0.0248
+    },
+    "openai": {
+      "requests": 360,
+      "errors": 0,
+      "error_samples": [],
+      "models": [
+        "gpt-6-luna"
+      ],
+      "category_accuracy": {
+        "k": 115,
+        "n": 120,
+        "rate": 0.958,
+        "ci95": [
+          0.906,
+          0.982
+        ]
+      },
+      "category_accuracy_clear": {
+        "k": 94,
+        "n": 96,
+        "rate": 0.979,
+        "ci95": [
+          0.927,
+          0.994
+        ]
+      },
+      "unclear_chosen": {
+        "k": 21,
+        "n": 24,
+        "rate": 0.875,
+        "ci95": [
+          0.69,
+          0.957
+        ]
+      },
+      "accuracy_by_kind": {
+        "clear": {
+          "k": 63,
+          "n": 65,
+          "rate": 0.969,
+          "ci95": [
+            0.895,
+            0.992
+          ]
+        },
+        "competing": {
+          "k": 22,
+          "n": 22,
+          "rate": 1.0,
+          "ci95": [
+            0.851,
+            1
+          ]
+        },
+        "multi": {
+          "k": 4,
+          "n": 7,
+          "rate": 0.571,
+          "ci95": [
+            0.25,
+            0.842
+          ]
+        },
+        "short": {
+          "k": 9,
+          "n": 9,
+          "rate": 1.0,
+          "ci95": [
+            0.701,
+            1
+          ]
+        },
+        "vague": {
+          "k": 17,
+          "n": 17,
+          "rate": 1.0,
+          "ci95": [
+            0.816,
+            1
+          ]
+        }
+      },
+      "confusions": [
+        {
+          "id": "d14",
+          "text": "My medication refill hasn't arrived and I run out tomorrow.",
+          "expected": "delivery",
+          "got": "unclear",
+          "p": 0.83
+        },
+        {
+          "id": "u04",
+          "text": "Who can I talk to about my account and my last payment?",
+          "expected": "unclear",
+          "got": "billing",
+          "p": 0.65
+        },
+        {
+          "id": "d04",
+          "text": "The parcel arrived with the box crushed and the lamp inside broken.",
+          "expected": "delivery",
+          "got": "unclear",
+          "p": 0.53
+        },
+        {
+          "id": "u10",
+          "text": "My package never arrived, and the app crashes when I try to report it.",
+          "expected": "unclear",
+          "got": "technical",
+          "p": 0.41
+        },
+        {
+          "id": "u19",
+          "text": "The tracking page asks me to sign in, and when I do, it says my payment failed.",
+          "expected": "unclear",
+          "got": "delivery",
+          "p": 0.3
+        }
+      ],
+      "policy": {
+        "threshold": 0.75,
+        "coverage": {
+          "k": 77,
+          "n": 120,
+          "rate": 0.642,
+          "ci95": [
+            0.553,
+            0.722
+          ]
+        },
+        "routed_correct": {
+          "k": 77,
+          "n": 77,
+          "rate": 1.0,
+          "ci95": [
+            0.952,
+            1
+          ]
+        },
+        "unclear_held_back": {
+          "k": 24,
+          "n": 24,
+          "rate": 1.0,
+          "ci95": [
+            0.862,
+            1
+          ]
+        },
+        "wrong_routes": 0,
+        "without_enough": {
+          "coverage": {
+            "k": 77,
+            "n": 120,
+            "rate": 0.642,
+            "ci95": [
+              0.553,
+              0.722
+            ]
+          },
+          "routed_correct": {
+            "k": 77,
+            "n": 77,
+            "rate": 1.0,
+            "ci95": [
+              0.952,
+              1
+            ]
+          },
+          "wrong_routes": 0
+        }
+      },
+      "policy_curve": [
+        {
+          "threshold": 0.5,
+          "coverage": {
+            "k": 92,
+            "n": 120,
+            "rate": 0.767,
+            "ci95": [
+              0.683,
+              0.833
+            ]
+          },
+          "routed_correct": {
+            "k": 91,
+            "n": 92,
+            "rate": 0.989,
+            "ci95": [
+              0.941,
+              0.998
+            ]
+          },
+          "unclear_held_back": {
+            "k": 23,
+            "n": 24,
+            "rate": 0.958,
+            "ci95": [
+              0.798,
+              0.993
+            ]
+          },
+          "wrong_routes": 1,
+          "without_enough": {
+            "coverage": {
+              "k": 94,
+              "n": 120,
+              "rate": 0.783,
+              "ci95": [
+                0.701,
+                0.848
+              ]
+            },
+            "routed_correct": {
+              "k": 93,
+              "n": 94,
+              "rate": 0.989,
+              "ci95": [
+                0.942,
+                0.998
+              ]
+            },
+            "wrong_routes": 1
+          }
+        },
+        {
+          "threshold": 0.6,
+          "coverage": {
+            "k": 88,
+            "n": 120,
+            "rate": 0.733,
+            "ci95": [
+              0.648,
+              0.804
+            ]
+          },
+          "routed_correct": {
+            "k": 87,
+            "n": 88,
+            "rate": 0.989,
+            "ci95": [
+              0.938,
+              0.998
+            ]
+          },
+          "unclear_held_back": {
+            "k": 23,
+            "n": 24,
+            "rate": 0.958,
+            "ci95": [
+              0.798,
+              0.993
+            ]
+          },
+          "wrong_routes": 1,
+          "without_enough": {
+            "coverage": {
+              "k": 88,
+              "n": 120,
+              "rate": 0.733,
+              "ci95": [
+                0.648,
+                0.804
+              ]
+            },
+            "routed_correct": {
+              "k": 87,
+              "n": 88,
+              "rate": 0.989,
+              "ci95": [
+                0.938,
+                0.998
+              ]
+            },
+            "wrong_routes": 1
+          }
+        },
+        {
+          "threshold": 0.7,
+          "coverage": {
+            "k": 82,
+            "n": 120,
+            "rate": 0.683,
+            "ci95": [
+              0.596,
+              0.76
+            ]
+          },
+          "routed_correct": {
+            "k": 82,
+            "n": 82,
+            "rate": 1.0,
+            "ci95": [
+              0.955,
+              1
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 82,
+              "n": 120,
+              "rate": 0.683,
+              "ci95": [
+                0.596,
+                0.76
+              ]
+            },
+            "routed_correct": {
+              "k": 82,
+              "n": 82,
+              "rate": 1.0,
+              "ci95": [
+                0.955,
+                1
+              ]
+            },
+            "wrong_routes": 0
+          }
+        },
+        {
+          "threshold": 0.75,
+          "coverage": {
+            "k": 77,
+            "n": 120,
+            "rate": 0.642,
+            "ci95": [
+              0.553,
+              0.722
+            ]
+          },
+          "routed_correct": {
+            "k": 77,
+            "n": 77,
+            "rate": 1.0,
+            "ci95": [
+              0.952,
+              1
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 77,
+              "n": 120,
+              "rate": 0.642,
+              "ci95": [
+                0.553,
+                0.722
+              ]
+            },
+            "routed_correct": {
+              "k": 77,
+              "n": 77,
+              "rate": 1.0,
+              "ci95": [
+                0.952,
+                1
+              ]
+            },
+            "wrong_routes": 0
+          }
+        },
+        {
+          "threshold": 0.8,
+          "coverage": {
+            "k": 71,
+            "n": 120,
+            "rate": 0.592,
+            "ci95": [
+              0.502,
+              0.675
+            ]
+          },
+          "routed_correct": {
+            "k": 71,
+            "n": 71,
+            "rate": 1.0,
+            "ci95": [
+              0.949,
+              1
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 71,
+              "n": 120,
+              "rate": 0.592,
+              "ci95": [
+                0.502,
+                0.675
+              ]
+            },
+            "routed_correct": {
+              "k": 71,
+              "n": 71,
+              "rate": 1.0,
+              "ci95": [
+                0.949,
+                1
+              ]
+            },
+            "wrong_routes": 0
+          }
+        },
+        {
+          "threshold": 0.85,
+          "coverage": {
+            "k": 65,
+            "n": 120,
+            "rate": 0.542,
+            "ci95": [
+              0.453,
+              0.628
+            ]
+          },
+          "routed_correct": {
+            "k": 65,
+            "n": 65,
+            "rate": 1.0,
+            "ci95": [
+              0.944,
+              1.0
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 65,
+              "n": 120,
+              "rate": 0.542,
+              "ci95": [
+                0.453,
+                0.628
+              ]
+            },
+            "routed_correct": {
+              "k": 65,
+              "n": 65,
+              "rate": 1.0,
+              "ci95": [
+                0.944,
+                1.0
+              ]
+            },
+            "wrong_routes": 0
+          }
+        },
+        {
+          "threshold": 0.9,
+          "coverage": {
+            "k": 60,
+            "n": 120,
+            "rate": 0.5,
+            "ci95": [
+              0.412,
+              0.588
+            ]
+          },
+          "routed_correct": {
+            "k": 60,
+            "n": 60,
+            "rate": 1.0,
+            "ci95": [
+              0.94,
+              1.0
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 60,
+              "n": 120,
+              "rate": 0.5,
+              "ci95": [
+                0.412,
+                0.588
+              ]
+            },
+            "routed_correct": {
+              "k": 60,
+              "n": 60,
+              "rate": 1.0,
+              "ci95": [
+                0.94,
+                1.0
+              ]
+            },
+            "wrong_routes": 0
+          }
+        },
+        {
+          "threshold": 0.95,
+          "coverage": {
+            "k": 46,
+            "n": 120,
+            "rate": 0.383,
+            "ci95": [
+              0.301,
+              0.473
+            ]
+          },
+          "routed_correct": {
+            "k": 46,
+            "n": 46,
+            "rate": 1.0,
+            "ci95": [
+              0.923,
+              1
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 46,
+              "n": 120,
+              "rate": 0.383,
+              "ci95": [
+                0.301,
+                0.473
+              ]
+            },
+            "routed_correct": {
+              "k": 46,
+              "n": 46,
+              "rate": 1.0,
+              "ci95": [
+                0.923,
+                1
+              ]
+            },
+            "wrong_routes": 0
+          }
+        },
+        {
+          "threshold": 0.99,
+          "coverage": {
+            "k": 16,
+            "n": 120,
+            "rate": 0.133,
+            "ci95": [
+              0.084,
+              0.206
+            ]
+          },
+          "routed_correct": {
+            "k": 16,
+            "n": 16,
+            "rate": 1.0,
+            "ci95": [
+              0.806,
+              1
+            ]
+          },
+          "unclear_held_back": {
+            "k": 24,
+            "n": 24,
+            "rate": 1.0,
+            "ci95": [
+              0.862,
+              1
+            ]
+          },
+          "wrong_routes": 0,
+          "without_enough": {
+            "coverage": {
+              "k": 16,
+              "n": 120,
+              "rate": 0.133,
+              "ci95": [
+                0.084,
+                0.206
+              ]
+            },
+            "routed_correct": {
+              "k": 16,
+              "n": 16,
+              "rate": 1.0,
+              "ci95": [
+                0.806,
+                1
+              ]
+            },
+            "wrong_routes": 0
+          }
+        }
+      ],
+      "category_calibration": {
+        "ece": 0.103,
+        "bins": [
+          {
+            "bin": "0.2-0.4",
+            "n": 2,
+            "mean_probability": 0.33,
+            "accuracy": 0.5
+          },
+          {
+            "bin": "0.4-0.6",
+            "n": 10,
+            "mean_probability": 0.536,
+            "accuracy": 0.8
+          },
+          {
+            "bin": "0.6-0.8",
+            "n": 20,
+            "mean_probability": 0.718,
+            "accuracy": 0.95
+          },
+          {
+            "bin": "0.8-1.0",
+            "n": 88,
+            "mean_probability": 0.935,
+            "accuracy": 0.989
+          }
+        ]
+      },
+      "enough": {
+        "accuracy": {
+          "k": 112,
+          "n": 120,
+          "rate": 0.933,
+          "ci95": [
+            0.874,
+            0.966
+          ]
+        },
+        "brier": 0.047,
+        "unclear_flagged": {
+          "k": 18,
+          "n": 24,
+          "rate": 0.75,
+          "ci95": [
+            0.551,
+            0.88
+          ]
+        }
+      },
+      "urgent": {
+        "accuracy": {
+          "k": 117,
+          "n": 120,
+          "rate": 0.975,
+          "ci95": [
+            0.929,
+            0.991
+          ]
+        },
+        "recall": {
+          "k": 12,
+          "n": 15,
+          "rate": 0.8,
+          "ci95": [
+            0.548,
+            0.93
+          ]
+        },
+        "false_alarms": 0,
+        "brier": 0.025
+      },
+      "impact": {
+        "n": 99,
+        "mean_abs_error": 0.238,
+        "nearest_level_correct": {
+          "k": 80,
+          "n": 99,
+          "rate": 0.808,
+          "ci95": [
+            0.72,
+            0.874
+          ]
+        }
+      },
+      "option_order": {
+        "same_choice": {
+          "k": 116,
+          "n": 120,
+          "rate": 0.967,
+          "ci95": [
+            0.917,
+            0.987
+          ]
+        },
+        "mean_probability_shift": 0.073,
+        "max_probability_shift": 0.37
+      },
+      "repeatability": {
+        "runs": 3,
+        "same_choice": {
+          "k": 120,
+          "n": 120,
+          "rate": 1.0,
+          "ci95": [
+            0.969,
+            1
+          ]
+        },
+        "max_probability_spread": 0.0
+      },
+      "latency_ms": {
+        "p50": 276,
+        "p95": 647,
+        "max": 1530
+      },
+      "tokens": {
+        "mean_input": 709,
+        "total_input": 255177,
+        "mean_output": 0
+      },
+      "cost_per_1000_messages_usd": 0.0709
+    }
+  }
+}
