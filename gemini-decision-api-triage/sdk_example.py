@@ -36,12 +36,22 @@ def main():
     print(f"google-genai {genai.__version__}, model {decide.MODEL}")
 
     uploads = []
-    for name in ["voicemail", args.invoice]:
-        f = client.files.upload(file=str(decide.HERE / FILES[name]))
-        print(f"uploaded {FILES[name]} -> {f.uri} ({f.mime_type})")
-        uploads.append(f)
-    voicemail, invoice = uploads
+    try:
+        for name in ["voicemail", args.invoice]:
+            f = client.files.upload(file=str(decide.HERE / FILES[name]))
+            print(f"uploaded {FILES[name]} -> {f.uri} ({f.mime_type})")
+            uploads.append(f)
+        run(client, *uploads)
+    finally:  # delete the uploads even if the request or the printing fails
+        for f in uploads:
+            try:
+                client.files.delete(name=f.name)
+            except Exception as e:  # noqa: BLE001 - cleanup must not hide the original error
+                print(f"could not delete {f.name}: {e}", file=sys.stderr)
 
+
+def run(client, voicemail, invoice):
+    """The decision request, the answers and the route, for the uploaded voicemail and invoice."""
     keys = ["category", "urgent", "impact", "enough", "sensitive", "conflict"]
     result = client.decisions.create(
         model=decide.MODEL,
@@ -67,9 +77,6 @@ def main():
     print(f"route: {action} ({reason})")
     usage = result.usage.model_dump() if hasattr(result.usage, "model_dump") else result.usage
     print("usage:", json.dumps(usage, default=str))
-
-    for f in uploads:
-        client.files.delete(name=f.name)
 
 
 if __name__ == "__main__":

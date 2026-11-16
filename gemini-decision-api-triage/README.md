@@ -114,7 +114,7 @@ Each run writes `results/<timestamp>/`:
 
 To rebuild a report: `python3 report.py results/<timestamp>`.
 
-**Pacing.** The free tier allows 200 requests and 50,000 input tokens per minute. The 1,000-question request and the video cases are the big ones. `decide.py` paces requests to stay under those limits, and retries 429 and 5xx responses with backoff. If you have a paid tier, set `GEMINI_RPM` and `GEMINI_TPM` in `.env` so it runs faster.
+**Pacing.** The free tier allows 200 requests and 50,000 input tokens per minute. The 1,000-question request and the video cases are the big ones. `decide.py` paces requests on a best-effort basis, using estimated token counts that it corrects with real usage after each response, and retries 429 and 5xx responses with backoff. It reduces rate-limit errors but doesn't guarantee staying under the limit: estimates can undershoot, and a single request bigger than the budget is still sent. If you have a paid tier, set `GEMINI_RPM` and `GEMINI_TPM` in `.env` so it runs faster.
 
 **Cost.** At $0.10 per million input tokens with no output charge, one full run is about 100 requests and should cost a few cents. Check `usage` in the report.
 
@@ -127,6 +127,12 @@ To rebuild a report: `python3 report.py results/<timestamp>`.
 5. Run it in shadow mode next to your current routing before letting it act.
 
 ## Notes
+
+- **This is a research and demonstration project, not production code.** It shows the pattern (typed judgments, then a policy in code) on synthetic data. A production version needs sensitive-data masking before the request, fail-safe routing when answers are missing or a request fails, and an audit record of each decision.
+- **What latency means here.** `latency_ms` is the client-observed HTTP time of the final attempt, from sending the request to reading the response. It excludes reading and base64-encoding the media, JSON serialization, pacing and retry backoff. `elapsed_ms` (recorded from 2026-11-17 on) includes retries and backoff.
+- **Scoring only counts complete responses.** A response that was blocked by an input filter, or that is missing any requested answer, is listed in the report and left out of accuracy and routing counts. The questions-per-request table shows answers received against answers requested.
+- **Routing is scored against the policy.** If the labels say a ticket should go to a queue but the model's top category probability is below `ROUTE_MIN`, review is the policy-correct action and isn't counted as a mistake. Category accuracy is reported separately.
+- **The question-count test changes the question set as well as its size** (1 = category only; up to 7 = the first triage questions; above that, 7 triage questions plus fact checks). It describes these workloads, not question count in isolation.
 
 - **Questions are independent.** They can't see each other's answers, so `route()` combines them in code.
 - **Option keys are sorted.** The API sorts choice option keys before evaluation, so the order you write them in doesn't matter. Exact ties go to the alphabetically first key.

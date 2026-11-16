@@ -2,7 +2,7 @@
 
 Model `gemini-decision-1`, endpoint `https://generativelanguage.googleapis.com/v1beta/decisions`. Started 2026-11-16T15:50:23+00:00. Prices at $0.1 per million input tokens.
 
-273 requests, 1 errors, 345,270 input tokens, $0.0345 in total. Median latency 640 ms.
+273 requests, 1 errors, 345,270 input tokens, $0.0345 in total. Median latency 640 ms (client-observed HTTP time of the final attempt; excludes encoding and retry backoff).
 
 ## Same message, six formats
 
@@ -91,14 +91,14 @@ Category identical across runs for 91 of 91 cases.
 
 ## Questions per request
 
-Same shared input every time (text, image, audio, PDF, video); only the number of questions changes.
+Same shared input every time (text, image, audio, PDF, video). The question set changes with the size (1 = category only; 10+ = 7 triage questions plus fact checks), so this describes these workloads, not question count in isolation. Fact accuracy counts complete responses only.
 
-| Questions | Requests | p50 ms (min–max) | Input tokens | $ per request | $ per question | True facts found | False facts rejected | Near-miss false positives |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 3 | 1016 (668–1032) | 3,154 | 0.000315 | 0.00031540 | – | – | – |
-| 10 | 3 | 955 (754–1181) | 3,784 | 0.000378 | 0.00003784 | 3/3 (100%) | 6/6 (100%) | 0/3 (0%) |
-| 100 | 3 | 609 (596–935) | 8,642 | 0.000864 | 0.00000864 | 33/33 (100%) | 246/246 (100%) | 0/84 (0%) |
-| 1000 | 3 | 1170 (1115–1432) | 58,316 | 0.005832 | 0.00000583 | 33/33 (100%) | 2946/2946 (100%) | 0/138 (0%) |
+| Questions | Requests (complete) | Answers received / requested | p50 ms (min–max) | Input tokens | $ per request | $ per question | True facts found | False facts rejected | Near-miss false positives |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 3 (3) | 3 / 3 | 1016 (668–1032) | 3,154 | 0.000315 | 0.00031540 | – | – | – |
+| 10 | 3 (3) | 30 / 30 | 955 (754–1181) | 3,784 | 0.000378 | 0.00003784 | 3/3 (100%) | 6/6 (100%) | 0/3 (0%) |
+| 100 | 3 (3) | 300 / 300 | 609 (596–935) | 8,642 | 0.000864 | 0.00000864 | 33/33 (100%) | 246/246 (100%) | 0/84 (0%) |
+| 1000 | 3 (3) | 3,000 / 3,000 | 1170 (1115–1432) | 58,316 | 0.005832 | 0.00000583 | 33/33 (100%) | 2946/2946 (100%) | 0/138 (0%) |
 
 Triage answers as questions are added (mean probability; change from the first size that asked it):
 

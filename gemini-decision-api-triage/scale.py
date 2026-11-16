@@ -35,8 +35,8 @@ TRIAGE = ["category", "urgent", "impact", "enough", "sensitive", "conflict", "wr
 
 def questions_for(size, facts):
     """Question map for one request size, plus the fact ground truth used in it."""
-    if size == 1:
-        return {"category": decide.QUESTIONS["category"]}, {}
+    if size <= len(TRIAGE):  # 1 = category only; up to 7 = the first triage questions, no facts
+        return {k: decide.QUESTIONS[k] for k in TRIAGE[:size]}, {}
     qs = {k: decide.QUESTIONS[k] for k in TRIAGE}
     n = size - len(qs)
     trues = [f for f in facts if f["label"]]
@@ -94,7 +94,8 @@ def main():
             body["questions"] = qs
             est = decide.estimate_tokens(case, len(qs))
             r = decide.decide(body, key, pacer, est)
-            f.write(json.dumps({"case": case["id"], "size": size, "run": run, "truth": truth, **r}) + "\n")
+            f.write(json.dumps({"case": case["id"], "size": size, "run": run, "n_questions": len(qs),
+                                "truth": truth, **r}) + "\n")
             f.flush()
             if r["status"] == "ok":
                 print(f"[{i}/{len(order)}] {size:>5} questions  {r['latency_ms']:>7.0f} ms  "

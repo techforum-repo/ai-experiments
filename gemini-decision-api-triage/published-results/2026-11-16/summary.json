@@ -40,6 +40,7 @@
       }
     ],
     "blocked": [],
+    "incomplete": [],
     "formats": {
       "text": {
         "requests": 29,
@@ -2912,6 +2913,10 @@
     "sizes": {
       "1": {
         "requests": 3,
+        "complete_requests": 3,
+        "questions_requested": 3,
+        "answers_received": 3,
+        "answers_missing": 0,
         "latency_p50_ms": 1016,
         "latency_min_ms": 668,
         "latency_max_ms": 1032,
@@ -2946,6 +2951,10 @@
       },
       "10": {
         "requests": 3,
+        "complete_requests": 3,
+        "questions_requested": 30,
+        "answers_received": 30,
+        "answers_missing": 0,
         "latency_p50_ms": 955,
         "latency_min_ms": 754,
         "latency_max_ms": 1181,
@@ -2996,6 +3005,10 @@
       },
       "100": {
         "requests": 3,
+        "complete_requests": 3,
+        "questions_requested": 300,
+        "answers_received": 300,
+        "answers_missing": 0,
         "latency_p50_ms": 609,
         "latency_min_ms": 596,
         "latency_max_ms": 935,
@@ -3046,6 +3059,10 @@
       },
       "1000": {
         "requests": 3,
+        "complete_requests": 3,
+        "questions_requested": 3000,
+        "answers_received": 3000,
+        "answers_missing": 0,
         "latency_p50_ms": 1170,
         "latency_min_ms": 1115,
         "latency_max_ms": 1432,

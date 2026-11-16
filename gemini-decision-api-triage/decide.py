@@ -145,7 +145,7 @@ def build_request(case, questions=None):
 
 def estimate_tokens(case, n_questions):
     """Rough input-token estimate, used only to pace requests under a tokens-per-minute limit."""
-    est = 200 + 40 * n_questions
+    est = 200 + 60 * n_questions   # measured: about 55 text tokens per short yes/no question
     for p in case["parts"]:
         if p["type"] == "text":
             est += len(p["text"]) // 3
@@ -162,8 +162,12 @@ def estimate_tokens(case, n_questions):
 
 
 class Pacer:
-    """Keeps requests under per-minute request and token limits (free tier: 200 RPM, 50,000 TPM).
-    Set GEMINI_RPM / GEMINI_TPM to your tier's limits, or 0 to turn pacing off."""
+    """Best-effort pacing under per-minute request and token limits (free tier: 200 RPM, 50,000 TPM).
+
+    It works from estimated token counts (corrected with real usage after each response), so it can
+    undershoot, and a single request larger than the budget is still sent once the window is empty.
+    It reduces 429s; it does not guarantee compliance. Set GEMINI_RPM / GEMINI_TPM to your tier's
+    limits, or 0 to turn pacing off."""
 
     def __init__(self):
         self.rpm = int(os.environ.get("GEMINI_RPM", "200"))
@@ -193,9 +197,14 @@ class Pacer:
 
 
 def decide(body, api_key, pacer=None, est_tokens=0, max_retries=6):
-    """POST one request. Returns a dict with status, latency, usage, answers, and any error."""
+    """POST one request. Returns a dict with status, latency, usage, answers, and any error.
+
+    latency_ms is the client-observed HTTP time of the final attempt (send to response read). It
+    excludes reading and base64-encoding the media, JSON serialization, pacing and retry backoff.
+    elapsed_ms covers everything from the first attempt to the end, including retries and backoff."""
     data = json.dumps(body).encode()
     retries = 0
+    first_start = time.perf_counter()
     while True:
         if pacer:
             pacer.wait(est_tokens)
@@ -209,7 +218,8 @@ def decide(body, api_key, pacer=None, est_tokens=0, max_retries=6):
             usage = payload.get("usage") or {}
             if pacer:
                 pacer.record(usage.get("total_input_tokens", est_tokens))
-            return {"status": "ok", "http_status": 200, "latency_ms": round(latency, 1), "retries": retries,
+            return {"status": "ok", "http_status": 200, "latency_ms": round(latency, 1),
+                    "elapsed_ms": round((time.perf_counter() - first_start) * 1000, 1), "retries": retries,
                     "request_bytes": len(data), "usage": usage, "answers": payload.get("answers") or {},
                     "prompt_feedback": payload.get("prompt_feedback")}
         except urllib.error.HTTPError as e:

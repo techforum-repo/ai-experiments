@@ -62,22 +62,39 @@ def judge(qkey, answer, label):
     return None, None, None
 
 
-def expected_route(labels, questions):
+def is_complete(r):
+    """HTTP 200, not blocked by an input filter, and an answer for every question that was asked."""
+    if r["status"] != "ok" or (r.get("prompt_feedback") or {}).get("block_reason"):
+        return False
+    return all(q in (r.get("answers") or {}) for q in r["questions"])
+
+
+def expected_route(labels, questions, answers=None):
+    """What the policy should do with this ticket. If the labels say route:X but the model's own
+    top category probability is below ROUTE_MIN, review is the policy-correct action, so a
+    low-confidence hold is not counted as a routing mistake (category accuracy is scored separately)."""
     if "sensitive" in questions and labels.get("sensitive"):
         return "redact"
     if "conflict" in questions and labels.get("conflict"):
         return "review"
     if labels["category"] == "unclear" or not labels.get("enough", True):
         return "clarify"
+    if answers and "category" in answers and decide.top_choice(answers["category"])[1] < decide.ROUTE_MIN:
+        return "review"
     return f"route:{labels['category']}"
 
 
 def summarize_cases(records, cases):
-    ok = [r for r in records if r["status"] == "ok"]
-    out = {"requests": len(records), "errors": len(records) - len(ok),
+    http_ok = [r for r in records if r["status"] == "ok"]
+    ok = [r for r in http_ok if is_complete(r)]   # only complete responses are scored
+    out = {"requests": len(records), "errors": len(records) - len(http_ok),
            "error_samples": [{"case": r["case"], "http_status": r.get("http_status"), "error": r.get("error")}
                              for r in records if r["status"] != "ok"][:10],
-           "blocked": [r["case"] for r in ok if (r.get("prompt_feedback") or {}).get("block_reason")]}
+           "blocked": [r["case"] for r in http_ok if (r.get("prompt_feedback") or {}).get("block_reason")],
+           "incomplete": [{"case": r["case"], "run": r["run"],
+                           "missing": [q for q in r["questions"] if q not in (r.get("answers") or {})]}
+                          for r in http_ok if not is_complete(r)
+                          and not (r.get("prompt_feedback") or {}).get("block_reason")]}
 
     # --- formats: the same ten messages in six formats
     fmt = defaultdict(lambda: defaultdict(list))
@@ -92,7 +109,7 @@ def summarize_cases(records, cases):
             if correct is not None:
                 f[q].append(correct)
         f["top_p"].append(decide.top_choice(r["answers"]["category"])[1])
-        f["route_ok"].append(decide.route(r["answers"])[0] == expected_route(c["labels"], c["questions"]))
+        f["route_ok"].append(decide.route(r["answers"])[0] == expected_route(c["labels"], c["questions"], r["answers"]))
         f["tokens"].append(r["usage"].get("total_input_tokens", 0))
         f["latency"].append(r["latency_ms"])
         by_scenario[c["scenario"]][c["format"]].append(r["answers"]["category"])
@@ -138,7 +155,7 @@ def summarize_cases(records, cases):
                "tokens_by_modality": modality_tokens(r["usage"]), "latency_ms": r["latency_ms"]}
         if "enough" in r["answers"]:
             row["route"] = decide.route(r["answers"])[0]
-            row["expected_route"] = expected_route(c["labels"], c["questions"])
+            row["expected_route"] = expected_route(c["labels"], c["questions"], r["answers"])
         rows[c["group"]].append(row)
     out["attachments"] = collapse(rows.get("attachments", []))
     out["mixed"] = collapse(rows.get("mixed", []))
@@ -162,20 +179,28 @@ def summarize_cases(records, cases):
 
 
 def summarize_scale(records):
-    ok = [r for r in records if r["status"] == "ok"]
+    http_ok = [r for r in records if r["status"] == "ok"]
     by_size = defaultdict(list)
-    for r in ok:
+    for r in http_ok:
         by_size[r["size"]].append(r)
+    ok = http_ok
     sizes = {}
     baseline = {}
     for size in sorted(by_size):
-        rs = by_size[size]
+        rs_all = by_size[size]
+        requested = sum(r.get("n_questions", size) for r in rs_all)
+        received = sum(len(r.get("answers") or {}) for r in rs_all)
+        # fact accuracy and drift use complete responses only, so a missing answer can't look like a correct one
+        rs = [r for r in rs_all if len(r.get("answers") or {}) == r.get("n_questions", size)
+              and not (r.get("prompt_feedback") or {}).get("block_reason")]
+        if not rs:
+            sizes[size] = {"requests": len(rs_all), "complete_requests": 0, "questions_requested": requested,
+                           "answers_received": received, "answers_missing": requested - received}
+            continue
         tp = fn = fp = tn = hard_fp = hard_n = 0
         for r in rs:
             for k, t in r["truth"].items():
-                a = r["answers"].get(k)
-                if not a:
-                    continue
+                a = r["answers"][k]
                 yes = decide.prob_true(a) >= 0.5
                 if t["label"]:
                     tp += yes
@@ -201,7 +226,9 @@ def summarize_scale(records):
         toks = [r["usage"].get("total_input_tokens", 0) for r in rs]
         lat = [r["latency_ms"] for r in rs]
         sizes[size] = {
-            "requests": len(rs), "latency_p50_ms": p50(lat), "latency_min_ms": round(min(lat)),
+            "requests": len(rs_all), "complete_requests": len(rs), "questions_requested": requested,
+            "answers_received": received, "answers_missing": requested - received,
+            "latency_p50_ms": p50(lat), "latency_min_ms": round(min(lat)),
             "latency_max_ms": round(max(lat)), "mean_input_tokens": round(statistics.mean(toks)),
             "tokens_by_modality": modality_tokens(rs[0]["usage"]),
             "cost_per_request_usd": round(decide.cost(statistics.mean(toks)), 6),
@@ -210,7 +237,7 @@ def summarize_scale(records):
                       "near_miss_false_positives": [hard_fp, hard_n]},
             "triage_answers": drift,
         }
-    return {"requests": len(records), "errors": len(records) - len(ok), "sizes": sizes,
+    return {"requests": len(records), "errors": len(records) - len(http_ok), "sizes": sizes,
             "error_samples": [{"size": r["size"], "http_status": r.get("http_status"), "error": r.get("error")}
                               for r in records if r["status"] != "ok"][:5]}
 
@@ -270,7 +297,11 @@ def write_report(folder, summary, meta):
     cs = summary.get("cases")
     if cs:
         L += [f"{cs['requests']} requests, {cs['errors']} errors, {cs['total_input_tokens']:,} input tokens, "
-              f"${cs['total_cost_usd']} in total. Median latency {cs['latency_p50_ms']} ms.", ""]
+              f"${cs['total_cost_usd']} in total. Median latency {cs['latency_p50_ms']} ms "
+              "(client-observed HTTP time of the final attempt; excludes encoding and retry backoff).", ""]
+        if cs.get("incomplete"):
+            L += ["Responses missing answers (excluded from scoring): "
+                  + ", ".join(f"{i['case']} run {i['run']} ({', '.join(i['missing'])})" for i in cs["incomplete"]), ""]
         if cs["blocked"]:
             L += [f"Blocked by input filters: {', '.join(cs['blocked'])}", ""]
         if cs["formats"]:
@@ -333,13 +364,20 @@ def write_report(folder, summary, meta):
     sc = summary.get("scale")
     if sc and sc["sizes"]:
         L += ["## Questions per request", "",
-              "Same shared input every time (text, image, audio, PDF, video); only the number of questions changes.",
-              "", "| Questions | Requests | p50 ms (min–max) | Input tokens | $ per request | $ per question "
+              "Same shared input every time (text, image, audio, PDF, video). The question set changes with the size "
+              "(1 = category only; 10+ = 7 triage questions plus fact checks), so this describes these workloads, "
+              "not question count in isolation. Fact accuracy counts complete responses only.",
+              "", "| Questions | Requests (complete) | Answers received / requested | p50 ms (min–max) | Input tokens | $ per request | $ per question "
               "| True facts found | False facts rejected | Near-miss false positives |",
-              "| --- " * 9 + "|"]
+              "| --- " * 10 + "|"]
         for size, s in sc["sizes"].items():
+            if not s.get("complete_requests"):
+                L.append(f"| {size} | {s['requests']} (0) | {s['answers_received']:,} / {s['questions_requested']:,} |"
+                         + " – |" * 7)
+                continue
             f = s["facts"]
-            L.append(f"| {size} | {s['requests']} | {s['latency_p50_ms']} ({s['latency_min_ms']}–{s['latency_max_ms']}) | "
+            L.append(f"| {size} | {s['requests']} ({s['complete_requests']}) | "
+                     f"{s['answers_received']:,} / {s['questions_requested']:,} | {s['latency_p50_ms']} ({s['latency_min_ms']}–{s['latency_max_ms']}) | "
                      f"{s['mean_input_tokens']:,} | {s['cost_per_request_usd']:.6f} | {s['cost_per_question_usd']:.8f} | "
                      f"{frac(f['true_found'])} | {frac(f['false_rejected'])} | {frac(f['near_miss_false_positives'])} |")
         L += ["", "Triage answers as questions are added (mean probability; change from the first size that asked it):", ""]
