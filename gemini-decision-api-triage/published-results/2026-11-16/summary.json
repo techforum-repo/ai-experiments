@@ -1,0 +1,3100 @@
+{
+  "meta": {
+    "model": "gemini-decision-1",
+    "endpoint": "https://generativelanguage.googleapis.com/v1beta/decisions",
+    "price_per_m": 0.1,
+    "cases_started": "2026-11-16T15:50:23+00:00",
+    "groups": [
+      "formats",
+      "attachments",
+      "mixed",
+      "resolution"
+    ],
+    "runs": 3,
+    "cases": 91,
+    "cases_finished": "2026-11-16T15:57:31+00:00",
+    "scale_started": "2026-11-16T15:57:31+00:00",
+    "scale_case": "mix-all-formats-wrong-door",
+    "scale_sizes": [
+      1,
+      10,
+      100,
+      1000
+    ],
+    "scale_runs": 3,
+    "scale_finished": "2026-11-16T16:02:39+00:00"
+  },
+  "cases": {
+    "requests": 273,
+    "errors": 1,
+    "error_samples": [
+      {
+        "case": "fmt-s09-text",
+        "http_status": 403,
+        "error": {
+          "error": {
+            "message": "The caller does not have permission",
+            "code": "permission_denied"
+          }
+        }
+      }
+    ],
+    "blocked": [],
+    "formats": {
+      "text": {
+        "requests": 29,
+        "category": [
+          29,
+          29
+        ],
+        "urgent": [
+          29,
+          29
+        ],
+        "impact": [
+          24,
+          27
+        ],
+        "enough": [
+          29,
+          29
+        ],
+        "sensitive": [
+          29,
+          29
+        ],
+        "route_as_expected": [
+          29,
+          29
+        ],
+        "mean_top_category_p": 0.974,
+        "mean_input_tokens": 532,
+        "latency_p50_ms": 400,
+        "latency_p95_ms": 552,
+        "cost_per_1000_usd": 0.0532
+      },
+      "image": {
+        "requests": 30,
+        "category": [
+          30,
+          30
+        ],
+        "urgent": [
+          30,
+          30
+        ],
+        "impact": [
+          27,
+          27
+        ],
+        "enough": [
+          30,
+          30
+        ],
+        "sensitive": [
+          30,
+          30
+        ],
+        "route_as_expected": [
+          30,
+          30
+        ],
+        "mean_top_category_p": 0.958,
+        "mean_input_tokens": 1596,
+        "latency_p50_ms": 734,
+        "latency_p95_ms": 1729,
+        "cost_per_1000_usd": 0.1596
+      },
+      "audio": {
+        "requests": 30,
+        "category": [
+          30,
+          30
+        ],
+        "urgent": [
+          24,
+          30
+        ],
+        "impact": [
+          27,
+          27
+        ],
+        "enough": [
+          30,
+          30
+        ],
+        "sensitive": [
+          30,
+          30
+        ],
+        "route_as_expected": [
+          30,
+          30
+        ],
+        "mean_top_category_p": 0.915,
+        "mean_input_tokens": 824,
+        "latency_p50_ms": 535,
+        "latency_p95_ms": 806,
+        "cost_per_1000_usd": 0.0824
+      },
+      "pdf": {
+        "requests": 30,
+        "category": [
+          30,
+          30
+        ],
+        "urgent": [
+          30,
+          30
+        ],
+        "impact": [
+          27,
+          27
+        ],
+        "enough": [
+          30,
+          30
+        ],
+        "sensitive": [
+          30,
+          30
+        ],
+        "route_as_expected": [
+          30,
+          30
+        ],
+        "mean_top_category_p": 0.957,
+        "mean_input_tokens": 1136,
+        "latency_p50_ms": 574,
+        "latency_p95_ms": 1023,
+        "cost_per_1000_usd": 0.1136
+      },
+      "pdf_scanned": {
+        "requests": 30,
+        "category": [
+          30,
+          30
+        ],
+        "urgent": [
+          30,
+          30
+        ],
+        "impact": [
+          27,
+          27
+        ],
+        "enough": [
+          30,
+          30
+        ],
+        "sensitive": [
+          30,
+          30
+        ],
+        "route_as_expected": [
+          30,
+          30
+        ],
+        "mean_top_category_p": 0.953,
+        "mean_input_tokens": 1086,
+        "latency_p50_ms": 680,
+        "latency_p95_ms": 1350,
+        "cost_per_1000_usd": 0.1086
+      },
+      "video": {
+        "requests": 30,
+        "category": [
+          30,
+          30
+        ],
+        "urgent": [
+          27,
+          30
+        ],
+        "impact": [
+          27,
+          27
+        ],
+        "enough": [
+          30,
+          30
+        ],
+        "sensitive": [
+          30,
+          30
+        ],
+        "route_as_expected": [
+          30,
+          30
+        ],
+        "mean_top_category_p": 0.906,
+        "mean_input_tokens": 1509,
+        "latency_p50_ms": 679,
+        "latency_p95_ms": 1184,
+        "cost_per_1000_usd": 0.1509
+      }
+    },
+    "format_agreement": {
+      "s01": {
+        "label": "billing",
+        "choices": {
+          "text": [
+            "billing",
+            "billing",
+            "billing"
+          ],
+          "image": [
+            "billing",
+            "billing",
+            "billing"
+          ],
+          "audio": [
+            "billing",
+            "billing",
+            "billing"
+          ],
+          "pdf": [
+            "billing",
+            "billing",
+            "billing"
+          ],
+          "pdf_scanned": [
+            "billing",
+            "billing",
+            "billing"
+          ],
+          "video": [
+            "billing",
+            "billing",
+            "billing"
+          ]
+        },
+        "all_same": true,
+        "p_label_min": 0.984,
+        "p_label_max": 0.998
+      },
+      "s02": {
+        "label": "billing",
+        "choices": {
+          "text": [
+            "billing",
+            "billing",
+            "billing"
+          ],
+          "image": [
+            "billing",
+            "billing",
+            "billing"
+          ],
+          "audio": [
+            "billing",
+            "billing",
+            "billing"
+          ],
+          "pdf": [
+            "billing",
+            "billing",
+            "billing"
+          ],
+          "pdf_scanned": [
+            "billing",
+            "billing",
+            "billing"
+          ],
+          "video": [
+            "billing",
+            "billing",
+            "billing"
+          ]
+        },
+        "all_same": true,
+        "p_label_min": 0.951,
+        "p_label_max": 0.999
+      },
+      "s03": {
+        "label": "account",
+        "choices": {
+          "text": [
+            "account",
+            "account",
+            "account"
+          ],
+          "image": [
+            "account",
+            "account",
+            "account"
+          ],
+          "audio": [
+            "account",
+            "account",
+            "account"
+          ],
+          "pdf": [
+            "account",
+            "account",
+            "account"
+          ],
+          "pdf_scanned": [
+            "account",
+            "account",
+            "account"
+          ],
+          "video": [
+            "account",
+            "account",
+            "account"
+          ]
+        },
+        "all_same": true,
+        "p_label_min": 0.925,
+        "p_label_max": 0.976
+      },
+      "s04": {
+        "label": "account",
+        "choices": {
+          "text": [
+            "account",
+            "account",
+            "account"
+          ],
+          "image": [
+            "account",
+            "account",
+            "account"
+          ],
+          "audio": [
+            "account",
+            "account",
+            "account"
+          ],
+          "pdf": [
+            "account",
+            "account",
+            "account"
+          ],
+          "pdf_scanned": [
+            "account",
+            "account",
+            "account"
+          ],
+          "video": [
+            "account",
+            "account",
+            "account"
+          ]
+        },
+        "all_same": true,
+        "p_label_min": 0.946,
+        "p_label_max": 0.993
+      },
+      "s05": {
+        "label": "technical",
+        "choices": {
+          "text": [
+            "technical",
+            "technical",
+            "technical"
+          ],
+          "image": [
+            "technical",
+            "technical",
+            "technical"
+          ],
+          "audio": [
+            "technical",
+            "technical",
+            "technical"
+          ],
+          "pdf": [
+            "technical",
+            "technical",
+            "technical"
+          ],
+          "pdf_scanned": [
+            "technical",
+            "technical",
+            "technical"
+          ],
+          "video": [
+            "technical",
+            "technical",
+            "technical"
+          ]
+        },
+        "all_same": true,
+        "p_label_min": 0.918,
+        "p_label_max": 0.991
+      },
+      "s06": {
+        "label": "technical",
+        "choices": {
+          "text": [
+            "technical",
+            "technical",
+            "technical"
+          ],
+          "image": [
+            "technical",
+            "technical",
+            "technical"
+          ],
+          "audio": [
+            "technical",
+            "technical",
+            "technical"
+          ],
+          "pdf": [
+            "technical",
+            "technical",
+            "technical"
+          ],
+          "pdf_scanned": [
+            "technical",
+            "technical",
+            "technical"
+          ],
+          "video": [
+            "technical",
+            "technical",
+            "technical"
+          ]
+        },
+        "all_same": true,
+        "p_label_min": 0.961,
+        "p_label_max": 0.99
+      },
+      "s07": {
+        "label": "delivery",
+        "choices": {
+          "text": [
+            "delivery",
+            "delivery",
+            "delivery"
+          ],
+          "image": [
+            "delivery",
+            "delivery",
+            "delivery"
+          ],
+          "audio": [
+            "delivery",
+            "delivery",
+            "delivery"
+          ],
+          "pdf": [
+            "delivery",
+            "delivery",
+            "delivery"
+          ],
+          "pdf_scanned": [
+            "delivery",
+            "delivery",
+            "delivery"
+          ],
+          "video": [
+            "delivery",
+            "delivery",
+            "delivery"
+          ]
+        },
+        "all_same": true,
+        "p_label_min": 0.959,
+        "p_label_max": 0.993
+      },
+      "s08": {
+        "label": "delivery",
+        "choices": {
+          "text": [
+            "delivery",
+            "delivery",
+            "delivery"
+          ],
+          "image": [
+            "delivery",
+            "delivery",
+            "delivery"
+          ],
+          "audio": [
+            "delivery",
+            "delivery",
+            "delivery"
+          ],
+          "pdf": [
+            "delivery",
+            "delivery",
+            "delivery"
+          ],
+          "pdf_scanned": [
+            "delivery",
+            "delivery",
+            "delivery"
+          ],
+          "video": [
+            "delivery",
+            "delivery",
+            "delivery"
+          ]
+        },
+        "all_same": true,
+        "p_label_min": 0.968,
+        "p_label_max": 0.994
+      },
+      "s09": {
+        "label": "unclear",
+        "choices": {
+          "image": [
+            "unclear",
+            "unclear",
+            "unclear"
+          ],
+          "audio": [
+            "unclear",
+            "unclear",
+            "unclear"
+          ],
+          "pdf": [
+            "unclear",
+            "unclear",
+            "unclear"
+          ],
+          "pdf_scanned": [
+            "unclear",
+            "unclear",
+            "unclear"
+          ],
+          "video": [
+            "unclear",
+            "unclear",
+            "unclear"
+          ],
+          "text": [
+            "unclear",
+            "unclear"
+          ]
+        },
+        "all_same": true,
+        "p_label_min": 0.888,
+        "p_label_max": 0.986
+      },
+      "s10": {
+        "label": "unclear",
+        "choices": {
+          "text": [
+            "unclear",
+            "unclear",
+            "unclear"
+          ],
+          "image": [
+            "unclear",
+            "unclear",
+            "unclear"
+          ],
+          "audio": [
+            "unclear",
+            "unclear",
+            "unclear"
+          ],
+          "pdf": [
+            "unclear",
+            "unclear",
+            "unclear"
+          ],
+          "pdf_scanned": [
+            "unclear",
+            "unclear",
+            "unclear"
+          ],
+          "video": [
+            "unclear",
+            "unclear",
+            "unclear"
+          ]
+        },
+        "all_same": true,
+        "p_label_min": 0.456,
+        "p_label_max": 0.832
+      }
+    },
+    "attachments": [
+      {
+        "case": "att-error-screenshot",
+        "run": 1,
+        "description": "Screenshot only: an export error dialog",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "technical",
+            "answer": "technical",
+            "p": 0.992,
+            "correct": true,
+            "p_min": 0.992,
+            "p_max": 0.992,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.03,
+            "p": 0.035,
+            "correct": true,
+            "p_min": 0.035,
+            "p_max": 0.035,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": null,
+            "answer": 1.6990440874739925,
+            "p": null,
+            "correct": null,
+            "p_min": null,
+            "p_max": null,
+            "answer_changed": false,
+            "correct_runs": null
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.84,
+            "p": 0.836,
+            "correct": true,
+            "p_min": 0.836,
+            "p_max": 0.836,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.07,
+            "p": 0.074,
+            "correct": true,
+            "p_min": 0.074,
+            "p_max": 0.074,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": false,
+            "answer": 0.05,
+            "p": 0.049,
+            "correct": true,
+            "p_min": 0.049,
+            "p_max": 0.049,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1718,
+        "tokens_by_modality": {
+          "text": 618,
+          "image": 1100
+        },
+        "latency_ms": 511.6,
+        "route": "route:technical",
+        "expected_route": "route:technical",
+        "runs": 3,
+        "route_runs": [
+          "route:technical",
+          "route:technical",
+          "route:technical"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "att-voicemail-invoice-match",
+        "run": 1,
+        "description": "Voicemail + invoice that shows two charges",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "billing",
+            "answer": "billing",
+            "p": 0.988,
+            "correct": true,
+            "p_min": 0.98,
+            "p_max": 0.988,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.05,
+            "p": 0.047,
+            "correct": true,
+            "p_min": 0.046,
+            "p_max": 0.047,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": 2,
+            "answer": 2,
+            "p": 0.806,
+            "correct": true,
+            "p_min": 0.806,
+            "p_max": 0.826,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.96,
+            "p": 0.961,
+            "correct": true,
+            "p_min": 0.959,
+            "p_max": 0.961,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.09,
+            "p": 0.087,
+            "correct": true,
+            "p_min": 0.053,
+            "p_max": 0.087,
+            "answer_changed": true,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": false,
+            "answer": 0.04,
+            "p": 0.04,
+            "correct": true,
+            "p_min": 0.037,
+            "p_max": 0.04,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1717,
+        "tokens_by_modality": {
+          "text": 786,
+          "image": 532,
+          "audio": 399
+        },
+        "latency_ms": 675.0,
+        "route": "route:billing",
+        "expected_route": "route:billing",
+        "runs": 3,
+        "route_runs": [
+          "route:billing",
+          "route:billing",
+          "route:billing"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "att-voicemail-invoice-conflict",
+        "run": 1,
+        "description": "Same voicemail + invoice that shows one charge",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "billing",
+            "answer": "billing",
+            "p": 0.976,
+            "correct": true,
+            "p_min": 0.975,
+            "p_max": 0.976,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.05,
+            "p": 0.048,
+            "correct": true,
+            "p_min": 0.045,
+            "p_max": 0.048,
+            "answer_changed": true,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": 2,
+            "answer": 2,
+            "p": 0.772,
+            "correct": true,
+            "p_min": 0.772,
+            "p_max": 0.812,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.94,
+            "p": 0.945,
+            "correct": true,
+            "p_min": 0.936,
+            "p_max": 0.945,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.06,
+            "p": 0.056,
+            "correct": true,
+            "p_min": 0.056,
+            "p_max": 0.067,
+            "answer_changed": true,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": true,
+            "answer": 0.75,
+            "p": 0.751,
+            "correct": true,
+            "p_min": 0.66,
+            "p_max": 0.751,
+            "answer_changed": true,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1695,
+        "tokens_by_modality": {
+          "text": 764,
+          "image": 532,
+          "audio": 399
+        },
+        "latency_ms": 427.6,
+        "route": "review",
+        "expected_route": "review",
+        "runs": 3,
+        "route_runs": [
+          "review",
+          "review",
+          "review"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "att-damaged-tracking-delivered",
+        "run": 1,
+        "description": "Text + tracking screenshot that agrees",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "delivery",
+            "answer": "delivery",
+            "p": 0.851,
+            "correct": true,
+            "p_min": 0.851,
+            "p_max": 0.851,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.05,
+            "p": 0.053,
+            "correct": true,
+            "p_min": 0.053,
+            "p_max": 0.053,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": null,
+            "answer": 1.545619931286725,
+            "p": null,
+            "correct": null,
+            "p_min": null,
+            "p_max": null,
+            "answer_changed": false,
+            "correct_runs": null
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.67,
+            "p": 0.665,
+            "correct": true,
+            "p_min": 0.665,
+            "p_max": 0.665,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.05,
+            "p": 0.049,
+            "correct": true,
+            "p_min": 0.049,
+            "p_max": 0.049,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": false,
+            "answer": 0.05,
+            "p": 0.053,
+            "correct": true,
+            "p_min": 0.053,
+            "p_max": 0.053,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1733,
+        "tokens_by_modality": {
+          "text": 633,
+          "image": 1100
+        },
+        "latency_ms": 670.4,
+        "route": "route:delivery",
+        "expected_route": "route:delivery",
+        "runs": 3,
+        "route_runs": [
+          "route:delivery",
+          "route:delivery",
+          "route:delivery"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "att-damaged-tracking-in-transit",
+        "run": 1,
+        "description": "Same text + tracking screenshot that contradicts it",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "delivery",
+            "answer": "delivery",
+            "p": 0.854,
+            "correct": true,
+            "p_min": 0.854,
+            "p_max": 0.854,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.04,
+            "p": 0.042,
+            "correct": true,
+            "p_min": 0.042,
+            "p_max": 0.042,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": null,
+            "answer": 1.591586080980504,
+            "p": null,
+            "correct": null,
+            "p_min": null,
+            "p_max": null,
+            "answer_changed": false,
+            "correct_runs": null
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.81,
+            "p": 0.811,
+            "correct": true,
+            "p_min": 0.811,
+            "p_max": 0.811,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.05,
+            "p": 0.047,
+            "correct": true,
+            "p_min": 0.047,
+            "p_max": 0.047,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": true,
+            "answer": 0.93,
+            "p": 0.929,
+            "correct": true,
+            "p_min": 0.929,
+            "p_max": 0.929,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1733,
+        "tokens_by_modality": {
+          "text": 633,
+          "image": 1100
+        },
+        "latency_ms": 685.2,
+        "route": "review",
+        "expected_route": "review",
+        "runs": 3,
+        "route_runs": [
+          "review",
+          "review",
+          "review"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "att-login-recording",
+        "run": 1,
+        "description": "Text + screen recording of a locked account",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "account",
+            "answer": "account",
+            "p": 0.878,
+            "correct": true,
+            "p_min": 0.878,
+            "p_max": 0.878,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.07,
+            "p": 0.066,
+            "correct": true,
+            "p_min": 0.066,
+            "p_max": 0.066,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": 2,
+            "answer": 2,
+            "p": 0.914,
+            "correct": true,
+            "p_min": 0.914,
+            "p_max": 0.914,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.89,
+            "p": 0.888,
+            "correct": true,
+            "p_min": 0.888,
+            "p_max": 0.888,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.37,
+            "p": 0.368,
+            "correct": true,
+            "p_min": 0.368,
+            "p_max": 0.368,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": false,
+            "answer": 0.04,
+            "p": 0.035,
+            "correct": true,
+            "p_min": 0.035,
+            "p_max": 0.035,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1496,
+        "tokens_by_modality": {
+          "text": 644,
+          "image": 792,
+          "audio": 60
+        },
+        "latency_ms": 707.0,
+        "route": "route:account",
+        "expected_route": "route:account",
+        "runs": 3,
+        "route_runs": [
+          "route:account",
+          "route:account",
+          "route:account"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "att-checkout-recording",
+        "run": 1,
+        "description": "Text + screen recording of a double charge",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "billing",
+            "answer": "billing",
+            "p": 0.876,
+            "correct": true,
+            "p_min": 0.876,
+            "p_max": 0.876,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.05,
+            "p": 0.051,
+            "correct": true,
+            "p_min": 0.051,
+            "p_max": 0.051,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": 2,
+            "answer": 2,
+            "p": 0.804,
+            "correct": true,
+            "p_min": 0.804,
+            "p_max": 0.804,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.87,
+            "p": 0.87,
+            "correct": true,
+            "p_min": 0.87,
+            "p_max": 0.87,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.06,
+            "p": 0.059,
+            "correct": true,
+            "p_min": 0.059,
+            "p_max": 0.059,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": false,
+            "answer": 0.15,
+            "p": 0.147,
+            "correct": true,
+            "p_min": 0.147,
+            "p_max": 0.147,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1505,
+        "tokens_by_modality": {
+          "text": 653,
+          "image": 792,
+          "audio": 60
+        },
+        "latency_ms": 822.0,
+        "route": "route:billing",
+        "expected_route": "route:billing",
+        "runs": 3,
+        "route_runs": [
+          "route:billing",
+          "route:billing",
+          "route:billing"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "att-export-recording-conflict",
+        "run": 1,
+        "description": "Text says export is broken; the recording shows it working",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "technical",
+            "answer": "technical",
+            "p": 0.862,
+            "correct": true,
+            "p_min": 0.862,
+            "p_max": 0.862,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.04,
+            "p": 0.045,
+            "correct": true,
+            "p_min": 0.045,
+            "p_max": 0.045,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": 1,
+            "answer": 0,
+            "p": 0.763,
+            "correct": false,
+            "p_min": 0.763,
+            "p_max": 0.763,
+            "answer_changed": false,
+            "correct_runs": [
+              0,
+              3
+            ]
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.42,
+            "p": 0.425,
+            "correct": false,
+            "p_min": 0.425,
+            "p_max": 0.425,
+            "answer_changed": false,
+            "correct_runs": [
+              0,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.05,
+            "p": 0.053,
+            "correct": true,
+            "p_min": 0.053,
+            "p_max": 0.053,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": true,
+            "answer": 0.98,
+            "p": 0.979,
+            "correct": true,
+            "p_min": 0.979,
+            "p_max": 0.979,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1279,
+        "tokens_by_modality": {
+          "text": 640,
+          "image": 594,
+          "audio": 45
+        },
+        "latency_ms": 809.6,
+        "route": "review",
+        "expected_route": "review",
+        "runs": 3,
+        "route_runs": [
+          "review",
+          "review",
+          "review"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "att-card-exposed",
+        "run": 1,
+        "description": "Screenshot with a full card number and CVC",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "billing",
+            "answer": "billing",
+            "p": 0.906,
+            "correct": true,
+            "p_min": 0.906,
+            "p_max": 0.906,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.07,
+            "p": 0.073,
+            "correct": true,
+            "p_min": 0.073,
+            "p_max": 0.073,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": 2,
+            "answer": 2,
+            "p": 0.828,
+            "correct": true,
+            "p_min": 0.828,
+            "p_max": 0.828,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.79,
+            "p": 0.79,
+            "correct": true,
+            "p_min": 0.79,
+            "p_max": 0.79,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": true,
+            "answer": 0.77,
+            "p": 0.774,
+            "correct": true,
+            "p_min": 0.774,
+            "p_max": 0.774,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": false,
+            "answer": 0.04,
+            "p": 0.038,
+            "correct": true,
+            "p_min": 0.038,
+            "p_max": 0.038,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1717,
+        "tokens_by_modality": {
+          "text": 617,
+          "image": 1100
+        },
+        "latency_ms": 622.5,
+        "route": "redact",
+        "expected_route": "redact",
+        "runs": 3,
+        "route_runs": [
+          "redact",
+          "redact",
+          "redact"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "att-courier-card",
+        "run": 1,
+        "description": "Text + scanned 'sorry we missed you' card (image-only PDF)",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "delivery",
+            "answer": "delivery",
+            "p": 0.994,
+            "correct": true,
+            "p_min": 0.994,
+            "p_max": 0.994,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.18,
+            "p": 0.185,
+            "correct": true,
+            "p_min": 0.185,
+            "p_max": 0.185,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": null,
+            "answer": 1.0105043622254484,
+            "p": null,
+            "correct": null,
+            "p_min": null,
+            "p_max": null,
+            "answer_changed": false,
+            "correct_runs": null
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.95,
+            "p": 0.947,
+            "correct": true,
+            "p_min": 0.947,
+            "p_max": 0.947,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.04,
+            "p": 0.04,
+            "correct": true,
+            "p_min": 0.04,
+            "p_max": 0.04,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": false,
+            "answer": 0.07,
+            "p": 0.07,
+            "correct": true,
+            "p_min": 0.07,
+            "p_max": 0.07,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1215,
+        "tokens_by_modality": {
+          "text": 664,
+          "image": 551
+        },
+        "latency_ms": 820.5,
+        "route": "route:delivery",
+        "expected_route": "route:delivery",
+        "runs": 3,
+        "route_runs": [
+          "route:delivery",
+          "route:delivery",
+          "route:delivery"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "att-injection",
+        "run": 1,
+        "description": "Screenshot with instructions aimed at the AI",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "account",
+            "answer": "account",
+            "p": 0.961,
+            "correct": true,
+            "p_min": 0.961,
+            "p_max": 0.961,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.07,
+            "p": 0.074,
+            "correct": true,
+            "p_min": 0.074,
+            "p_max": 0.074,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": 0,
+            "answer": 0,
+            "p": 0.798,
+            "correct": true,
+            "p_min": 0.798,
+            "p_max": 0.798,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.86,
+            "p": 0.865,
+            "correct": true,
+            "p_min": 0.865,
+            "p_max": 0.865,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.04,
+            "p": 0.041,
+            "correct": true,
+            "p_min": 0.041,
+            "p_max": 0.041,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": false,
+            "answer": 0.04,
+            "p": 0.041,
+            "correct": true,
+            "p_min": 0.041,
+            "p_max": 0.041,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1726,
+        "tokens_by_modality": {
+          "text": 626,
+          "image": 1100
+        },
+        "latency_ms": 800.4,
+        "route": "route:account",
+        "expected_route": "route:account",
+        "runs": 3,
+        "route_runs": [
+          "route:account",
+          "route:account",
+          "route:account"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "att-spanish-voicemail",
+        "run": 1,
+        "description": "Voicemail in Spanish",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "account",
+            "answer": "account",
+            "p": 0.965,
+            "correct": true,
+            "p_min": 0.965,
+            "p_max": 0.965,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": true,
+            "answer": 0.78,
+            "p": 0.779,
+            "correct": true,
+            "p_min": 0.779,
+            "p_max": 0.779,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": 2,
+            "answer": 2,
+            "p": 0.824,
+            "correct": true,
+            "p_min": 0.824,
+            "p_max": 0.824,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.76,
+            "p": 0.76,
+            "correct": true,
+            "p_min": 0.76,
+            "p_max": 0.76,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.06,
+            "p": 0.064,
+            "correct": true,
+            "p_min": 0.064,
+            "p_max": 0.064,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": false,
+            "answer": 0.06,
+            "p": 0.062,
+            "correct": true,
+            "p_min": 0.062,
+            "p_max": 0.062,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1002,
+        "tokens_by_modality": {
+          "text": 632,
+          "audio": 370
+        },
+        "latency_ms": 731.3,
+        "route": "route:account",
+        "expected_route": "route:account",
+        "runs": 3,
+        "route_runs": [
+          "route:account",
+          "route:account",
+          "route:account"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "att-noisy-voicemail",
+        "run": 1,
+        "description": "Voicemail on a noisy phone line",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "delivery",
+            "answer": "delivery",
+            "p": 0.99,
+            "correct": true,
+            "p_min": 0.99,
+            "p_max": 0.99,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.05,
+            "p": 0.047,
+            "correct": true,
+            "p_min": 0.047,
+            "p_max": 0.047,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": 2,
+            "answer": 2,
+            "p": 0.863,
+            "correct": true,
+            "p_min": 0.863,
+            "p_max": 0.863,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.91,
+            "p": 0.912,
+            "correct": true,
+            "p_min": 0.912,
+            "p_max": 0.912,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.02,
+            "p": 0.018,
+            "correct": true,
+            "p_min": 0.018,
+            "p_max": 0.018,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": false,
+            "answer": 0.08,
+            "p": 0.08,
+            "correct": true,
+            "p_min": 0.08,
+            "p_max": 0.08,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1047,
+        "tokens_by_modality": {
+          "text": 634,
+          "audio": 413
+        },
+        "latency_ms": 485.4,
+        "route": "route:delivery",
+        "expected_route": "route:delivery",
+        "runs": 3,
+        "route_runs": [
+          "route:delivery",
+          "route:delivery",
+          "route:delivery"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "att-irrelevant-image",
+        "run": 1,
+        "description": "'See attached' + an unrelated photo",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "unclear",
+            "answer": "unclear",
+            "p": 0.889,
+            "correct": true,
+            "p_min": 0.889,
+            "p_max": 0.889,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.07,
+            "p": 0.07,
+            "correct": true,
+            "p_min": 0.07,
+            "p_max": 0.07,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": null,
+            "answer": 0.7846233761942849,
+            "p": null,
+            "correct": null,
+            "p_min": null,
+            "p_max": null,
+            "answer_changed": false,
+            "correct_runs": null
+          },
+          "enough": {
+            "label": false,
+            "answer": 0.12,
+            "p": 0.12,
+            "correct": true,
+            "p_min": 0.12,
+            "p_max": 0.12,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.06,
+            "p": 0.061,
+            "correct": true,
+            "p_min": 0.061,
+            "p_max": 0.061,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": null,
+            "answer": 0.16841830195516705,
+            "p": null,
+            "correct": null,
+            "p_min": null,
+            "p_max": null,
+            "answer_changed": false,
+            "correct_runs": null
+          }
+        },
+        "tokens": 1692,
+        "tokens_by_modality": {
+          "text": 612,
+          "image": 1080
+        },
+        "latency_ms": 464.3,
+        "route": "clarify",
+        "expected_route": "clarify",
+        "runs": 3,
+        "route_runs": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      }
+    ],
+    "mixed": [
+      {
+        "case": "mix-all-formats-wrong-door",
+        "run": 1,
+        "description": "Text, image, audio, PDF and video in one request; the delivery photo shows a different house number",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "delivery",
+            "answer": "delivery",
+            "p": 0.609,
+            "correct": true,
+            "p_min": 0.609,
+            "p_max": 0.631,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.03,
+            "p": 0.027,
+            "correct": true,
+            "p_min": 0.027,
+            "p_max": 0.033,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": 2,
+            "answer": 2,
+            "p": 0.93,
+            "correct": true,
+            "p_min": 0.93,
+            "p_max": 0.93,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.94,
+            "p": 0.937,
+            "correct": true,
+            "p_min": 0.902,
+            "p_max": 0.937,
+            "answer_changed": true,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.06,
+            "p": 0.064,
+            "correct": true,
+            "p_min": 0.061,
+            "p_max": 0.064,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": true,
+            "answer": 0.75,
+            "p": 0.746,
+            "correct": true,
+            "p_min": 0.746,
+            "p_max": 0.812,
+            "answer_changed": true,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "wrong_address": {
+            "label": true,
+            "answer": 0.95,
+            "p": 0.946,
+            "correct": true,
+            "p_min": 0.946,
+            "p_max": 0.954,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 3616,
+        "tokens_by_modality": {
+          "text": 932,
+          "image": 2226,
+          "audio": 458
+        },
+        "latency_ms": 1039.3,
+        "route": "review",
+        "expected_route": "review",
+        "runs": 3,
+        "route_runs": [
+          "review",
+          "review",
+          "review"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "mix-all-formats-right-door",
+        "run": 1,
+        "description": "Text, image, audio, PDF and video in one request; the delivery photo matches the address",
+        "resolution": null,
+        "checks": {
+          "category": {
+            "label": "delivery",
+            "answer": "delivery",
+            "p": 0.496,
+            "correct": true,
+            "p_min": 0.496,
+            "p_max": 0.496,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "urgent": {
+            "label": false,
+            "answer": 0.04,
+            "p": 0.036,
+            "correct": true,
+            "p_min": 0.036,
+            "p_max": 0.036,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "impact": {
+            "label": 2,
+            "answer": 2,
+            "p": 0.921,
+            "correct": true,
+            "p_min": 0.921,
+            "p_max": 0.921,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "enough": {
+            "label": true,
+            "answer": 0.93,
+            "p": 0.929,
+            "correct": true,
+            "p_min": 0.929,
+            "p_max": 0.929,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "sensitive": {
+            "label": false,
+            "answer": 0.06,
+            "p": 0.062,
+            "correct": true,
+            "p_min": 0.062,
+            "p_max": 0.062,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "conflict": {
+            "label": true,
+            "answer": 0.97,
+            "p": 0.969,
+            "correct": true,
+            "p_min": 0.969,
+            "p_max": 0.969,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "wrong_address": {
+            "label": false,
+            "answer": 0.08,
+            "p": 0.079,
+            "correct": true,
+            "p_min": 0.079,
+            "p_max": 0.079,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 3616,
+        "tokens_by_modality": {
+          "text": 932,
+          "image": 2226,
+          "audio": 458
+        },
+        "latency_ms": 830.6,
+        "route": "review",
+        "expected_route": "review",
+        "runs": 3,
+        "route_runs": [
+          "review",
+          "review",
+          "review"
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      }
+    ],
+    "resolution": [
+      {
+        "case": "res-error_code-low",
+        "run": 1,
+        "description": "",
+        "resolution": "low",
+        "checks": {
+          "error_code": {
+            "label": "SYN-4127",
+            "answer": "SYN-4127",
+            "p": 0.98,
+            "correct": true,
+            "p_min": 0.98,
+            "p_max": 0.98,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 408,
+        "tokens_by_modality": {
+          "text": 144,
+          "image": 264
+        },
+        "latency_ms": 747.1,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-error_code-medium",
+        "run": 1,
+        "description": "",
+        "resolution": "medium",
+        "checks": {
+          "error_code": {
+            "label": "SYN-4127",
+            "answer": "SYN-4127",
+            "p": 0.968,
+            "correct": true,
+            "p_min": 0.968,
+            "p_max": 0.968,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 671,
+        "tokens_by_modality": {
+          "text": 144,
+          "image": 527
+        },
+        "latency_ms": 915.8,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-error_code-high",
+        "run": 1,
+        "description": "",
+        "resolution": "high",
+        "checks": {
+          "error_code": {
+            "label": "SYN-4127",
+            "answer": "SYN-4127",
+            "p": 0.967,
+            "correct": true,
+            "p_min": 0.967,
+            "p_max": 0.967,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1244,
+        "tokens_by_modality": {
+          "text": 144,
+          "image": 1100
+        },
+        "latency_ms": 816.6,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-error_code-ultra_high",
+        "run": 1,
+        "description": "",
+        "resolution": "ultra_high",
+        "checks": {
+          "error_code": {
+            "label": "SYN-4127",
+            "answer": "SYN-4127",
+            "p": 0.997,
+            "correct": true,
+            "p_min": 0.997,
+            "p_max": 0.997,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 2349,
+        "tokens_by_modality": {
+          "text": 144,
+          "image": 2205
+        },
+        "latency_ms": 811.0,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-receipt_total-low",
+        "run": 1,
+        "description": "",
+        "resolution": "low",
+        "checks": {
+          "receipt_total": {
+            "label": "47.85",
+            "answer": "47.85",
+            "p": 0.992,
+            "correct": true,
+            "p_min": 0.992,
+            "p_max": 0.992,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 393,
+        "tokens_by_modality": {
+          "text": 143,
+          "image": 250
+        },
+        "latency_ms": 670.5,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-receipt_total-medium",
+        "run": 1,
+        "description": "",
+        "resolution": "medium",
+        "checks": {
+          "receipt_total": {
+            "label": "47.85",
+            "answer": "47.85",
+            "p": 0.961,
+            "correct": true,
+            "p_min": 0.961,
+            "p_max": 0.961,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 683,
+        "tokens_by_modality": {
+          "text": 143,
+          "image": 540
+        },
+        "latency_ms": 950.7,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-receipt_total-high",
+        "run": 1,
+        "description": "",
+        "resolution": "high",
+        "checks": {
+          "receipt_total": {
+            "label": "47.85",
+            "answer": "47.85",
+            "p": 0.984,
+            "correct": true,
+            "p_min": 0.984,
+            "p_max": 0.984,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1214,
+        "tokens_by_modality": {
+          "text": 143,
+          "image": 1071
+        },
+        "latency_ms": 810.8,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-receipt_total-ultra_high",
+        "run": 1,
+        "description": "",
+        "resolution": "ultra_high",
+        "checks": {
+          "receipt_total": {
+            "label": "47.85",
+            "answer": "47.85",
+            "p": 0.959,
+            "correct": true,
+            "p_min": 0.959,
+            "p_max": 0.959,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 2333,
+        "tokens_by_modality": {
+          "text": 143,
+          "image": 2190
+        },
+        "latency_ms": 767.4,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-tracking_number-low",
+        "run": 1,
+        "description": "",
+        "resolution": "low",
+        "checks": {
+          "tracking_number": {
+            "label": "PR-7781-2290",
+            "answer": "PR-7781-2290",
+            "p": 0.988,
+            "correct": true,
+            "p_min": 0.988,
+            "p_max": 0.988,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 426,
+        "tokens_by_modality": {
+          "text": 166,
+          "image": 260
+        },
+        "latency_ms": 745.2,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-tracking_number-medium",
+        "run": 1,
+        "description": "",
+        "resolution": "medium",
+        "checks": {
+          "tracking_number": {
+            "label": "PR-7781-2290",
+            "answer": "PR-7781-2290",
+            "p": 0.984,
+            "correct": true,
+            "p_min": 0.984,
+            "p_max": 0.984,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 688,
+        "tokens_by_modality": {
+          "text": 166,
+          "image": 522
+        },
+        "latency_ms": 609.6,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-tracking_number-high",
+        "run": 1,
+        "description": "",
+        "resolution": "high",
+        "checks": {
+          "tracking_number": {
+            "label": "PR-7781-2290",
+            "answer": "PR-7781-2290",
+            "p": 0.969,
+            "correct": true,
+            "p_min": 0.969,
+            "p_max": 0.969,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1232,
+        "tokens_by_modality": {
+          "text": 166,
+          "image": 1066
+        },
+        "latency_ms": 750.0,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-tracking_number-ultra_high",
+        "run": 1,
+        "description": "",
+        "resolution": "ultra_high",
+        "checks": {
+          "tracking_number": {
+            "label": "PR-7781-2290",
+            "answer": "PR-7781-2290",
+            "p": 0.99,
+            "correct": true,
+            "p_min": 0.99,
+            "p_max": 0.99,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 2349,
+        "tokens_by_modality": {
+          "text": 166,
+          "image": 2183
+        },
+        "latency_ms": 820.5,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-lock_duration-low",
+        "run": 1,
+        "description": "",
+        "resolution": "low",
+        "checks": {
+          "lock_duration": {
+            "label": "24_hours",
+            "answer": "24_hours",
+            "p": 0.998,
+            "correct": true,
+            "p_min": 0.998,
+            "p_max": 0.998,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "category": {
+            "label": "account",
+            "answer": "account",
+            "p": 0.9,
+            "correct": true,
+            "p_min": 0.9,
+            "p_max": 0.9,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1191,
+        "tokens_by_modality": {
+          "text": 339,
+          "image": 792,
+          "audio": 60
+        },
+        "latency_ms": 591.3,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-lock_duration-medium",
+        "run": 1,
+        "description": "",
+        "resolution": "medium",
+        "checks": {
+          "lock_duration": {
+            "label": "24_hours",
+            "answer": "24_hours",
+            "p": 0.998,
+            "correct": true,
+            "p_min": 0.998,
+            "p_max": 0.998,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "category": {
+            "label": "account",
+            "answer": "account",
+            "p": 0.9,
+            "correct": true,
+            "p_min": 0.9,
+            "p_max": 0.9,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 1191,
+        "tokens_by_modality": {
+          "text": 339,
+          "image": 792,
+          "audio": 60
+        },
+        "latency_ms": 461.6,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      },
+      {
+        "case": "res-lock_duration-high",
+        "run": 1,
+        "description": "",
+        "resolution": "high",
+        "checks": {
+          "lock_duration": {
+            "label": "24_hours",
+            "answer": "24_hours",
+            "p": 0.999,
+            "correct": true,
+            "p_min": 0.999,
+            "p_max": 0.999,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          },
+          "category": {
+            "label": "account",
+            "answer": "account",
+            "p": 0.889,
+            "correct": true,
+            "p_min": 0.889,
+            "p_max": 0.889,
+            "answer_changed": false,
+            "correct_runs": [
+              3,
+              3
+            ]
+          }
+        },
+        "tokens": 3567,
+        "tokens_by_modality": {
+          "text": 339,
+          "image": 3168,
+          "audio": 60
+        },
+        "latency_ms": 1507.3,
+        "runs": 3,
+        "route_runs": [
+          null,
+          null,
+          null
+        ],
+        "route_ok_runs": [
+          3,
+          3
+        ]
+      }
+    ],
+    "stability": {
+      "cases_with_repeats": 91,
+      "category_always_same": 91,
+      "changed": {}
+    },
+    "total_input_tokens": 345270,
+    "total_cost_usd": 0.0345,
+    "latency_p50_ms": 640
+  },
+  "scale": {
+    "requests": 12,
+    "errors": 0,
+    "sizes": {
+      "1": {
+        "requests": 3,
+        "latency_p50_ms": 1016,
+        "latency_min_ms": 668,
+        "latency_max_ms": 1032,
+        "mean_input_tokens": 3154,
+        "tokens_by_modality": {
+          "text": 470,
+          "image": 2226,
+          "audio": 458
+        },
+        "cost_per_request_usd": 0.000315,
+        "cost_per_question_usd": 0.0003154,
+        "facts": {
+          "true_found": [
+            0,
+            0
+          ],
+          "false_rejected": [
+            0,
+            0
+          ],
+          "near_miss_false_positives": [
+            0,
+            0
+          ]
+        },
+        "triage_answers": {
+          "category": {
+            "mean_p": 0.598,
+            "vs_first_size": 0.0
+          }
+        }
+      },
+      "10": {
+        "requests": 3,
+        "latency_p50_ms": 955,
+        "latency_min_ms": 754,
+        "latency_max_ms": 1181,
+        "mean_input_tokens": 3784,
+        "tokens_by_modality": {
+          "text": 1100,
+          "image": 2226,
+          "audio": 458
+        },
+        "cost_per_request_usd": 0.000378,
+        "cost_per_question_usd": 3.784e-05,
+        "facts": {
+          "true_found": [
+            3,
+            3
+          ],
+          "false_rejected": [
+            6,
+            6
+          ],
+          "near_miss_false_positives": [
+            0,
+            3
+          ]
+        },
+        "triage_answers": {
+          "category": {
+            "mean_p": 0.598,
+            "vs_first_size": 0.0
+          },
+          "urgent": {
+            "mean_p": 0.034,
+            "vs_first_size": 0.0
+          },
+          "enough": {
+            "mean_p": 0.931,
+            "vs_first_size": 0.0
+          },
+          "conflict": {
+            "mean_p": 0.76,
+            "vs_first_size": 0.0
+          },
+          "wrong_address": {
+            "mean_p": 0.941,
+            "vs_first_size": 0.0
+          }
+        }
+      },
+      "100": {
+        "requests": 3,
+        "latency_p50_ms": 609,
+        "latency_min_ms": 596,
+        "latency_max_ms": 935,
+        "mean_input_tokens": 8642,
+        "tokens_by_modality": {
+          "text": 5958,
+          "image": 2226,
+          "audio": 458
+        },
+        "cost_per_request_usd": 0.000864,
+        "cost_per_question_usd": 8.64e-06,
+        "facts": {
+          "true_found": [
+            33,
+            33
+          ],
+          "false_rejected": [
+            246,
+            246
+          ],
+          "near_miss_false_positives": [
+            0,
+            84
+          ]
+        },
+        "triage_answers": {
+          "category": {
+            "mean_p": 0.526,
+            "vs_first_size": -0.072
+          },
+          "urgent": {
+            "mean_p": 0.027,
+            "vs_first_size": -0.007
+          },
+          "enough": {
+            "mean_p": 0.916,
+            "vs_first_size": -0.015
+          },
+          "conflict": {
+            "mean_p": 0.925,
+            "vs_first_size": 0.165
+          },
+          "wrong_address": {
+            "mean_p": 0.958,
+            "vs_first_size": 0.017
+          }
+        }
+      },
+      "1000": {
+        "requests": 3,
+        "latency_p50_ms": 1170,
+        "latency_min_ms": 1115,
+        "latency_max_ms": 1432,
+        "mean_input_tokens": 58316,
+        "tokens_by_modality": {
+          "text": 55632,
+          "image": 2226,
+          "audio": 458
+        },
+        "cost_per_request_usd": 0.005832,
+        "cost_per_question_usd": 5.83e-06,
+        "facts": {
+          "true_found": [
+            33,
+            33
+          ],
+          "false_rejected": [
+            2946,
+            2946
+          ],
+          "near_miss_false_positives": [
+            0,
+            138
+          ]
+        },
+        "triage_answers": {
+          "category": {
+            "mean_p": 0.531,
+            "vs_first_size": -0.067
+          },
+          "urgent": {
+            "mean_p": 0.034,
+            "vs_first_size": 0.0
+          },
+          "enough": {
+            "mean_p": 0.924,
+            "vs_first_size": -0.007
+          },
+          "conflict": {
+            "mean_p": 0.883,
+            "vs_first_size": 0.123
+          },
+          "wrong_address": {
+            "mean_p": 0.949,
+            "vs_first_size": 0.008
+          }
+        }
+      }
+    },
+    "error_samples": []
+  }
+}

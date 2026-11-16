@@ -1,0 +1,25 @@
+{
+  "model": "gemini-decision-1",
+  "endpoint": "https://generativelanguage.googleapis.com/v1beta/decisions",
+  "price_per_m": 0.1,
+  "cases_started": "2026-11-16T15:50:23+00:00",
+  "groups": [
+    "formats",
+    "attachments",
+    "mixed",
+    "resolution"
+  ],
+  "runs": 3,
+  "cases": 91,
+  "cases_finished": "2026-11-16T15:57:31+00:00",
+  "scale_started": "2026-11-16T15:57:31+00:00",
+  "scale_case": "mix-all-formats-wrong-door",
+  "scale_sizes": [
+    1,
+    10,
+    100,
+    1000
+  ],
+  "scale_runs": 3,
+  "scale_finished": "2026-11-16T16:02:39+00:00"
+}

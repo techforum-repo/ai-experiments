@@ -1,0 +1,11 @@
+google-genai 3.3.0, model gemini-decision-1
+uploaded samples/audio/charged-twice-voicemail.mp3 -> https://generativelanguage.googleapis.com/v1beta/files/pu8fhdsg7rd3 (audio/mpeg)
+uploaded samples/pdf/invoice-one-charge.pdf -> https://generativelanguage.googleapis.com/v1beta/files/5tuplg2wpwmd (application/pdf)
+  category   billing (0.98)
+  urgent     P(yes) 0.05
+  impact     score 1.76, most likely level 2 (0.77)
+  enough     P(yes) 0.94
+  sensitive  P(yes) 0.06
+  conflict   P(yes) 0.75
+route: review (attachments contradict the customer)
+usage: {"input_tokens_by_modality": [{"modality": "text", "tokens": 764}, {"modality": "image", "tokens": 532}, {"modality": "audio", "tokens": 399}], "total_input_tokens": 1695, "total_output_tokens": 0, "total_tokens": 1695}

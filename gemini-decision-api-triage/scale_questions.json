@@ -1,0 +1,6971 @@
+{
+ "case": "mix-all-formats-wrong-door",
+ "true_facts": 11,
+ "facts": [
+  {
+   "kind": "order",
+   "value": "55120",
+   "instructions": "Is order number 55120 mentioned anywhere in the input?",
+   "label": true,
+   "hard": false
+  },
+  {
+   "kind": "courier",
+   "value": "ParcelRoute",
+   "instructions": "Is the courier ParcelRoute mentioned anywhere in the input?",
+   "label": true,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7781-2290",
+   "instructions": "Does the input show the tracking number PR-7781-2290?",
+   "label": true,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "86.40",
+   "instructions": "Does an invoice in the input show a total of $86.40?",
+   "label": true,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Trail daypack 28L",
+   "instructions": "Does the invoice list a product called 'Trail daypack 28L'?",
+   "label": true,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Insulated bottle 750 ml",
+   "instructions": "Does the invoice list a product called 'Insulated bottle 750 ml'?",
+   "label": true,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Denver",
+   "instructions": "Is the city Denver mentioned anywhere in the input?",
+   "label": true,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Daniel Brooks",
+   "instructions": "Is the customer's name Daniel Brooks?",
+   "label": true,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Larimer St",
+   "instructions": "Is the street Larimer St mentioned anywhere in the input?",
+   "label": true,
+   "hard": false
+  },
+  {
+   "kind": "weekday",
+   "value": "Tuesday",
+   "instructions": "Does the input say the parcel was delivered on a Tuesday?",
+   "label": true,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1418",
+   "instructions": "Does the proof-of-delivery photo show the house number 1418?",
+   "label": true,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5055-5877",
+   "instructions": "Does the input show the tracking number PR-5055-5877?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3781",
+   "instructions": "Does the proof-of-delivery photo show the house number 3781?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "227.22",
+   "instructions": "Does an invoice in the input show a total of $227.22?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5824",
+   "instructions": "Does the proof-of-delivery photo show the house number 5824?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "49107",
+   "instructions": "Is order number 49107 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8673-2233",
+   "instructions": "Does the input show the tracking number PR-8673-2233?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "99714",
+   "instructions": "Is order number 99714 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "28714",
+   "instructions": "Is order number 28714 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "74.08",
+   "instructions": "Does an invoice in the input show a total of $74.08?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "62163",
+   "instructions": "Is order number 62163 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "25118",
+   "instructions": "Is order number 25118 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2348",
+   "instructions": "Does the proof-of-delivery photo show the house number 2348?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Anna Stone",
+   "instructions": "Is the customer's name Anna Stone?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "84.60",
+   "instructions": "Does an invoice in the input show a total of $84.60?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "street",
+   "value": "Oak St",
+   "instructions": "Is the street Oak St mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Femi Stone",
+   "instructions": "Is the customer's name Femi Stone?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3624",
+   "instructions": "Does the proof-of-delivery photo show the house number 3624?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Carla Khan",
+   "instructions": "Is the customer's name Carla Khan?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "284.37",
+   "instructions": "Does an invoice in the input show a total of $284.37?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3546-5462",
+   "instructions": "Does the input show the tracking number PR-3546-5462?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7601",
+   "instructions": "Does the proof-of-delivery photo show the house number 7601?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9585",
+   "instructions": "Does the proof-of-delivery photo show the house number 9585?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7112-7652",
+   "instructions": "Does the input show the tracking number PR-7112-7652?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Luca Novak",
+   "instructions": "Is the customer's name Luca Novak?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8223",
+   "instructions": "Does the proof-of-delivery photo show the house number 8223?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1719-4792",
+   "instructions": "Does the input show the tracking number PR-1719-4792?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "courier",
+   "value": "ShipNorth",
+   "instructions": "Is the courier ShipNorth mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Jon Stone",
+   "instructions": "Is the customer's name Jon Stone?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4637-8391",
+   "instructions": "Does the input show the tracking number PR-4637-8391?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "263.59",
+   "instructions": "Does an invoice in the input show a total of $263.59?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "96511",
+   "instructions": "Is order number 96511 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9538",
+   "instructions": "Does the proof-of-delivery photo show the house number 9538?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6598",
+   "instructions": "Does the proof-of-delivery photo show the house number 6598?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "104.49",
+   "instructions": "Does an invoice in the input show a total of $104.49?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "weekday",
+   "value": "Wednesday",
+   "instructions": "Does the input say the parcel was delivered on a Wednesday?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "order",
+   "value": "62550",
+   "instructions": "Is order number 62550 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3471",
+   "instructions": "Does the proof-of-delivery photo show the house number 3471?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Dev Silva",
+   "instructions": "Is the customer's name Dev Silva?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "393.90",
+   "instructions": "Does an invoice in the input show a total of $393.90?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1689",
+   "instructions": "Does the proof-of-delivery photo show the house number 1689?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1323-1790",
+   "instructions": "Does the input show the tracking number PR-1323-1790?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "48253",
+   "instructions": "Is order number 48253 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "40539",
+   "instructions": "Is order number 40539 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "315.55",
+   "instructions": "Does an invoice in the input show a total of $315.55?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5720-4893",
+   "instructions": "Does the input show the tracking number PR-5720-4893?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Daniel Banks",
+   "instructions": "Is the customer's name Daniel Banks?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5564-4705",
+   "instructions": "Does the input show the tracking number PR-5564-4705?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Carla Quinn",
+   "instructions": "Is the customer's name Carla Quinn?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "62725",
+   "instructions": "Is order number 62725 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2517",
+   "instructions": "Does the proof-of-delivery photo show the house number 2517?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2730-2654",
+   "instructions": "Does the input show the tracking number PR-2730-2654?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8194",
+   "instructions": "Does the proof-of-delivery photo show the house number 8194?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5240-2228",
+   "instructions": "Does the input show the tracking number PR-5240-2228?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9693-9355",
+   "instructions": "Does the input show the tracking number PR-9693-9355?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "145.35",
+   "instructions": "Does an invoice in the input show a total of $145.35?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2801",
+   "instructions": "Does the proof-of-delivery photo show the house number 2801?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ines Meyer",
+   "instructions": "Is the customer's name Ines Meyer?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "317.81",
+   "instructions": "Does an invoice in the input show a total of $317.81?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Elena Novak",
+   "instructions": "Is the customer's name Elena Novak?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "378.00",
+   "instructions": "Does an invoice in the input show a total of $378.00?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7903",
+   "instructions": "Does the proof-of-delivery photo show the house number 7903?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Dev Quinn",
+   "instructions": "Is the customer's name Dev Quinn?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8388",
+   "instructions": "Does the proof-of-delivery photo show the house number 8388?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Trekking poles",
+   "instructions": "Does the invoice list a product called 'Trekking poles'?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "61.84",
+   "instructions": "Does an invoice in the input show a total of $61.84?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "96298",
+   "instructions": "Is order number 96298 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9145",
+   "instructions": "Does the proof-of-delivery photo show the house number 9145?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6277-3430",
+   "instructions": "Does the input show the tracking number PR-6277-3430?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "23133",
+   "instructions": "Is order number 23133 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "321.58",
+   "instructions": "Does an invoice in the input show a total of $321.58?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1017-4496",
+   "instructions": "Does the input show the tracking number PR-1017-4496?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5308-2262",
+   "instructions": "Does the input show the tracking number PR-5308-2262?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1814",
+   "instructions": "Does the proof-of-delivery photo show the house number 1814?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1420-6111",
+   "instructions": "Does the input show the tracking number PR-1420-6111?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "398.17",
+   "instructions": "Does an invoice in the input show a total of $398.17?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7018-9920",
+   "instructions": "Does the input show the tracking number PR-7018-9920?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2109",
+   "instructions": "Does the proof-of-delivery photo show the house number 2109?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "349.90",
+   "instructions": "Does an invoice in the input show a total of $349.90?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Carla Hughes",
+   "instructions": "Is the customer's name Carla Hughes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "199.91",
+   "instructions": "Does an invoice in the input show a total of $199.91?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Pine Blvd",
+   "instructions": "Is the street Pine Blvd mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1699-8552",
+   "instructions": "Does the input show the tracking number PR-1699-8552?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "260.65",
+   "instructions": "Does an invoice in the input show a total of $260.65?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "10617",
+   "instructions": "Is order number 10617 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "252.62",
+   "instructions": "Does an invoice in the input show a total of $252.62?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "212.87",
+   "instructions": "Does an invoice in the input show a total of $212.87?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9307-7299",
+   "instructions": "Does the input show the tracking number PR-9307-7299?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5038",
+   "instructions": "Does the proof-of-delivery photo show the house number 5038?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5247",
+   "instructions": "Does the proof-of-delivery photo show the house number 5247?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Daniel Brookes",
+   "instructions": "Is the customer's name Daniel Brookes?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "name",
+   "value": "Luca Hughes",
+   "instructions": "Is the customer's name Luca Hughes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "63744",
+   "instructions": "Is order number 63744 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Jon Hughes",
+   "instructions": "Is the customer's name Jon Hughes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "53719",
+   "instructions": "Is order number 53719 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "312.01",
+   "instructions": "Does an invoice in the input show a total of $312.01?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "193.20",
+   "instructions": "Does an invoice in the input show a total of $193.20?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "395.60",
+   "instructions": "Does an invoice in the input show a total of $395.60?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "15100",
+   "instructions": "Is order number 15100 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "68.40",
+   "instructions": "Does an invoice in the input show a total of $68.40?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "total",
+   "value": "175.10",
+   "instructions": "Does an invoice in the input show a total of $175.10?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "21802",
+   "instructions": "Is order number 21802 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7948",
+   "instructions": "Does the proof-of-delivery photo show the house number 7948?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8450-2501",
+   "instructions": "Does the input show the tracking number PR-8450-2501?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Gus Meyer",
+   "instructions": "Is the customer's name Gus Meyer?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Atlanta",
+   "instructions": "Is the city Atlanta mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "85456",
+   "instructions": "Is order number 85456 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3999-7116",
+   "instructions": "Does the input show the tracking number PR-3999-7116?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2838-2011",
+   "instructions": "Does the input show the tracking number PR-2838-2011?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1550-8314",
+   "instructions": "Does the input show the tracking number PR-1550-8314?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "11007",
+   "instructions": "Is order number 11007 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "72.00",
+   "instructions": "Does an invoice in the input show a total of $72.00?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "total",
+   "value": "61.67",
+   "instructions": "Does an invoice in the input show a total of $61.67?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2408",
+   "instructions": "Does the proof-of-delivery photo show the house number 2408?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8405-9254",
+   "instructions": "Does the input show the tracking number PR-8405-9254?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "22097",
+   "instructions": "Is order number 22097 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "17456",
+   "instructions": "Is order number 17456 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "14877",
+   "instructions": "Is order number 14877 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ines Park",
+   "instructions": "Is the customer's name Ines Park?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "107.43",
+   "instructions": "Does an invoice in the input show a total of $107.43?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "82970",
+   "instructions": "Is order number 82970 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2565-9280",
+   "instructions": "Does the input show the tracking number PR-2565-9280?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1514-6413",
+   "instructions": "Does the input show the tracking number PR-1514-6413?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7868-9565",
+   "instructions": "Does the input show the tracking number PR-7868-9565?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "146.51",
+   "instructions": "Does an invoice in the input show a total of $146.51?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5504",
+   "instructions": "Does the proof-of-delivery photo show the house number 5504?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8867",
+   "instructions": "Does the proof-of-delivery photo show the house number 8867?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4588",
+   "instructions": "Does the proof-of-delivery photo show the house number 4588?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2694",
+   "instructions": "Does the proof-of-delivery photo show the house number 2694?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7824-6040",
+   "instructions": "Does the input show the tracking number PR-7824-6040?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3683-6096",
+   "instructions": "Does the input show the tracking number PR-3683-6096?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "39.30",
+   "instructions": "Does an invoice in the input show a total of $39.30?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "91205",
+   "instructions": "Is order number 91205 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "186.27",
+   "instructions": "Does an invoice in the input show a total of $186.27?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Sleeping mat",
+   "instructions": "Does the invoice list a product called 'Sleeping mat'?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "56129",
+   "instructions": "Is order number 56129 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Raleigh",
+   "instructions": "Is the city Raleigh mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "88238",
+   "instructions": "Is order number 88238 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "58.49",
+   "instructions": "Does an invoice in the input show a total of $58.49?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2592-4846",
+   "instructions": "Does the input show the tracking number PR-2592-4846?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6823",
+   "instructions": "Does the proof-of-delivery photo show the house number 6823?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ines Quinn",
+   "instructions": "Is the customer's name Ines Quinn?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9575",
+   "instructions": "Does the proof-of-delivery photo show the house number 9575?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "87846",
+   "instructions": "Is order number 87846 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "88.23",
+   "instructions": "Does an invoice in the input show a total of $88.23?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Boulder",
+   "instructions": "Is the city Boulder mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "order",
+   "value": "42472",
+   "instructions": "Is order number 42472 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6372-5843",
+   "instructions": "Does the input show the tracking number PR-6372-5843?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8075-2582",
+   "instructions": "Does the input show the tracking number PR-8075-2582?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "336.78",
+   "instructions": "Does an invoice in the input show a total of $336.78?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6375",
+   "instructions": "Does the proof-of-delivery photo show the house number 6375?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "289.07",
+   "instructions": "Does an invoice in the input show a total of $289.07?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7365",
+   "instructions": "Does the proof-of-delivery photo show the house number 7365?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "51.99",
+   "instructions": "Does an invoice in the input show a total of $51.99?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "courier",
+   "value": "TrayExpress",
+   "instructions": "Is the courier TrayExpress mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "318.11",
+   "instructions": "Does an invoice in the input show a total of $318.11?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "56176",
+   "instructions": "Is order number 56176 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8062-6804",
+   "instructions": "Does the input show the tracking number PR-8062-6804?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "113.24",
+   "instructions": "Does an invoice in the input show a total of $113.24?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8213-2633",
+   "instructions": "Does the input show the tracking number PR-8213-2633?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4408",
+   "instructions": "Does the proof-of-delivery photo show the house number 4408?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5872",
+   "instructions": "Does the proof-of-delivery photo show the house number 5872?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2678-2690",
+   "instructions": "Does the input show the tracking number PR-2678-2690?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "342.10",
+   "instructions": "Does an invoice in the input show a total of $342.10?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "198.39",
+   "instructions": "Does an invoice in the input show a total of $198.39?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8637",
+   "instructions": "Does the proof-of-delivery photo show the house number 8637?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7583",
+   "instructions": "Does the proof-of-delivery photo show the house number 7583?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "55508",
+   "instructions": "Is order number 55508 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "17146",
+   "instructions": "Is order number 17146 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "244.16",
+   "instructions": "Does an invoice in the input show a total of $244.16?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6067-7523",
+   "instructions": "Does the input show the tracking number PR-6067-7523?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "45187",
+   "instructions": "Is order number 45187 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5556",
+   "instructions": "Does the proof-of-delivery photo show the house number 5556?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1030",
+   "instructions": "Does the proof-of-delivery photo show the house number 1030?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1020-1788",
+   "instructions": "Does the input show the tracking number PR-1020-1788?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "127.22",
+   "instructions": "Does an invoice in the input show a total of $127.22?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Carla Stone",
+   "instructions": "Is the customer's name Carla Stone?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9883",
+   "instructions": "Does the proof-of-delivery photo show the house number 9883?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "58.53",
+   "instructions": "Does an invoice in the input show a total of $58.53?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "55143",
+   "instructions": "Is order number 55143 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ines Khan",
+   "instructions": "Is the customer's name Ines Khan?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "216.77",
+   "instructions": "Does an invoice in the input show a total of $216.77?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Elena Khan",
+   "instructions": "Is the customer's name Elena Khan?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "25.37",
+   "instructions": "Does an invoice in the input show a total of $25.37?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "362.54",
+   "instructions": "Does an invoice in the input show a total of $362.54?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "97538",
+   "instructions": "Is order number 97538 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Spokane",
+   "instructions": "Is the city Spokane mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1224",
+   "instructions": "Does the proof-of-delivery photo show the house number 1224?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "385.60",
+   "instructions": "Does an invoice in the input show a total of $385.60?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5526-7798",
+   "instructions": "Does the input show the tracking number PR-5526-7798?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Seattle",
+   "instructions": "Is the city Seattle mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8529-1266",
+   "instructions": "Does the input show the tracking number PR-8529-1266?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Reno",
+   "instructions": "Is the city Reno mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "67154",
+   "instructions": "Is order number 67154 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "58393",
+   "instructions": "Is order number 58393 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5367",
+   "instructions": "Does the proof-of-delivery photo show the house number 5367?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "374.56",
+   "instructions": "Does an invoice in the input show a total of $374.56?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "33508",
+   "instructions": "Is order number 33508 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "courier",
+   "value": "CargoLink",
+   "instructions": "Is the courier CargoLink mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "391.79",
+   "instructions": "Does an invoice in the input show a total of $391.79?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8934",
+   "instructions": "Does the proof-of-delivery photo show the house number 8934?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1512",
+   "instructions": "Does the proof-of-delivery photo show the house number 1512?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "51.37",
+   "instructions": "Does an invoice in the input show a total of $51.37?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9920",
+   "instructions": "Does the proof-of-delivery photo show the house number 9920?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "29360",
+   "instructions": "Is order number 29360 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "331.50",
+   "instructions": "Does an invoice in the input show a total of $331.50?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "96.04",
+   "instructions": "Does an invoice in the input show a total of $96.04?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6575",
+   "instructions": "Does the proof-of-delivery photo show the house number 6575?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Dev Novak",
+   "instructions": "Is the customer's name Dev Novak?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "15772",
+   "instructions": "Is order number 15772 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "140.06",
+   "instructions": "Does an invoice in the input show a total of $140.06?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6012",
+   "instructions": "Does the proof-of-delivery photo show the house number 6012?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1202",
+   "instructions": "Does the proof-of-delivery photo show the house number 1202?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4899-6682",
+   "instructions": "Does the input show the tracking number PR-4899-6682?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9317-9843",
+   "instructions": "Does the input show the tracking number PR-9317-9843?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Gus Quinn",
+   "instructions": "Is the customer's name Gus Quinn?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6072-7171",
+   "instructions": "Does the input show the tracking number PR-6072-7171?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "262.37",
+   "instructions": "Does an invoice in the input show a total of $262.37?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Larimer Ave",
+   "instructions": "Is the street Larimer Ave mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2809-9095",
+   "instructions": "Does the input show the tracking number PR-2809-9095?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6129-8033",
+   "instructions": "Does the input show the tracking number PR-6129-8033?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Kira Silva",
+   "instructions": "Is the customer's name Kira Silva?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "17972",
+   "instructions": "Is order number 17972 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "55210",
+   "instructions": "Is order number 55210 mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "order",
+   "value": "48654",
+   "instructions": "Is order number 48654 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "42.57",
+   "instructions": "Does an invoice in the input show a total of $42.57?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1273-2106",
+   "instructions": "Does the input show the tracking number PR-1273-2106?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Mona Ortiz",
+   "instructions": "Is the customer's name Mona Ortiz?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4451",
+   "instructions": "Does the proof-of-delivery photo show the house number 4451?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "166.91",
+   "instructions": "Does an invoice in the input show a total of $166.91?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3634-6403",
+   "instructions": "Does the input show the tracking number PR-3634-6403?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7746",
+   "instructions": "Does the proof-of-delivery photo show the house number 7746?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9803",
+   "instructions": "Does the proof-of-delivery photo show the house number 9803?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "29762",
+   "instructions": "Is order number 29762 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "58281",
+   "instructions": "Is order number 58281 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Walnut Ave",
+   "instructions": "Is the street Walnut Ave mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4742-9336",
+   "instructions": "Does the input show the tracking number PR-4742-9336?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Femi Silva",
+   "instructions": "Is the customer's name Femi Silva?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "48452",
+   "instructions": "Is order number 48452 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "269.97",
+   "instructions": "Does an invoice in the input show a total of $269.97?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "31579",
+   "instructions": "Is order number 31579 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "weekday",
+   "value": "Friday",
+   "instructions": "Does the input say the parcel was delivered on a Friday?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "name",
+   "value": "Femi Park",
+   "instructions": "Is the customer's name Femi Park?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7900",
+   "instructions": "Does the proof-of-delivery photo show the house number 7900?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "190.65",
+   "instructions": "Does an invoice in the input show a total of $190.65?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "98857",
+   "instructions": "Is order number 98857 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ben Reyes",
+   "instructions": "Is the customer's name Ben Reyes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6236-6692",
+   "instructions": "Does the input show the tracking number PR-6236-6692?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ben Park",
+   "instructions": "Is the customer's name Ben Park?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ben Stone",
+   "instructions": "Is the customer's name Ben Stone?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9234-3762",
+   "instructions": "Does the input show the tracking number PR-9234-3762?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Oak Rd",
+   "instructions": "Is the street Oak Rd mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "61949",
+   "instructions": "Is order number 61949 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "158.41",
+   "instructions": "Does an invoice in the input show a total of $158.41?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9775-4120",
+   "instructions": "Does the input show the tracking number PR-9775-4120?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8369-7079",
+   "instructions": "Does the input show the tracking number PR-8369-7079?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4633-1035",
+   "instructions": "Does the input show the tracking number PR-4633-1035?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "230.44",
+   "instructions": "Does an invoice in the input show a total of $230.44?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Jon Quinn",
+   "instructions": "Is the customer's name Jon Quinn?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2764",
+   "instructions": "Does the proof-of-delivery photo show the house number 2764?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "426",
+   "instructions": "Does the proof-of-delivery photo show the house number 426?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7641",
+   "instructions": "Does the proof-of-delivery photo show the house number 7641?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4118",
+   "instructions": "Does the proof-of-delivery photo show the house number 4118?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "street",
+   "value": "Elm Blvd",
+   "instructions": "Is the street Elm Blvd mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "81845",
+   "instructions": "Is order number 81845 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "38758",
+   "instructions": "Is order number 38758 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3692-4996",
+   "instructions": "Does the input show the tracking number PR-3692-4996?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2604",
+   "instructions": "Does the proof-of-delivery photo show the house number 2604?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3645",
+   "instructions": "Does the proof-of-delivery photo show the house number 3645?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "254.27",
+   "instructions": "Does an invoice in the input show a total of $254.27?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1370-6620",
+   "instructions": "Does the input show the tracking number PR-1370-6620?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "293.30",
+   "instructions": "Does an invoice in the input show a total of $293.30?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "106.77",
+   "instructions": "Does an invoice in the input show a total of $106.77?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4978-2669",
+   "instructions": "Does the input show the tracking number PR-4978-2669?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "73518",
+   "instructions": "Is order number 73518 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Blake St",
+   "instructions": "Is the street Blake St mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "order",
+   "value": "16572",
+   "instructions": "Is order number 16572 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "96275",
+   "instructions": "Is order number 96275 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "329.38",
+   "instructions": "Does an invoice in the input show a total of $329.38?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Maple Ave",
+   "instructions": "Is the street Maple Ave mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1920-4811",
+   "instructions": "Does the input show the tracking number PR-1920-4811?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6742-5205",
+   "instructions": "Does the input show the tracking number PR-6742-5205?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Kira Ortiz",
+   "instructions": "Is the customer's name Kira Ortiz?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Luca Meyer",
+   "instructions": "Is the customer's name Luca Meyer?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8260-2604",
+   "instructions": "Does the input show the tracking number PR-8260-2604?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Detroit",
+   "instructions": "Is the city Detroit mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "item",
+   "value": "Headlamp",
+   "instructions": "Does the invoice list a product called 'Headlamp'?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "total",
+   "value": "263.60",
+   "instructions": "Does an invoice in the input show a total of $263.60?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "96765",
+   "instructions": "Is order number 96765 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2490",
+   "instructions": "Does the proof-of-delivery photo show the house number 2490?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "18301",
+   "instructions": "Is order number 18301 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Luca Stone",
+   "instructions": "Is the customer's name Luca Stone?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "103.53",
+   "instructions": "Does an invoice in the input show a total of $103.53?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5372",
+   "instructions": "Does the proof-of-delivery photo show the house number 5372?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Lawrence St",
+   "instructions": "Is the street Lawrence St mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "order",
+   "value": "85243",
+   "instructions": "Is order number 85243 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3442-9938",
+   "instructions": "Does the input show the tracking number PR-3442-9938?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "11526",
+   "instructions": "Is order number 11526 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Maple Rd",
+   "instructions": "Is the street Maple Rd mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3120-8105",
+   "instructions": "Does the input show the tracking number PR-3120-8105?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4582-4811",
+   "instructions": "Does the input show the tracking number PR-4582-4811?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6805",
+   "instructions": "Does the proof-of-delivery photo show the house number 6805?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1430-2468",
+   "instructions": "Does the input show the tracking number PR-1430-2468?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9726",
+   "instructions": "Does the proof-of-delivery photo show the house number 9726?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "89482",
+   "instructions": "Is order number 89482 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4814-2654",
+   "instructions": "Does the input show the tracking number PR-4814-2654?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "146.24",
+   "instructions": "Does an invoice in the input show a total of $146.24?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "20.51",
+   "instructions": "Does an invoice in the input show a total of $20.51?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3215",
+   "instructions": "Does the proof-of-delivery photo show the house number 3215?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7437-4532",
+   "instructions": "Does the input show the tracking number PR-7437-4532?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9129-3304",
+   "instructions": "Does the input show the tracking number PR-9129-3304?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "260.91",
+   "instructions": "Does an invoice in the input show a total of $260.91?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1878-3485",
+   "instructions": "Does the input show the tracking number PR-1878-3485?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5066-2940",
+   "instructions": "Does the input show the tracking number PR-5066-2940?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "75193",
+   "instructions": "Is order number 75193 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Kira Novak",
+   "instructions": "Is the customer's name Kira Novak?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4571-8619",
+   "instructions": "Does the input show the tracking number PR-4571-8619?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "126.75",
+   "instructions": "Does an invoice in the input show a total of $126.75?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "43092",
+   "instructions": "Is order number 43092 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1829-5754",
+   "instructions": "Does the input show the tracking number PR-1829-5754?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "38.05",
+   "instructions": "Does an invoice in the input show a total of $38.05?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Compass",
+   "instructions": "Does the invoice list a product called 'Compass'?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Anna Park",
+   "instructions": "Is the customer's name Anna Park?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "325.86",
+   "instructions": "Does an invoice in the input show a total of $325.86?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6628",
+   "instructions": "Does the proof-of-delivery photo show the house number 6628?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5990-9328",
+   "instructions": "Does the input show the tracking number PR-5990-9328?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "22208",
+   "instructions": "Is order number 22208 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9779-4033",
+   "instructions": "Does the input show the tracking number PR-9779-4033?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2715",
+   "instructions": "Does the proof-of-delivery photo show the house number 2715?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "98259",
+   "instructions": "Is order number 98259 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1653-8078",
+   "instructions": "Does the input show the tracking number PR-1653-8078?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7600-9447",
+   "instructions": "Does the input show the tracking number PR-7600-9447?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4235",
+   "instructions": "Does the proof-of-delivery photo show the house number 4235?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "165.81",
+   "instructions": "Does an invoice in the input show a total of $165.81?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "51365",
+   "instructions": "Is order number 51365 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "136.61",
+   "instructions": "Does an invoice in the input show a total of $136.61?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Portland",
+   "instructions": "Is the city Portland mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1520",
+   "instructions": "Does the proof-of-delivery photo show the house number 1520?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "94.10",
+   "instructions": "Does an invoice in the input show a total of $94.10?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "courier",
+   "value": "QuickDrop",
+   "instructions": "Is the courier QuickDrop mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1645-6061",
+   "instructions": "Does the input show the tracking number PR-1645-6061?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "331.37",
+   "instructions": "Does an invoice in the input show a total of $331.37?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "131.35",
+   "instructions": "Does an invoice in the input show a total of $131.35?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6626-2381",
+   "instructions": "Does the input show the tracking number PR-6626-2381?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7065",
+   "instructions": "Does the proof-of-delivery photo show the house number 7065?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "276.46",
+   "instructions": "Does an invoice in the input show a total of $276.46?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "51520",
+   "instructions": "Is order number 51520 mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "total",
+   "value": "237.00",
+   "instructions": "Does an invoice in the input show a total of $237.00?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "44761",
+   "instructions": "Is order number 44761 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "17.05",
+   "instructions": "Does an invoice in the input show a total of $17.05?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "159.01",
+   "instructions": "Does an invoice in the input show a total of $159.01?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "184.39",
+   "instructions": "Does an invoice in the input show a total of $184.39?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3807",
+   "instructions": "Does the proof-of-delivery photo show the house number 3807?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Luca Reyes",
+   "instructions": "Is the customer's name Luca Reyes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "40007",
+   "instructions": "Is order number 40007 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2901-3321",
+   "instructions": "Does the input show the tracking number PR-2901-3321?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1993-7596",
+   "instructions": "Does the input show the tracking number PR-1993-7596?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7377",
+   "instructions": "Does the proof-of-delivery photo show the house number 7377?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "22803",
+   "instructions": "Is order number 22803 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "13905",
+   "instructions": "Is order number 13905 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "309.33",
+   "instructions": "Does an invoice in the input show a total of $309.33?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8606-5951",
+   "instructions": "Does the input show the tracking number PR-8606-5951?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "313.40",
+   "instructions": "Does an invoice in the input show a total of $313.40?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9609-8319",
+   "instructions": "Does the input show the tracking number PR-9609-8319?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "78146",
+   "instructions": "Is order number 78146 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3067-5505",
+   "instructions": "Does the input show the tracking number PR-3067-5505?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "61864",
+   "instructions": "Is order number 61864 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Water filter",
+   "instructions": "Does the invoice list a product called 'Water filter'?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Mona Khan",
+   "instructions": "Is the customer's name Mona Khan?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7700",
+   "instructions": "Does the proof-of-delivery photo show the house number 7700?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "144.57",
+   "instructions": "Does an invoice in the input show a total of $144.57?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Cedar Rd",
+   "instructions": "Is the street Cedar Rd mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "32463",
+   "instructions": "Is order number 32463 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "85047",
+   "instructions": "Is order number 85047 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Cedar Blvd",
+   "instructions": "Is the street Cedar Blvd mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "52516",
+   "instructions": "Is order number 52516 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "281.46",
+   "instructions": "Does an invoice in the input show a total of $281.46?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "55102",
+   "instructions": "Is order number 55102 mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4180-5853",
+   "instructions": "Does the input show the tracking number PR-4180-5853?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "165.91",
+   "instructions": "Does an invoice in the input show a total of $165.91?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Elm Rd",
+   "instructions": "Is the street Elm Rd mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "165.15",
+   "instructions": "Does an invoice in the input show a total of $165.15?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "391.68",
+   "instructions": "Does an invoice in the input show a total of $391.68?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "42701",
+   "instructions": "Is order number 42701 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "90492",
+   "instructions": "Is order number 90492 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3053-6194",
+   "instructions": "Does the input show the tracking number PR-3053-6194?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2076",
+   "instructions": "Does the proof-of-delivery photo show the house number 2076?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "44181",
+   "instructions": "Is order number 44181 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3800",
+   "instructions": "Does the proof-of-delivery photo show the house number 3800?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8560-2924",
+   "instructions": "Does the input show the tracking number PR-8560-2924?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4734-3201",
+   "instructions": "Does the input show the tracking number PR-4734-3201?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "326.20",
+   "instructions": "Does an invoice in the input show a total of $326.20?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Oak Blvd",
+   "instructions": "Is the street Oak Blvd mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3902-9095",
+   "instructions": "Does the input show the tracking number PR-3902-9095?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "95948",
+   "instructions": "Is order number 95948 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Carla Reyes",
+   "instructions": "Is the customer's name Carla Reyes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "391.28",
+   "instructions": "Does an invoice in the input show a total of $391.28?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "59177",
+   "instructions": "Is order number 59177 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4954-7658",
+   "instructions": "Does the input show the tracking number PR-4954-7658?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6947-6038",
+   "instructions": "Does the input show the tracking number PR-6947-6038?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7718-2290",
+   "instructions": "Does the input show the tracking number PR-7718-2290?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "order",
+   "value": "90980",
+   "instructions": "Is order number 90980 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8205",
+   "instructions": "Does the proof-of-delivery photo show the house number 8205?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6376",
+   "instructions": "Does the proof-of-delivery photo show the house number 6376?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4273",
+   "instructions": "Does the proof-of-delivery photo show the house number 4273?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "23082",
+   "instructions": "Is order number 23082 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "David Brooks",
+   "instructions": "Is the customer's name David Brooks?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "order",
+   "value": "57303",
+   "instructions": "Is order number 57303 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6600-3787",
+   "instructions": "Does the input show the tracking number PR-6600-3787?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ines Ortiz",
+   "instructions": "Is the customer's name Ines Ortiz?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "26.39",
+   "instructions": "Does an invoice in the input show a total of $26.39?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Jon Meyer",
+   "instructions": "Is the customer's name Jon Meyer?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "281.32",
+   "instructions": "Does an invoice in the input show a total of $281.32?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "84720",
+   "instructions": "Is order number 84720 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7566-7557",
+   "instructions": "Does the input show the tracking number PR-7566-7557?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "219.25",
+   "instructions": "Does an invoice in the input show a total of $219.25?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "123.59",
+   "instructions": "Does an invoice in the input show a total of $123.59?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4012",
+   "instructions": "Does the proof-of-delivery photo show the house number 4012?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "99166",
+   "instructions": "Is order number 99166 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6736-7022",
+   "instructions": "Does the input show the tracking number PR-6736-7022?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1977-3718",
+   "instructions": "Does the input show the tracking number PR-1977-3718?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5833-7021",
+   "instructions": "Does the input show the tracking number PR-5833-7021?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3538",
+   "instructions": "Does the proof-of-delivery photo show the house number 3538?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Jon Ortiz",
+   "instructions": "Is the customer's name Jon Ortiz?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "561",
+   "instructions": "Does the proof-of-delivery photo show the house number 561?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5207",
+   "instructions": "Does the proof-of-delivery photo show the house number 5207?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "374.03",
+   "instructions": "Does an invoice in the input show a total of $374.03?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9189-9782",
+   "instructions": "Does the input show the tracking number PR-9189-9782?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Chicago",
+   "instructions": "Is the city Chicago mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "92578",
+   "instructions": "Is order number 92578 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "103.25",
+   "instructions": "Does an invoice in the input show a total of $103.25?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Walnut Blvd",
+   "instructions": "Is the street Walnut Blvd mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "170.07",
+   "instructions": "Does an invoice in the input show a total of $170.07?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "16021",
+   "instructions": "Is order number 16021 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Kira Park",
+   "instructions": "Is the customer's name Kira Park?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6649-4950",
+   "instructions": "Does the input show the tracking number PR-6649-4950?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "19744",
+   "instructions": "Is order number 19744 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "154.54",
+   "instructions": "Does an invoice in the input show a total of $154.54?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "216.63",
+   "instructions": "Does an invoice in the input show a total of $216.63?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "43.60",
+   "instructions": "Does an invoice in the input show a total of $43.60?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "39135",
+   "instructions": "Is order number 39135 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "79515",
+   "instructions": "Is order number 79515 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2088",
+   "instructions": "Does the proof-of-delivery photo show the house number 2088?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2375",
+   "instructions": "Does the proof-of-delivery photo show the house number 2375?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "29808",
+   "instructions": "Is order number 29808 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8886",
+   "instructions": "Does the proof-of-delivery photo show the house number 8886?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9297",
+   "instructions": "Does the proof-of-delivery photo show the house number 9297?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Market St",
+   "instructions": "Is the street Market St mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "order",
+   "value": "31516",
+   "instructions": "Is order number 31516 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "107.77",
+   "instructions": "Does an invoice in the input show a total of $107.77?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "weekday",
+   "value": "Monday",
+   "instructions": "Does the input say the parcel was delivered on a Monday?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "order",
+   "value": "57235",
+   "instructions": "Is order number 57235 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Gus Hughes",
+   "instructions": "Is the customer's name Gus Hughes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6173",
+   "instructions": "Does the proof-of-delivery photo show the house number 6173?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Anna Hughes",
+   "instructions": "Is the customer's name Anna Hughes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9691-1138",
+   "instructions": "Does the input show the tracking number PR-9691-1138?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "353.42",
+   "instructions": "Does an invoice in the input show a total of $353.42?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7201-2291",
+   "instructions": "Does the input show the tracking number PR-7201-2291?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "weekday",
+   "value": "Thursday",
+   "instructions": "Does the input say the parcel was delivered on a Thursday?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "total",
+   "value": "375.73",
+   "instructions": "Does an invoice in the input show a total of $375.73?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2344-5390",
+   "instructions": "Does the input show the tracking number PR-2344-5390?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "46349",
+   "instructions": "Is order number 46349 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2404-6632",
+   "instructions": "Does the input show the tracking number PR-2404-6632?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1744-5336",
+   "instructions": "Does the input show the tracking number PR-1744-5336?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9392",
+   "instructions": "Does the proof-of-delivery photo show the house number 9392?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "28139",
+   "instructions": "Is order number 28139 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9727-3060",
+   "instructions": "Does the input show the tracking number PR-9727-3060?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "41252",
+   "instructions": "Is order number 41252 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "91439",
+   "instructions": "Is order number 91439 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "courier",
+   "value": "PostHaste",
+   "instructions": "Is the courier PostHaste mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "14944",
+   "instructions": "Is order number 14944 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "115.97",
+   "instructions": "Does an invoice in the input show a total of $115.97?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3924-9802",
+   "instructions": "Does the input show the tracking number PR-3924-9802?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6916-5123",
+   "instructions": "Does the input show the tracking number PR-6916-5123?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Anna Quinn",
+   "instructions": "Is the customer's name Anna Quinn?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6391",
+   "instructions": "Does the proof-of-delivery photo show the house number 6391?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "56210",
+   "instructions": "Is order number 56210 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5555",
+   "instructions": "Does the proof-of-delivery photo show the house number 5555?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7224-2584",
+   "instructions": "Does the input show the tracking number PR-7224-2584?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9882-5757",
+   "instructions": "Does the input show the tracking number PR-9882-5757?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Mona Meyer",
+   "instructions": "Is the customer's name Mona Meyer?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "26.54",
+   "instructions": "Does an invoice in the input show a total of $26.54?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5919-1732",
+   "instructions": "Does the input show the tracking number PR-5919-1732?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "51347",
+   "instructions": "Is order number 51347 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Madison",
+   "instructions": "Is the city Madison mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "379.55",
+   "instructions": "Does an invoice in the input show a total of $379.55?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4239",
+   "instructions": "Does the proof-of-delivery photo show the house number 4239?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "353.31",
+   "instructions": "Does an invoice in the input show a total of $353.31?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4846-5708",
+   "instructions": "Does the input show the tracking number PR-4846-5708?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7713",
+   "instructions": "Does the proof-of-delivery photo show the house number 7713?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "courier",
+   "value": "RouteParcel",
+   "instructions": "Is the courier RouteParcel mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "order",
+   "value": "10836",
+   "instructions": "Is order number 10836 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "308.28",
+   "instructions": "Does an invoice in the input show a total of $308.28?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "37.21",
+   "instructions": "Does an invoice in the input show a total of $37.21?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5511",
+   "instructions": "Does the proof-of-delivery photo show the house number 5511?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "63852",
+   "instructions": "Is order number 63852 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8692-6246",
+   "instructions": "Does the input show the tracking number PR-8692-6246?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "55012",
+   "instructions": "Is order number 55012 mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "house",
+   "value": "4475",
+   "instructions": "Does the proof-of-delivery photo show the house number 4475?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5170",
+   "instructions": "Does the proof-of-delivery photo show the house number 5170?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8736-4187",
+   "instructions": "Does the input show the tracking number PR-8736-4187?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ines Stone",
+   "instructions": "Is the customer's name Ines Stone?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "147.10",
+   "instructions": "Does an invoice in the input show a total of $147.10?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "56898",
+   "instructions": "Is order number 56898 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "114.43",
+   "instructions": "Does an invoice in the input show a total of $114.43?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Anna Meyer",
+   "instructions": "Is the customer's name Anna Meyer?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "216.03",
+   "instructions": "Does an invoice in the input show a total of $216.03?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "57294",
+   "instructions": "Is order number 57294 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6700-6766",
+   "instructions": "Does the input show the tracking number PR-6700-6766?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Camp stove",
+   "instructions": "Does the invoice list a product called 'Camp stove'?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "43544",
+   "instructions": "Is order number 43544 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "110.88",
+   "instructions": "Does an invoice in the input show a total of $110.88?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "87.41",
+   "instructions": "Does an invoice in the input show a total of $87.41?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8133-4308",
+   "instructions": "Does the input show the tracking number PR-8133-4308?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "40021",
+   "instructions": "Is order number 40021 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Elena Reyes",
+   "instructions": "Is the customer's name Elena Reyes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2494-2398",
+   "instructions": "Does the input show the tracking number PR-2494-2398?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Gus Novak",
+   "instructions": "Is the customer's name Gus Novak?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6794-7658",
+   "instructions": "Does the input show the tracking number PR-6794-7658?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "69827",
+   "instructions": "Is order number 69827 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Elm Ave",
+   "instructions": "Is the street Elm Ave mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9395",
+   "instructions": "Does the proof-of-delivery photo show the house number 9395?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ben Novak",
+   "instructions": "Is the customer's name Ben Novak?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9791-9808",
+   "instructions": "Does the input show the tracking number PR-9791-9808?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3757",
+   "instructions": "Does the proof-of-delivery photo show the house number 3757?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2549",
+   "instructions": "Does the proof-of-delivery photo show the house number 2549?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "36144",
+   "instructions": "Is order number 36144 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "170.90",
+   "instructions": "Does an invoice in the input show a total of $170.90?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6919",
+   "instructions": "Does the proof-of-delivery photo show the house number 6919?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8461-7790",
+   "instructions": "Does the input show the tracking number PR-8461-7790?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Insulated bottle 500 ml",
+   "instructions": "Does the invoice list a product called 'Insulated bottle 500 ml'?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "total",
+   "value": "30.33",
+   "instructions": "Does an invoice in the input show a total of $30.33?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "810",
+   "instructions": "Does the proof-of-delivery photo show the house number 810?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5060-4951",
+   "instructions": "Does the input show the tracking number PR-5060-4951?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3171-1960",
+   "instructions": "Does the input show the tracking number PR-3171-1960?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "21003",
+   "instructions": "Is order number 21003 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Jon Novak",
+   "instructions": "Is the customer's name Jon Novak?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5681-4841",
+   "instructions": "Does the input show the tracking number PR-5681-4841?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "293.24",
+   "instructions": "Does an invoice in the input show a total of $293.24?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "390.91",
+   "instructions": "Does an invoice in the input show a total of $390.91?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "352.57",
+   "instructions": "Does an invoice in the input show a total of $352.57?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5722",
+   "instructions": "Does the proof-of-delivery photo show the house number 5722?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7267-1634",
+   "instructions": "Does the input show the tracking number PR-7267-1634?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "369.35",
+   "instructions": "Does an invoice in the input show a total of $369.35?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9866-1987",
+   "instructions": "Does the input show the tracking number PR-9866-1987?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3690",
+   "instructions": "Does the proof-of-delivery photo show the house number 3690?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9655-1197",
+   "instructions": "Does the input show the tracking number PR-9655-1197?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Elena Ortiz",
+   "instructions": "Is the customer's name Elena Ortiz?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3366",
+   "instructions": "Does the proof-of-delivery photo show the house number 3366?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7781-2291",
+   "instructions": "Does the input show the tracking number PR-7781-2291?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7828-8279",
+   "instructions": "Does the input show the tracking number PR-7828-8279?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "27275",
+   "instructions": "Is order number 27275 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ben Silva",
+   "instructions": "Is the customer's name Ben Silva?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Gus Stone",
+   "instructions": "Is the customer's name Gus Stone?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9473",
+   "instructions": "Does the proof-of-delivery photo show the house number 9473?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8372-8632",
+   "instructions": "Does the input show the tracking number PR-8372-8632?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "56805",
+   "instructions": "Is order number 56805 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "339.44",
+   "instructions": "Does an invoice in the input show a total of $339.44?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "83731",
+   "instructions": "Is order number 83731 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "366.27",
+   "instructions": "Does an invoice in the input show a total of $366.27?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1861-3549",
+   "instructions": "Does the input show the tracking number PR-1861-3549?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9747",
+   "instructions": "Does the proof-of-delivery photo show the house number 9747?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "91183",
+   "instructions": "Is order number 91183 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4787",
+   "instructions": "Does the proof-of-delivery photo show the house number 4787?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9899-7220",
+   "instructions": "Does the input show the tracking number PR-9899-7220?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4361-9680",
+   "instructions": "Does the input show the tracking number PR-4361-9680?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Tampa",
+   "instructions": "Is the city Tampa mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9654",
+   "instructions": "Does the proof-of-delivery photo show the house number 9654?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Priya Nair",
+   "instructions": "Is the customer's name Priya Nair?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "item",
+   "value": "Gaiters",
+   "instructions": "Does the invoice list a product called 'Gaiters'?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9749",
+   "instructions": "Does the proof-of-delivery photo show the house number 9749?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3219-5991",
+   "instructions": "Does the input show the tracking number PR-3219-5991?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "92.84",
+   "instructions": "Does an invoice in the input show a total of $92.84?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1148",
+   "instructions": "Does the proof-of-delivery photo show the house number 1148?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "city",
+   "value": "Albany",
+   "instructions": "Is the city Albany mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5413",
+   "instructions": "Does the proof-of-delivery photo show the house number 5413?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "22196",
+   "instructions": "Is order number 22196 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2249",
+   "instructions": "Does the proof-of-delivery photo show the house number 2249?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8111",
+   "instructions": "Does the proof-of-delivery photo show the house number 8111?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Maple Blvd",
+   "instructions": "Is the street Maple Blvd mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Elena Stone",
+   "instructions": "Is the customer's name Elena Stone?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Tent pegs",
+   "instructions": "Does the invoice list a product called 'Tent pegs'?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "126.20",
+   "instructions": "Does an invoice in the input show a total of $126.20?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8935",
+   "instructions": "Does the proof-of-delivery photo show the house number 8935?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ines Hughes",
+   "instructions": "Is the customer's name Ines Hughes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3213",
+   "instructions": "Does the proof-of-delivery photo show the house number 3213?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9055-6253",
+   "instructions": "Does the input show the tracking number PR-9055-6253?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3487",
+   "instructions": "Does the proof-of-delivery photo show the house number 3487?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Kira Quinn",
+   "instructions": "Is the customer's name Kira Quinn?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Carla Novak",
+   "instructions": "Is the customer's name Carla Novak?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5631-2867",
+   "instructions": "Does the input show the tracking number PR-5631-2867?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1505-4613",
+   "instructions": "Does the input show the tracking number PR-1505-4613?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2824",
+   "instructions": "Does the proof-of-delivery photo show the house number 2824?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5483",
+   "instructions": "Does the proof-of-delivery photo show the house number 5483?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7565-9056",
+   "instructions": "Does the input show the tracking number PR-7565-9056?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "44.37",
+   "instructions": "Does an invoice in the input show a total of $44.37?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "79758",
+   "instructions": "Is order number 79758 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Gus Khan",
+   "instructions": "Is the customer's name Gus Khan?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8758-2892",
+   "instructions": "Does the input show the tracking number PR-8758-2892?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "55121",
+   "instructions": "Is order number 55121 mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "total",
+   "value": "384.56",
+   "instructions": "Does an invoice in the input show a total of $384.56?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3726",
+   "instructions": "Does the proof-of-delivery photo show the house number 3726?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "332.84",
+   "instructions": "Does an invoice in the input show a total of $332.84?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "56955",
+   "instructions": "Is order number 56955 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "380.45",
+   "instructions": "Does an invoice in the input show a total of $380.45?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "249.19",
+   "instructions": "Does an invoice in the input show a total of $249.19?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Dry bag 20L",
+   "instructions": "Does the invoice list a product called 'Dry bag 20L'?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "92141",
+   "instructions": "Is order number 92141 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ben Khan",
+   "instructions": "Is the customer's name Ben Khan?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Kira Khan",
+   "instructions": "Is the customer's name Kira Khan?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "39218",
+   "instructions": "Is order number 39218 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1958",
+   "instructions": "Does the proof-of-delivery photo show the house number 1958?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5131",
+   "instructions": "Does the proof-of-delivery photo show the house number 5131?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "61498",
+   "instructions": "Is order number 61498 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Elena Quinn",
+   "instructions": "Is the customer's name Elena Quinn?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "63545",
+   "instructions": "Is order number 63545 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Rain shell",
+   "instructions": "Does the invoice list a product called 'Rain shell'?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Elena Park",
+   "instructions": "Is the customer's name Elena Park?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5073-4139",
+   "instructions": "Does the input show the tracking number PR-5073-4139?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "16629",
+   "instructions": "Is order number 16629 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4935",
+   "instructions": "Does the proof-of-delivery photo show the house number 4935?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2580",
+   "instructions": "Does the proof-of-delivery photo show the house number 2580?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "156",
+   "instructions": "Does the proof-of-delivery photo show the house number 156?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Kira Stone",
+   "instructions": "Is the customer's name Kira Stone?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "281.99",
+   "instructions": "Does an invoice in the input show a total of $281.99?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8859",
+   "instructions": "Does the proof-of-delivery photo show the house number 8859?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "96673",
+   "instructions": "Is order number 96673 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7738-8220",
+   "instructions": "Does the input show the tracking number PR-7738-8220?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Jon Reyes",
+   "instructions": "Is the customer's name Jon Reyes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "106.51",
+   "instructions": "Does an invoice in the input show a total of $106.51?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "90584",
+   "instructions": "Is order number 90584 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "32946",
+   "instructions": "Is order number 32946 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "166.57",
+   "instructions": "Does an invoice in the input show a total of $166.57?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9861",
+   "instructions": "Does the proof-of-delivery photo show the house number 9861?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3752",
+   "instructions": "Does the proof-of-delivery photo show the house number 3752?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "195.16",
+   "instructions": "Does an invoice in the input show a total of $195.16?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9365",
+   "instructions": "Does the proof-of-delivery photo show the house number 9365?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Femi Quinn",
+   "instructions": "Is the customer's name Femi Quinn?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8280",
+   "instructions": "Does the proof-of-delivery photo show the house number 8280?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8483-1130",
+   "instructions": "Does the input show the tracking number PR-8483-1130?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8381-8493",
+   "instructions": "Does the input show the tracking number PR-8381-8493?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "580",
+   "instructions": "Does the proof-of-delivery photo show the house number 580?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1058",
+   "instructions": "Does the proof-of-delivery photo show the house number 1058?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "82512",
+   "instructions": "Is order number 82512 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "44.65",
+   "instructions": "Does an invoice in the input show a total of $44.65?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Cedar St",
+   "instructions": "Is the street Cedar St mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7464-1228",
+   "instructions": "Does the input show the tracking number PR-7464-1228?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7139",
+   "instructions": "Does the proof-of-delivery photo show the house number 7139?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "82384",
+   "instructions": "Is order number 82384 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Femi Khan",
+   "instructions": "Is the customer's name Femi Khan?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3172",
+   "instructions": "Does the proof-of-delivery photo show the house number 3172?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "321.77",
+   "instructions": "Does an invoice in the input show a total of $321.77?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "98338",
+   "instructions": "Is order number 98338 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5027",
+   "instructions": "Does the proof-of-delivery photo show the house number 5027?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5066-6828",
+   "instructions": "Does the input show the tracking number PR-5066-6828?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5583-7275",
+   "instructions": "Does the input show the tracking number PR-5583-7275?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Trail daypack 32L",
+   "instructions": "Does the invoice list a product called 'Trail daypack 32L'?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "house",
+   "value": "1645",
+   "instructions": "Does the proof-of-delivery photo show the house number 1645?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "102.37",
+   "instructions": "Does an invoice in the input show a total of $102.37?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6417-3662",
+   "instructions": "Does the input show the tracking number PR-6417-3662?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5521",
+   "instructions": "Does the proof-of-delivery photo show the house number 5521?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "86.04",
+   "instructions": "Does an invoice in the input show a total of $86.04?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "name",
+   "value": "Kira Reyes",
+   "instructions": "Is the customer's name Kira Reyes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Mona Quinn",
+   "instructions": "Is the customer's name Mona Quinn?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Pine St",
+   "instructions": "Is the street Pine St mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3563",
+   "instructions": "Does the proof-of-delivery photo show the house number 3563?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "77045",
+   "instructions": "Is order number 77045 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3252-1084",
+   "instructions": "Does the input show the tracking number PR-3252-1084?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "194.39",
+   "instructions": "Does an invoice in the input show a total of $194.39?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6670",
+   "instructions": "Does the proof-of-delivery photo show the house number 6670?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "126.37",
+   "instructions": "Does an invoice in the input show a total of $126.37?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3588-8230",
+   "instructions": "Does the input show the tracking number PR-3588-8230?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6154",
+   "instructions": "Does the proof-of-delivery photo show the house number 6154?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7029-8159",
+   "instructions": "Does the input show the tracking number PR-7029-8159?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Dallas",
+   "instructions": "Is the city Dallas mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5458-8259",
+   "instructions": "Does the input show the tracking number PR-5458-8259?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "38.39",
+   "instructions": "Does an invoice in the input show a total of $38.39?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "310.48",
+   "instructions": "Does an invoice in the input show a total of $310.48?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "89905",
+   "instructions": "Is order number 89905 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "265.63",
+   "instructions": "Does an invoice in the input show a total of $265.63?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8846-4974",
+   "instructions": "Does the input show the tracking number PR-8846-4974?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "67.01",
+   "instructions": "Does an invoice in the input show a total of $67.01?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9922-4683",
+   "instructions": "Does the input show the tracking number PR-9922-4683?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "342.60",
+   "instructions": "Does an invoice in the input show a total of $342.60?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "226.64",
+   "instructions": "Does an invoice in the input show a total of $226.64?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7504",
+   "instructions": "Does the proof-of-delivery photo show the house number 7504?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9780-6870",
+   "instructions": "Does the input show the tracking number PR-9780-6870?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1409-5506",
+   "instructions": "Does the input show the tracking number PR-1409-5506?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "41544",
+   "instructions": "Is order number 41544 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "First aid kit",
+   "instructions": "Does the invoice list a product called 'First aid kit'?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Elena Hughes",
+   "instructions": "Is the customer's name Elena Hughes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "357.92",
+   "instructions": "Does an invoice in the input show a total of $357.92?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "50120",
+   "instructions": "Is order number 50120 mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "name",
+   "value": "Carla Park",
+   "instructions": "Is the customer's name Carla Park?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9423-4899",
+   "instructions": "Does the input show the tracking number PR-9423-4899?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1172-2615",
+   "instructions": "Does the input show the tracking number PR-1172-2615?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7337",
+   "instructions": "Does the proof-of-delivery photo show the house number 7337?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1481",
+   "instructions": "Does the proof-of-delivery photo show the house number 1481?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "total",
+   "value": "262.75",
+   "instructions": "Does an invoice in the input show a total of $262.75?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "348.89",
+   "instructions": "Does an invoice in the input show a total of $348.89?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7505-1693",
+   "instructions": "Does the input show the tracking number PR-7505-1693?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Gus Park",
+   "instructions": "Is the customer's name Gus Park?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "75.04",
+   "instructions": "Does an invoice in the input show a total of $75.04?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "294.84",
+   "instructions": "Does an invoice in the input show a total of $294.84?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Mona Park",
+   "instructions": "Is the customer's name Mona Park?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Femi Ortiz",
+   "instructions": "Is the customer's name Femi Ortiz?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Gus Reyes",
+   "instructions": "Is the customer's name Gus Reyes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8734-1519",
+   "instructions": "Does the input show the tracking number PR-8734-1519?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "courier",
+   "value": "BoxLine",
+   "instructions": "Is the courier BoxLine mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "76.61",
+   "instructions": "Does an invoice in the input show a total of $76.61?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "66047",
+   "instructions": "Is order number 66047 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2556-1751",
+   "instructions": "Does the input show the tracking number PR-2556-1751?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "37125",
+   "instructions": "Is order number 37125 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2777",
+   "instructions": "Does the proof-of-delivery photo show the house number 2777?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1771-2796",
+   "instructions": "Does the input show the tracking number PR-1771-2796?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "courier",
+   "value": "ParcelPoint",
+   "instructions": "Is the courier ParcelPoint mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7108-2956",
+   "instructions": "Does the input show the tracking number PR-7108-2956?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "92831",
+   "instructions": "Is order number 92831 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "weekday",
+   "value": "Saturday",
+   "instructions": "Does the input say the parcel was delivered on a Saturday?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "order",
+   "value": "32018",
+   "instructions": "Is order number 32018 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7596",
+   "instructions": "Does the proof-of-delivery photo show the house number 7596?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4474",
+   "instructions": "Does the proof-of-delivery photo show the house number 4474?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "77537",
+   "instructions": "Is order number 77537 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2353",
+   "instructions": "Does the proof-of-delivery photo show the house number 2353?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8193-2923",
+   "instructions": "Does the input show the tracking number PR-8193-2923?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7092-3711",
+   "instructions": "Does the input show the tracking number PR-7092-3711?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7884",
+   "instructions": "Does the proof-of-delivery photo show the house number 7884?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2403-8962",
+   "instructions": "Does the input show the tracking number PR-2403-8962?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "36.57",
+   "instructions": "Does an invoice in the input show a total of $36.57?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4500",
+   "instructions": "Does the proof-of-delivery photo show the house number 4500?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8620-5625",
+   "instructions": "Does the input show the tracking number PR-8620-5625?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "22255",
+   "instructions": "Is order number 22255 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "46.62",
+   "instructions": "Does an invoice in the input show a total of $46.62?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Dev Hughes",
+   "instructions": "Is the customer's name Dev Hughes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1239",
+   "instructions": "Does the proof-of-delivery photo show the house number 1239?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8725",
+   "instructions": "Does the proof-of-delivery photo show the house number 8725?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7781-2209",
+   "instructions": "Does the input show the tracking number PR-7781-2209?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "name",
+   "value": "Anna Khan",
+   "instructions": "Is the customer's name Anna Khan?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4138",
+   "instructions": "Does the proof-of-delivery photo show the house number 4138?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "331.33",
+   "instructions": "Does an invoice in the input show a total of $331.33?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "264.13",
+   "instructions": "Does an invoice in the input show a total of $264.13?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Phoenix",
+   "instructions": "Is the city Phoenix mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3293-3017",
+   "instructions": "Does the input show the tracking number PR-3293-3017?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "57.49",
+   "instructions": "Does an invoice in the input show a total of $57.49?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6409-6143",
+   "instructions": "Does the input show the tracking number PR-6409-6143?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6315-7311",
+   "instructions": "Does the input show the tracking number PR-6315-7311?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Femi Meyer",
+   "instructions": "Is the customer's name Femi Meyer?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Wool socks",
+   "instructions": "Does the invoice list a product called 'Wool socks'?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "order",
+   "value": "34385",
+   "instructions": "Is order number 34385 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "66.01",
+   "instructions": "Does an invoice in the input show a total of $66.01?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "13718",
+   "instructions": "Is order number 13718 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2237",
+   "instructions": "Does the proof-of-delivery photo show the house number 2237?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2874-4522",
+   "instructions": "Does the input show the tracking number PR-2874-4522?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2716",
+   "instructions": "Does the proof-of-delivery photo show the house number 2716?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "255.97",
+   "instructions": "Does an invoice in the input show a total of $255.97?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4404-4457",
+   "instructions": "Does the input show the tracking number PR-4404-4457?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "11056",
+   "instructions": "Is order number 11056 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3410",
+   "instructions": "Does the proof-of-delivery photo show the house number 3410?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1519",
+   "instructions": "Does the proof-of-delivery photo show the house number 1519?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "33647",
+   "instructions": "Is order number 33647 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6539-1344",
+   "instructions": "Does the input show the tracking number PR-6539-1344?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8357-3832",
+   "instructions": "Does the input show the tracking number PR-8357-3832?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "90931",
+   "instructions": "Is order number 90931 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Gus Ortiz",
+   "instructions": "Is the customer's name Gus Ortiz?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Luca Park",
+   "instructions": "Is the customer's name Luca Park?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "315.77",
+   "instructions": "Does an invoice in the input show a total of $315.77?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8385",
+   "instructions": "Does the proof-of-delivery photo show the house number 8385?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "44180",
+   "instructions": "Is order number 44180 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9204-6666",
+   "instructions": "Does the input show the tracking number PR-9204-6666?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "127.16",
+   "instructions": "Does an invoice in the input show a total of $127.16?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "133.06",
+   "instructions": "Does an invoice in the input show a total of $133.06?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7824",
+   "instructions": "Does the proof-of-delivery photo show the house number 7824?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ben Quinn",
+   "instructions": "Is the customer's name Ben Quinn?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Pine Ave",
+   "instructions": "Is the street Pine Ave mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1778-2290",
+   "instructions": "Does the input show the tracking number PR-1778-2290?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "total",
+   "value": "49.23",
+   "instructions": "Does an invoice in the input show a total of $49.23?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "71835",
+   "instructions": "Is order number 71835 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "41711",
+   "instructions": "Is order number 41711 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Femi Hughes",
+   "instructions": "Is the customer's name Femi Hughes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "941",
+   "instructions": "Does the proof-of-delivery photo show the house number 941?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "76.92",
+   "instructions": "Does an invoice in the input show a total of $76.92?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "364.01",
+   "instructions": "Does an invoice in the input show a total of $364.01?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Cedar Ave",
+   "instructions": "Is the street Cedar Ave mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4750-1339",
+   "instructions": "Does the input show the tracking number PR-4750-1339?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "310.00",
+   "instructions": "Does an invoice in the input show a total of $310.00?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "119.66",
+   "instructions": "Does an invoice in the input show a total of $119.66?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6348",
+   "instructions": "Does the proof-of-delivery photo show the house number 6348?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7283",
+   "instructions": "Does the proof-of-delivery photo show the house number 7283?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Walnut Rd",
+   "instructions": "Is the street Walnut Rd mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3267-3471",
+   "instructions": "Does the input show the tracking number PR-3267-3471?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ben Hughes",
+   "instructions": "Is the customer's name Ben Hughes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9797-5371",
+   "instructions": "Does the input show the tracking number PR-9797-5371?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Jon Khan",
+   "instructions": "Is the customer's name Jon Khan?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "28098",
+   "instructions": "Is order number 28098 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "97796",
+   "instructions": "Is order number 97796 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "125.13",
+   "instructions": "Does an invoice in the input show a total of $125.13?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Elm St",
+   "instructions": "Is the street Elm St mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5769",
+   "instructions": "Does the proof-of-delivery photo show the house number 5769?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4841",
+   "instructions": "Does the proof-of-delivery photo show the house number 4841?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "46877",
+   "instructions": "Is order number 46877 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5573-6753",
+   "instructions": "Does the input show the tracking number PR-5573-6753?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Tucson",
+   "instructions": "Is the city Tucson mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "370.42",
+   "instructions": "Does an invoice in the input show a total of $370.42?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "214.83",
+   "instructions": "Does an invoice in the input show a total of $214.83?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3221-7743",
+   "instructions": "Does the input show the tracking number PR-3221-7743?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4321-3230",
+   "instructions": "Does the input show the tracking number PR-4321-3230?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3803-9751",
+   "instructions": "Does the input show the tracking number PR-3803-9751?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "294.26",
+   "instructions": "Does an invoice in the input show a total of $294.26?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Carla Ortiz",
+   "instructions": "Is the customer's name Carla Ortiz?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1742-7941",
+   "instructions": "Does the input show the tracking number PR-1742-7941?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "38183",
+   "instructions": "Is order number 38183 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "370.56",
+   "instructions": "Does an invoice in the input show a total of $370.56?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "34586",
+   "instructions": "Is order number 34586 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5439",
+   "instructions": "Does the proof-of-delivery photo show the house number 5439?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "137.95",
+   "instructions": "Does an invoice in the input show a total of $137.95?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "59.12",
+   "instructions": "Does an invoice in the input show a total of $59.12?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Mona Silva",
+   "instructions": "Is the customer's name Mona Silva?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Walnut St",
+   "instructions": "Is the street Walnut St mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "242.07",
+   "instructions": "Does an invoice in the input show a total of $242.07?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "98032",
+   "instructions": "Is order number 98032 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1152-8508",
+   "instructions": "Does the input show the tracking number PR-1152-8508?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "courier",
+   "value": "ParcelRun",
+   "instructions": "Is the courier ParcelRun mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2200-9808",
+   "instructions": "Does the input show the tracking number PR-2200-9808?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "51774",
+   "instructions": "Is order number 51774 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6447-3185",
+   "instructions": "Does the input show the tracking number PR-6447-3185?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ines Novak",
+   "instructions": "Is the customer's name Ines Novak?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "55119",
+   "instructions": "Is order number 55119 mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "name",
+   "value": "Mona Stone",
+   "instructions": "Is the customer's name Mona Stone?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1527-7868",
+   "instructions": "Does the input show the tracking number PR-1527-7868?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "459",
+   "instructions": "Does the proof-of-delivery photo show the house number 459?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Carla Silva",
+   "instructions": "Is the customer's name Carla Silva?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Miami",
+   "instructions": "Is the city Miami mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "54185",
+   "instructions": "Is order number 54185 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "293.38",
+   "instructions": "Does an invoice in the input show a total of $293.38?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "92691",
+   "instructions": "Is order number 92691 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "courier",
+   "value": "SwiftRoute",
+   "instructions": "Is the courier SwiftRoute mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "total",
+   "value": "356.60",
+   "instructions": "Does an invoice in the input show a total of $356.60?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Richmond",
+   "instructions": "Is the city Richmond mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "394.47",
+   "instructions": "Does an invoice in the input show a total of $394.47?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5065-5668",
+   "instructions": "Does the input show the tracking number PR-5065-5668?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4188",
+   "instructions": "Does the proof-of-delivery photo show the house number 4188?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8119-6663",
+   "instructions": "Does the input show the tracking number PR-8119-6663?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Fleece jacket",
+   "instructions": "Does the invoice list a product called 'Fleece jacket'?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8713-3096",
+   "instructions": "Does the input show the tracking number PR-8713-3096?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "382.42",
+   "instructions": "Does an invoice in the input show a total of $382.42?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ben Meyer",
+   "instructions": "Is the customer's name Ben Meyer?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "245.66",
+   "instructions": "Does an invoice in the input show a total of $245.66?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5920-9308",
+   "instructions": "Does the input show the tracking number PR-5920-9308?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7919-3165",
+   "instructions": "Does the input show the tracking number PR-7919-3165?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6978",
+   "instructions": "Does the proof-of-delivery photo show the house number 6978?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Fresno",
+   "instructions": "Is the city Fresno mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "19539",
+   "instructions": "Is order number 19539 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "203.72",
+   "instructions": "Does an invoice in the input show a total of $203.72?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4806",
+   "instructions": "Does the proof-of-delivery photo show the house number 4806?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "42077",
+   "instructions": "Is order number 42077 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "53910",
+   "instructions": "Is order number 53910 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "384.53",
+   "instructions": "Does an invoice in the input show a total of $384.53?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2499-1085",
+   "instructions": "Does the input show the tracking number PR-2499-1085?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "364.16",
+   "instructions": "Does an invoice in the input show a total of $364.16?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "110.26",
+   "instructions": "Does an invoice in the input show a total of $110.26?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9653-1697",
+   "instructions": "Does the input show the tracking number PR-9653-1697?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "37110",
+   "instructions": "Is order number 37110 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6500-8317",
+   "instructions": "Does the input show the tracking number PR-6500-8317?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8849",
+   "instructions": "Does the proof-of-delivery photo show the house number 8849?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2020-8126",
+   "instructions": "Does the input show the tracking number PR-2020-8126?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3474-1149",
+   "instructions": "Does the input show the tracking number PR-3474-1149?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5185",
+   "instructions": "Does the proof-of-delivery photo show the house number 5185?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "65057",
+   "instructions": "Is order number 65057 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "752",
+   "instructions": "Does the proof-of-delivery photo show the house number 752?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "52233",
+   "instructions": "Is order number 52233 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Austin",
+   "instructions": "Is the city Austin mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "49110",
+   "instructions": "Is order number 49110 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Dev Park",
+   "instructions": "Is the customer's name Dev Park?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9796-4063",
+   "instructions": "Does the input show the tracking number PR-9796-4063?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3582-5984",
+   "instructions": "Does the input show the tracking number PR-3582-5984?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "136.25",
+   "instructions": "Does an invoice in the input show a total of $136.25?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "33777",
+   "instructions": "Is order number 33777 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2862",
+   "instructions": "Does the proof-of-delivery photo show the house number 2862?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "382.13",
+   "instructions": "Does an invoice in the input show a total of $382.13?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Luca Quinn",
+   "instructions": "Is the customer's name Luca Quinn?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "266.49",
+   "instructions": "Does an invoice in the input show a total of $266.49?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4434",
+   "instructions": "Does the proof-of-delivery photo show the house number 4434?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "57059",
+   "instructions": "Is order number 57059 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "52.42",
+   "instructions": "Does an invoice in the input show a total of $52.42?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "18450",
+   "instructions": "Is order number 18450 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4582",
+   "instructions": "Does the proof-of-delivery photo show the house number 4582?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-1981-3589",
+   "instructions": "Does the input show the tracking number PR-1981-3589?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "14067",
+   "instructions": "Is order number 14067 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "22026",
+   "instructions": "Is order number 22026 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1117",
+   "instructions": "Does the proof-of-delivery photo show the house number 1117?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "383.49",
+   "instructions": "Does an invoice in the input show a total of $383.49?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "44365",
+   "instructions": "Is order number 44365 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7797-7678",
+   "instructions": "Does the input show the tracking number PR-7797-7678?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "907",
+   "instructions": "Does the proof-of-delivery photo show the house number 907?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9154-4254",
+   "instructions": "Does the input show the tracking number PR-9154-4254?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Femi Reyes",
+   "instructions": "Is the customer's name Femi Reyes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5840-7815",
+   "instructions": "Does the input show the tracking number PR-5840-7815?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6771",
+   "instructions": "Does the proof-of-delivery photo show the house number 6771?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6323",
+   "instructions": "Does the proof-of-delivery photo show the house number 6323?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1049",
+   "instructions": "Does the proof-of-delivery photo show the house number 1049?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "20384",
+   "instructions": "Is order number 20384 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "56095",
+   "instructions": "Is order number 56095 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4394-4538",
+   "instructions": "Does the input show the tracking number PR-4394-4538?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Dayton",
+   "instructions": "Is the city Dayton mentioned anywhere in the input?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "total",
+   "value": "60.78",
+   "instructions": "Does an invoice in the input show a total of $60.78?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "259.44",
+   "instructions": "Does an invoice in the input show a total of $259.44?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "3362",
+   "instructions": "Does the proof-of-delivery photo show the house number 3362?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "304.55",
+   "instructions": "Does an invoice in the input show a total of $304.55?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-3546-2731",
+   "instructions": "Does the input show the tracking number PR-3546-2731?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5103",
+   "instructions": "Does the proof-of-delivery photo show the house number 5103?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Boston",
+   "instructions": "Is the city Boston mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "66534",
+   "instructions": "Is order number 66534 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2113-4853",
+   "instructions": "Does the input show the tracking number PR-2113-4853?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9289-6590",
+   "instructions": "Does the input show the tracking number PR-9289-6590?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7465",
+   "instructions": "Does the proof-of-delivery photo show the house number 7465?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "city",
+   "value": "Omaha",
+   "instructions": "Is the city Omaha mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "140.14",
+   "instructions": "Does an invoice in the input show a total of $140.14?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "235.59",
+   "instructions": "Does an invoice in the input show a total of $235.59?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "50539",
+   "instructions": "Is order number 50539 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5269",
+   "instructions": "Does the proof-of-delivery photo show the house number 5269?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8475",
+   "instructions": "Does the proof-of-delivery photo show the house number 8475?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "courier",
+   "value": "Velo Courier",
+   "instructions": "Is the courier Velo Courier mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5067-6816",
+   "instructions": "Does the input show the tracking number PR-5067-6816?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "7459",
+   "instructions": "Does the proof-of-delivery photo show the house number 7459?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Oak Ave",
+   "instructions": "Is the street Oak Ave mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7730-6793",
+   "instructions": "Does the input show the tracking number PR-7730-6793?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "weekday",
+   "value": "Sunday",
+   "instructions": "Does the input say the parcel was delivered on a Sunday?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "street",
+   "value": "Pine Rd",
+   "instructions": "Is the street Pine Rd mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "54.50",
+   "instructions": "Does an invoice in the input show a total of $54.50?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "86.41",
+   "instructions": "Does an invoice in the input show a total of $86.41?",
+   "label": false,
+   "hard": true
+  },
+  {
+   "kind": "order",
+   "value": "51795",
+   "instructions": "Is order number 51795 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "street",
+   "value": "Maple St",
+   "instructions": "Is the street Maple St mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5825-8869",
+   "instructions": "Does the input show the tracking number PR-5825-8869?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5670-1449",
+   "instructions": "Does the input show the tracking number PR-5670-1449?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "40340",
+   "instructions": "Is order number 40340 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4125-1310",
+   "instructions": "Does the input show the tracking number PR-4125-1310?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "32.12",
+   "instructions": "Does an invoice in the input show a total of $32.12?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-4641-6820",
+   "instructions": "Does the input show the tracking number PR-4641-6820?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6081-8167",
+   "instructions": "Does the input show the tracking number PR-6081-8167?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "73277",
+   "instructions": "Is order number 73277 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "313.19",
+   "instructions": "Does an invoice in the input show a total of $313.19?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "144",
+   "instructions": "Does the proof-of-delivery photo show the house number 144?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "371.54",
+   "instructions": "Does an invoice in the input show a total of $371.54?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "83242",
+   "instructions": "Is order number 83242 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4155",
+   "instructions": "Does the proof-of-delivery photo show the house number 4155?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-7655-6952",
+   "instructions": "Does the input show the tracking number PR-7655-6952?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8625-6026",
+   "instructions": "Does the input show the tracking number PR-8625-6026?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6042",
+   "instructions": "Does the proof-of-delivery photo show the house number 6042?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "42053",
+   "instructions": "Is order number 42053 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "19305",
+   "instructions": "Is order number 19305 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "23453",
+   "instructions": "Is order number 23453 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1580",
+   "instructions": "Does the proof-of-delivery photo show the house number 1580?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "9717",
+   "instructions": "Does the proof-of-delivery photo show the house number 9717?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Kira Hughes",
+   "instructions": "Is the customer's name Kira Hughes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4072",
+   "instructions": "Does the proof-of-delivery photo show the house number 4072?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "26274",
+   "instructions": "Is order number 26274 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Luca Khan",
+   "instructions": "Is the customer's name Luca Khan?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "name",
+   "value": "Ines Reyes",
+   "instructions": "Is the customer's name Ines Reyes?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "2496",
+   "instructions": "Does the proof-of-delivery photo show the house number 2496?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "95477",
+   "instructions": "Is order number 95477 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "83822",
+   "instructions": "Is order number 83822 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "49467",
+   "instructions": "Is order number 49467 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8451-7038",
+   "instructions": "Does the input show the tracking number PR-8451-7038?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-5298-9019",
+   "instructions": "Does the input show the tracking number PR-5298-9019?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "141.18",
+   "instructions": "Does an invoice in the input show a total of $141.18?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9756-7516",
+   "instructions": "Does the input show the tracking number PR-9756-7516?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "79391",
+   "instructions": "Is order number 79391 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "23970",
+   "instructions": "Is order number 23970 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "item",
+   "value": "Bivvy bag",
+   "instructions": "Does the invoice list a product called 'Bivvy bag'?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "4643",
+   "instructions": "Does the proof-of-delivery photo show the house number 4643?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-9189-8109",
+   "instructions": "Does the input show the tracking number PR-9189-8109?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6489-5662",
+   "instructions": "Does the input show the tracking number PR-6489-5662?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "total",
+   "value": "173.45",
+   "instructions": "Does an invoice in the input show a total of $173.45?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "8208",
+   "instructions": "Does the proof-of-delivery photo show the house number 8208?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "6534",
+   "instructions": "Does the proof-of-delivery photo show the house number 6534?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "51704",
+   "instructions": "Is order number 51704 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-2425-7358",
+   "instructions": "Does the input show the tracking number PR-2425-7358?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "21725",
+   "instructions": "Is order number 21725 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "68947",
+   "instructions": "Is order number 68947 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1671",
+   "instructions": "Does the proof-of-delivery photo show the house number 1671?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-6153-5135",
+   "instructions": "Does the input show the tracking number PR-6153-5135?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "5673",
+   "instructions": "Does the proof-of-delivery photo show the house number 5673?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "house",
+   "value": "1048",
+   "instructions": "Does the proof-of-delivery photo show the house number 1048?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "tracking",
+   "value": "PR-8892-2045",
+   "instructions": "Does the input show the tracking number PR-8892-2045?",
+   "label": false,
+   "hard": false
+  },
+  {
+   "kind": "order",
+   "value": "67850",
+   "instructions": "Is order number 67850 mentioned anywhere in the input?",
+   "label": false,
+   "hard": false
+  }
+ ]
+}

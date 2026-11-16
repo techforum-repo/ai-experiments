@@ -1,0 +1,8 @@
+# Only needed to regenerate samples/ with make_samples.py (the generated files are committed).
+# Also needs the ffmpeg and pdftoppm (poppler-utils) command-line tools, the DejaVu fonts,
+# and the Kokoro v1.0 model files (kokoro-v1.0.onnx, voices-v1.0.bin) in $KOKORO_DIR:
+# https://github.com/thewh1teagle/kokoro-onnx/releases/tag/model-files-v1.0
+pillow>=10
+kokoro-onnx>=0.4
+soundfile>=0.12
+weasyprint>=60
